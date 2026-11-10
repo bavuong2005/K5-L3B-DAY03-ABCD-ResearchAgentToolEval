@@ -58,7 +58,7 @@ ngrok http 8501
 | policy | tìm trong company policy markdown nội bộ | không |
 | papers | tìm paper trên arXiv | không |
 | paper_text | tải PDF arXiv và trích text cục bộ | không |
-| <!-- tool mới --> | <!-- điền khi nhóm viết xong --> | có |
+| github_search | Tìm repository GitHub theo từ khóa, có thể lọc theo ngôn ngữ và giới hạn số kết quả | có |
 
 ### A3. Câu hỏi mẫu để thử
 
@@ -72,7 +72,11 @@ ngrok http 8501
 
 > Tóm tắt các thay đổi chính trong `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`, và tool mới nhóm viết (tên, làm gì, khi nào agent nên gọi).
 
--
+- **v1 — `system_prompt.md`:** bỏ chỉ dẫn starter yêu cầu đoán khi thiếu thông tin, gửi ngay không cần xác nhận và ép xử lý một bước; thêm cách dùng `clarify` và xác nhận trước `send`. Case accuracy tăng từ **0.40 lên 0.50**.
+- **v2 — `system_prompt.md`:** thêm quy tắc chọn `timeline`, `social_search`, `lookup`, `fetch`; gọi song song khi cần web và mạng xã hội; giữ chỉ dẫn mới nhất trong hội thoại nhiều lượt. Case accuracy tăng từ **0.50 lên 0.55**.
+- **v3 — `tools.yaml`:** viết lại mô tả công cụ, điều kiện dùng/không dùng và quy ước tham số như handle, `topic=news`, timeframe; giữ xác nhận rõ ràng trước `send`. Case accuracy tăng từ **0.55 lên 0.65**.
+- **CP3 — `github_search`:** tool mới tìm repository GitHub theo từ khóa, tùy chọn lọc ngôn ngữ và số kết quả; dùng cho yêu cầu tìm code/repo/framework, không dùng cho tin tức, mạng xã hội hoặc bài báo arXiv. Tool đã được đăng ký trong `tools/__init__.py` và `tools.yaml`; có 3 unit test trong `tests/test_tools_todo.py`.
+- Các số CP2 trên lấy từ chuỗi run Ollama `qwen2.5:7b` hợp lệ, 20/20 case và 0 provider error; xem B1. v3.1 là lượt tích hợp tool mới, không gộp vào chuỗi CP2 v0–v3.
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
 ### B1. Version Evidence
@@ -82,9 +86,9 @@ Các run hiện có dưới đây đều hợp lệ theo điều kiện kỹ thu
 | Version | Changed Artifact | Hypothesis | Metric Before | Metric After | Run File |
 |---|---|---|---:|---:|---|
 | v0 | baseline | Đo hành vi ban đầu của Ollama `qwen2.5:7b` | — | 0.40 | [v0 run](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json) |
-| v1 | Không đổi: prompt/tools hash trùng v0 | Không có thay đổi artifact để kiểm nghiệm; metric giữ nguyên | 0.40 | 0.40 | [v1 run](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json) |
-| v2 | `system_prompt.md` (prompt hash `e1bb34ba87e7`; tools hash giữ nguyên) | Hash này khớp dòng v1 trong `samples/version_log.csv` (bỏ chỉ dẫn đoán/gửi ngay); nhãn run hiện tại lại là v2 | 0.40 | 0.50 | [v2 run](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json) |
-| v3 | Prompt và `tools.yaml` cùng đổi so với run v2 | Sample log nói viết lại tool descriptions/conventions; vì prompt hash cũng đổi và run trung gian thiếu, chưa tách được tác động riêng của tools | 0.50 | 0.65 | [v3 run](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) |
+| v1 | `system_prompt.md` (prompt hash `e1bb34ba87e7`; tools hash giữ nguyên) | Bỏ chỉ dẫn xấu, thêm clarify/xác nhận trước send | 0.40 | 0.50 | [v1 canonical run](../../starter_v0/runs/v1_B_base_ollama_20261110T184929994451.json) |
+| v2 | `system_prompt.md` (prompt hash `1df0f2c8faae`; tools hash giữ nguyên) | Thêm routing rules, gọi song song khi cần và giữ chỉ dẫn mới nhất ở multi-turn | 0.50 | 0.55 | [v2 canonical run](../../starter_v0/runs/v2_B_base_ollama_20261110T185141794941.json) |
+| v3 | `tools.yaml` (prompt hash giữ `1df0f2c8faae`; tools hash `ccdab12edb30`) | Mô tả rõ cách dùng và quy ước args của từng tool | 0.55 | 0.65 | [v3 canonical run](../../starter_v0/runs/v3_B_base_ollama_20261110T185437173292.json) |
 
 ### B2. Failure Analysis
 
@@ -187,7 +191,7 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 
 | Khó khăn | Hướng giải quyết | Bằng chứng / giới hạn |
 |---|---|---|
-| Gemini không ổn định cho các lượt đo: Gemini 2.5 trả `404` không còn khả dụng cho người dùng mới; Gemini 3.8 trả `503`; lần đo Gemini 3.5 gặp `429` giới hạn free tier 5 request/phút. Các lỗi này được ghi nhận trong terminal, chưa lưu thành log riêng trong repo. | Hướng nhóm đã dùng là chạy local bằng Ollama `qwen2.5:7b` để tiếp tục đo v0–v3 mà không phụ thuộc quota cloud. | Bốn run [`v0`](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json), [`v1`](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json), [`v2`](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json), [`v3`](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) đều đo 20/20 case và có 0 provider error.|
+| Gemini không ổn định cho các lượt đo (terminal ghi nhận 404/429; run Gemini lưu trong repo có 3 case `503 UNAVAILABLE`). Run này chỉ đo được 17/20 case nên không hợp lệ làm baseline. | Nhóm chuyển sang Ollama `qwen2.5:7b` để có chuỗi baseline và tối ưu v0–v3 hợp lệ, không phụ thuộc quota cloud. | [Run Gemini lỗi](../../starter_v0/runs/v0_B_base_gemini_20261110T183955462026.json): 3 provider errors, 17/20 measured; **không dùng làm baseline**. Baseline v0 là [run Ollama](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json); các run Ollama canonical v1–v3 được dẫn ở B1, đều 20/20 và 0 provider error.|
 
 
 ## 6. Tổng hợp đóng góp
@@ -196,10 +200,9 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 
 ## 7. Hạn chế và hướng cải thiện — B6. Reflection
 
-- Fix nào thuộc `system_prompt.md`?
-- Fix nào thuộc `tools.yaml`?
-- Failure nào cần review thủ công thay vì chấm tự động?
-- Nếu có thêm một vòng, nhóm sẽ thử giả thuyết nào?
+- `system_prompt.md`: bỏ yêu cầu đoán và gửi ngay; thêm clarify, xác nhận và routing rules. `tools.yaml`: mô tả rõ lúc dùng/không dùng và quy ước tham số.
+- Cần review thủ công các case alias handle, chọn `topic=news`/timeframe, hỏi lại khi thiếu dữ kiện và xác nhận trước khi gửi; model có thể trả lời bằng text đúng ý nhưng vẫn không tạo tool call được chấm PASS.
+- Nếu có vòng tiếp theo, thử ví dụ ngắn cho handle và `topic=news`, rồi đo lại bằng cùng model và artifacts được version hóa.
 
 ## 8. Tài liệu tham khảo
 

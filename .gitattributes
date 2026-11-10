@@ -1,0 +1,4 @@
+# Keep eval artifacts byte-stable across OSes: prompt_hash/tools_hash are computed on raw bytes
+starter_v0/artifacts/*.md text eol=lf
+starter_v0/artifacts/*.yaml text eol=lf
+starter_v0/artifacts/*.csv text eol=lf

@@ -81,16 +81,18 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-| G01_github_search_python | Tìm repo GitHub với từ khóa và filter language=python, limit=3 | `github_search(query='agent eval', language='python', limit=3)` |  |
-| G02_github_search_general | Tìm repo trên GitHub không chỉ định ngôn ngữ | `github_search(query='langchain')` |  |
-| G03_policy_internal_routing | Hỏi quy định nội bộ công ty -> route tới policy thay vì web search | `policy(policy_area='ai_research')` |  |
-| G04_missing_github_query | Yêu cầu tìm repo nhưng không có từ khóa -> hỏi lại người dùng | `clarify(response_type='text')` |  |
-| G05_out_of_scope_creative | Sáng tác thơ ngoài phạm vi research agent -> từ chối, không gọi tool | `no_tool=true (refuse)` |  |
-| G06_multiturn_github_refine_lang | 2 turns: carry query DeepSeek từ turn 1, thêm language=typescript ở turn 2 | `github_search(query='DeepSeek', language='typescript')` |  |
-| G07_multiturn_clarify_then_github | 2 turns: user bổ sung query và language ở turn 2 sau khi thiếu ở turn 1 | `github_search(query='RAG evaluation', language='python')` |  |
-| G08_multiturn_switch_web_to_github | 2 turns: chuyển hướng từ web search sang tìm kiếm repo GitHub cho Llama 3 | `github_search(query='Llama 3')` |  |
-| G09_multiturn_confirm_send_flow | 2 turns: lượt 1 yêu cầu gửi, lượt 2 user xác nhận -> gọi send | `send(confirmed=true)` |  |
-| G10_multiturn_paper_then_repo | 2 turns: tìm paper xong chuyển sang tìm repo GitHub triển khai LoRA | `github_search(query='LoRA', language='python')` |  |
+| G01_github_search_python | Tìm repo GitHub với từ khóa và filter language=python, limit=3 | `github_search(query='agent eval', language='python', limit=3)` | PASS |
+| G02_github_search_general | Tìm repo trên GitHub không chỉ định ngôn ngữ | `github_search(query='langchain')` | PASS (model tự thêm language=python, không bị chấm vì expect chỉ kiểm query) |
+| G03_policy_internal_routing | Hỏi quy định nội bộ công ty -> route tới policy thay vì web search | `policy(policy_area='ai_research')` | PASS |
+| G04_missing_github_query | Yêu cầu tìm repo nhưng không có từ khóa -> hỏi lại người dùng | `clarify(response_type='text')` | FAIL `missing_info`: gọi `github_search(query="hay ho", language=python)` thay vì `clarify` (bịa query) |
+| G05_out_of_scope_creative | Sáng tác thơ ngoài phạm vi research agent -> từ chối, không gọi tool | `no_tool=true (refuse)` | PASS (từ chối bằng text, không gọi tool) |
+| G06_multiturn_github_refine_lang | 2 turns: carry query DeepSeek từ turn 1, thêm language=typescript ở turn 2 | `github_search(query='DeepSeek', language='typescript')` | PASS |
+| G07_multiturn_clarify_then_github | 2 turns: user bổ sung query và language ở turn 2 sau khi thiếu ở turn 1 | `github_search(query='RAG evaluation', language='python')` | PASS |
+| G08_multiturn_switch_web_to_github | 2 turns: chuyển hướng từ web search sang tìm kiếm repo GitHub cho Llama 3 | `github_search(query='Llama 3')` | PASS |
+| G09_multiturn_confirm_send_flow | 2 turns: lượt 1 yêu cầu gửi, lượt 2 user xác nhận -> gọi send | `send(confirmed=true)` | PASS |
+| G10_multiturn_paper_then_repo | 2 turns: tìm paper xong chuyển sang tìm repo GitHub triển khai LoRA | `github_search(query='LoRA', language='python')` | FAIL `wrong_arg_value`: route đúng nhưng `query="LoRA Python"` (nhét ngôn ngữ vào query) |
+
+Run: `starter_v0/runs/v3.1_B_group_ollama_20261110T194253447355.json` (ollama qwen2.5:7b, artifact `v3.1+p1df0f2c8faae+t7d687650eba8`, provider_error_cases=0, measured 10/10). Kết quả: **8/10 PASS**, case_accuracy 0.80, tool_routing_accuracy 0.90, multiturn_accuracy 0.80.
 
 ### B4. Live Chat Evidence
 

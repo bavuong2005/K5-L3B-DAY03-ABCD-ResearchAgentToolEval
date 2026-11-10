@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 | 1 | Cung Đức Anh | 2A202603814 | 26ai.anhcd2@vinuni.edu.vn | | Tool mới & Unit Test (CP3) |
-| 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | noobpyno | Điều phối; baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
+| 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | bavuong2005 |baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
 
 ## Cá nhân
 

@@ -52,7 +52,9 @@ Ví dụ: "Research agent: tìm tin theo từ khóa / theo tài khoản, đọc 
 
 > Tóm tắt các thay đổi chính trong `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`, và tool mới nhóm viết (tên, làm gì, khi nào agent nên gọi).
 
--
+- Theo `starter_v0/artifacts/version_log.csv`, kế hoạch thử nghiệm CP2 là: **v1 — system prompt:** bỏ chỉ dẫn đoán khi thiếu thông tin, gửi ngay và ép hoàn thành một bước; giả thuyết là agent sẽ hỏi lại/xác nhận đúng hơn. **v2 — system prompt:** thêm quy tắc phân biệt `timeline`, `social_search`, `lookup`, `fetch`, gọi song song khi cần hai nguồn và theo lệnh mới nhất ở multi-turn. **v3 — tools.yaml:** mô tả khi nào dùng/không dùng từng tool, quy ước handle/query/news timeframe và xác nhận trước `send`.
+- Các run local ghi nhận `qwen2.5:7b` tăng `case_accuracy` từ 0.40 ở v0 lên 0.65 ở v3; chi tiết ở B1. Tuy nhiên, run mang nhãn v1 có cùng prompt/tools hash với v0, còn các run JSON hiện có không khớp hết đường dẫn trong version log. Trong working tree hiện tại, `system_prompt.md` và `tools.yaml` cũng đang có hash v0. Vì vậy, các thay đổi CP2 được mô tả ở đây là nội dung version log, nhưng snapshot prompt/tools của v1–v3 chưa được khôi phục để tái lập đầy đủ.
+- Chưa có tool do nhóm tự viết được ghi nhận trong repo; phần đó thuộc CP3 và chưa được chứng minh ở đây.
 
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
@@ -155,7 +157,10 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 
 > Khó khăn chính và cách nhóm xử lý. Nếu gặp lỗi kỹ thuật (provider lỗi, hết quota API, tool không chạy), mô tả lỗi và dẫn bằng chứng: run JSON, log, ảnh chụp.
 
--
+| Khó khăn | Hướng giải quyết | Bằng chứng / giới hạn |
+|---|---|---|
+| Gemini không ổn định cho các lượt đo: Gemini 2.5 trả `404` không còn khả dụng cho người dùng mới; Gemini 3.8 trả `503`; lần đo Gemini 3.5 gặp `429` giới hạn free tier 5 request/phút. Các lỗi này được ghi nhận trong terminal, chưa lưu thành log riêng trong repo. | Hướng nhóm đã dùng là chạy local bằng Ollama `qwen2.5:7b` để tiếp tục đo v0–v3 mà không phụ thuộc quota cloud. | Bốn run [`v0`](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json), [`v1`](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json), [`v2`](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json), [`v3`](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) đều đo 20/20 case và có 0 provider error. Đây là kết quả local, không thay thế so sánh cloud. |
+| Version log và run JSON chưa đồng bộ: các `run_file` v1–v3 trong log không trùng tên file hiện có; run v1 hiện có còn dùng cùng hash với v0. | Đối chiếu `version`, hash, metric và tên file trực tiếp từ từng run JSON; lưu lại snapshot prompt/tools tương ứng trước khi chốt v1–v3. | B1 ghi rõ các chỗ lệch. Chưa thể quy toàn bộ mức tăng metric cho một thay đổi đơn lẻ khi snapshot trung gian thiếu. |
 
 ## 6. Tổng hợp đóng góp
 

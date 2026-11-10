@@ -58,22 +58,35 @@ Ví dụ: "Research agent: tìm tin theo từ khóa / theo tài khoản, đọc 
 
 ### B1. Version Evidence
 
-Lấy từ `starter_v0/artifacts/version_log.csv` và `starter_v0/runs/*.json`. Chỉ dùng run có `provider_error_cases == 0` và `measured_cases == total_cases`.
+Các run hiện có dưới đây đều hợp lệ theo điều kiện kỹ thuật (`provider_error_cases == 0`, `measured_cases == total_cases`) và đều dùng Ollama `qwen2.5:7b`. Đây là bằng chứng local, chưa phải cloud comparison.
 
 | Version | Changed Artifact | Hypothesis | Metric Before | Metric After | Run File |
 |---|---|---|---:|---:|---|
-| v0 | baseline |  |  |  |  |
-| v1 |  |  |  |  |  |
-| v2 |  |  |  |  |  |
-| v3 |  |  |  |  |  |
+| v0 | baseline | Đo hành vi ban đầu của Ollama `qwen2.5:7b` | — | 0.40 | [v0 run](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json) |
+| v1 | Không đổi: prompt/tools hash trùng v0 | Không có thay đổi artifact để kiểm nghiệm; metric giữ nguyên | 0.40 | 0.40 | [v1 run](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json) |
+| v2 | `system_prompt.md` (prompt hash `e1bb34ba87e7`; tools hash giữ nguyên) | Hash này khớp dòng v1 trong `samples/version_log.csv` (bỏ chỉ dẫn đoán/gửi ngay); nhãn run hiện tại lại là v2 | 0.40 | 0.50 | [v2 run](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json) |
+| v3 | Prompt và `tools.yaml` cùng đổi so với run v2 | Sample log nói viết lại tool descriptions/conventions; vì prompt hash cũng đổi và run trung gian thiếu, chưa tách được tác động riêng của tools | 0.50 | 0.65 | [v3 run](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) |
+
+**Lưu ý về version log:** `artifacts/version_log.csv` đã có các dòng v0–v3, nhưng các `run_file` v1–v3 không tồn tại trong `runs/` hiện tại và nhãn/hash không khớp bốn run đang có. `samples/version_log.csv` chứa cùng các dòng. Bảng trên lấy metric, provider/model, hash và đường dẫn trực tiếp từ bốn run JSON thật; cần đồng bộ version log trước khi nộp. `case_accuracy` là metric trong bảng.
 
 ### B2. Failure Analysis
 
-Lấy từ `results[*].result.failures` trong run JSON.
+Các lỗi dưới đây lấy từ baseline v0; cột cuối đối chiếu với run v3 để ghi kết quả quan sát được, không suy diễn fix chưa được đo.
 
 | Case ID | Failure Type | Actual Tool Calls | What Failed | Fix |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| R01_user_tweets_routing | wrong_tool | `timeline(screenname=samaltman)` | Sai handle; mong đợi `sama` | Còn lỗi ở v3: vẫn gửi `samaltman` |
+| R02_search_tweets_routing | wrong_tool | `timeline(screenname=SamAltman)` | Chọn timeline thay vì social search | Qua ở v3 |
+| R03_web_news_routing | wrong_tool | `lookup(query="tin tức ai hôm nay", topic=general)` | Query dài và topic sai; mong đợi query `AI`, topic `news` | Qua ở v3 |
+| R06_timeframe_arg | wrong_arg_value | `social_search(query="tin công nghệ trong tuần")` | Chọn sai tool, không truyền news timeframe | Một phần ở v3: route đúng sang lookup nhưng `topic` vẫn là `general` |
+| R10_missing_handle | missing_info | `timeline(screenname=SamAltman)` | Đoán tài khoản khi user chưa nêu handle, lẽ ra hỏi lại | Còn lỗi ở v3: vẫn không gọi clarify |
+| R11_missing_url | missing_info | `fetch(url=https://www.vietnamnet.vn/)` | Tự đoán URL thay vì hỏi URL nào cần đọc | Còn lỗi ở v3: thiếu clarify và vẫn gọi fetch thừa |
+| R12_confirm_before_send | wrong_boundary | `send(confirmed=true)` | Gửi mà chưa có lượt xác nhận rõ ràng | Còn lỗi ở v3: vẫn không hỏi xác nhận |
+| R13_parallel_web_and_tweets | wrong_tool | `social_search(...)` + `timeline(...)` | Thiếu lookup; timeline không đúng yêu cầu | Qua ở v3 |
+| R14_out_of_scope_coding | out_of_scope | `send(...)` | Gọi send cho yêu cầu viết code ngoài phạm vi | Qua ở v3: không còn tool call |
+| M02_carryover_timeframe | wrong_arg_value | `social_search(query="robotics today")` | Không dùng lookup và bỏ timeframe đã có trong hội thoại | Một phần ở v3: route sang lookup nhưng `topic` vẫn sai |
+| M03_correction_handle | wrong_arg_value | `timeline(screenname=AndrejKarpathy)` | Truyền tên đầy đủ thay vì handle `karpathy` | Còn lỗi ở v3: gửi `andrejkarpathy` |
+| M06_switch_tool | wrong_tool | `social_search(query=OpenAI)` | Không chuyển từ social search sang web lookup | Qua ở v3 |
 
 ### B3. Team Eval Cases
 

@@ -9,10 +9,8 @@
 ## 1. Thông tin nhóm
 
 - Tên nhóm: ABCD
-- Lớp: L3B
-- Repo: [K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval), nhánh `MaiLeBaVuong`
-- Thành viên và phân công: A — Mai Lê Bá Vương (2A202603872), điều phối/baseline/prompt; B — tool mới/unit test; C — eval nhóm; D — UI/transcript/báo cáo. Tên và MSSV của B/C/D chưa có trong hồ sơ hiện tại.
-- Provider/model dùng cho v0–v3 trong các run hiện có: Ollama `qwen2.5:7b`.
+- Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
+- Provider/model dùng cho v0–v3: Ollama `qwen2.5:7b`
 
 ## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
 
@@ -68,8 +66,6 @@ Các run hiện có dưới đây đều hợp lệ theo điều kiện kỹ thu
 | v1 | Không đổi: prompt/tools hash trùng v0 | Không có thay đổi artifact để kiểm nghiệm; metric giữ nguyên | 0.40 | 0.40 | [v1 run](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json) |
 | v2 | `system_prompt.md` (prompt hash `e1bb34ba87e7`; tools hash giữ nguyên) | Hash này khớp dòng v1 trong `samples/version_log.csv` (bỏ chỉ dẫn đoán/gửi ngay); nhãn run hiện tại lại là v2 | 0.40 | 0.50 | [v2 run](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json) |
 | v3 | Prompt và `tools.yaml` cùng đổi so với run v2 | Sample log nói viết lại tool descriptions/conventions; vì prompt hash cũng đổi và run trung gian thiếu, chưa tách được tác động riêng của tools | 0.50 | 0.65 | [v3 run](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) |
-
-**Lưu ý về version log:** `artifacts/version_log.csv` đã có các dòng v0–v3, nhưng các `run_file` v1–v3 không tồn tại trong `runs/` hiện tại và nhãn/hash không khớp bốn run đang có. `samples/version_log.csv` chứa cùng các dòng. Bảng trên lấy metric, provider/model, hash và đường dẫn trực tiếp từ bốn run JSON thật; cần đồng bộ version log trước khi nộp. `case_accuracy` là metric trong bảng.
 
 ### B2. Failure Analysis
 

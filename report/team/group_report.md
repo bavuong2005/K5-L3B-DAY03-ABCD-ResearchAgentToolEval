@@ -58,7 +58,7 @@ ngrok http 8501
 | policy | tìm trong company policy markdown nội bộ | không |
 | papers | tìm paper trên arXiv | không |
 | paper_text | tải PDF arXiv và trích text cục bộ | không |
-| github_search | Tìm repository GitHub theo từ khóa, có thể lọc theo ngôn ngữ và giới hạn số kết quả | có |
+| github_search | Tìm repository GitHub theo từ khóa, có thể lọc theo ngôn ngữ và giới hạn số kết quả | Có (`github_search`, CP3) |
 
 ### A3. Câu hỏi mẫu để thử
 

@@ -123,3 +123,13 @@ tools:
         max_pages: {type: integer, default: 5, description: "Số trang"}
         max_chars: {type: integer, default: 8000, description: "Số ký tự"}
       required: [arxiv_url]
+
+  - name: github_search
+    description: "Tìm kiếm các repository mã nguồn mở trên GitHub theo từ khóa và ngôn ngữ lập trình. Dùng khi người dùng tìm kiếm code, repo, framework, thư viện hoặc dự án phần mềm trên GitHub. Không dùng để tìm bài báo arXiv, tin tức chung hoặc mạng xã hội."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Từ khóa tìm kiếm repository trên GitHub (ví dụ: 'agent eval', 'deepseek', 'vllm')"}
+        language: {type: string, default: "", description: "Ngôn ngữ lập trình để lọc repo (ví dụ: 'python', 'typescript', 'rust')"}
+        limit: {type: integer, default: 5, description: "Số lượng repository trả về (mặc định 5, tối đa 30)"}
+      required: [query]

@@ -81,7 +81,16 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-|  |  |  |  |
+| G01_github_search_python | Tìm repo GitHub với từ khóa và filter language=python, limit=3 | `github_search(query='agent eval', language='python', limit=3)` |  |
+| G02_github_search_general | Tìm repo trên GitHub không chỉ định ngôn ngữ | `github_search(query='langchain')` |  |
+| G03_policy_internal_routing | Hỏi quy định nội bộ công ty -> route tới policy thay vì web search | `policy(policy_area='ai_research')` |  |
+| G04_missing_github_query | Yêu cầu tìm repo nhưng không có từ khóa -> hỏi lại người dùng | `clarify(response_type='text')` |  |
+| G05_out_of_scope_creative | Sáng tác thơ ngoài phạm vi research agent -> từ chối, không gọi tool | `no_tool=true (refuse)` |  |
+| G06_multiturn_github_refine_lang | 2 turns: carry query DeepSeek từ turn 1, thêm language=typescript ở turn 2 | `github_search(query='DeepSeek', language='typescript')` |  |
+| G07_multiturn_clarify_then_github | 2 turns: user bổ sung query và language ở turn 2 sau khi thiếu ở turn 1 | `github_search(query='RAG evaluation', language='python')` |  |
+| G08_multiturn_switch_web_to_github | 2 turns: chuyển hướng từ web search sang tìm kiếm repo GitHub cho Llama 3 | `github_search(query='Llama 3')` |  |
+| G09_multiturn_confirm_send_flow | 2 turns: lượt 1 yêu cầu gửi, lượt 2 user xác nhận -> gọi send | `send(confirmed=true)` |  |
+| G10_multiturn_paper_then_repo | 2 turns: tìm paper xong chuyển sang tìm repo GitHub triển khai LoRA | `github_search(query='LoRA', language='python')` |  |
 
 ### B4. Live Chat Evidence
 
@@ -95,11 +104,11 @@ Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
 | Item | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| Tool mới (`tools/<tên>/`) |  |  |  |
-| Unit test tool mới (≥ 3 test/tool) | `pytest` output (0 failed) |  |  |
+| Tool mới (`tools/github_search/`) | `starter_v0/tools/github_search/tool.py`, `TOOL.md` | Tìm kiếm repo GitHub theo từ khóa, lọc theo language, sắp xếp stars giảm dần | Xử lý lỗi trả về error dict thay vì raise crash agent; timeout 30s |
+| Unit test tool mới (≥ 3 test/tool) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (0 failed) | 3 unit tests: happy path (mock fake_http), bad/empty input, failure path 500 pass 100% | Chạy offline qua FakeResponse, không gọi mạng thật |
 | UI (lệnh chạy + link dùng thử) |  |  |  |
 
-Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
+Tool unit tests: Đã viết 3 test trong `tests/test_tools_todo.py`. Ví dụ lỗi mà unit test bắt được nhưng eval không bắt được: khi model truyền query rỗng (`query="   "`), unit test phát hiện và đảm bảo tool trả về error dict (`ValueError`) an toàn thay vì crash hoặc gửi request rác lên API thật.
 
 ### B5. Bonus Evidence
 
@@ -110,9 +119,9 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 | Small Local Model | xem B7 |  |  |
 | Hơn 3 tool mới (≥ 4) |  |  |  |
 | `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output |  |  |
+| Test challenge (0 skipped / regression test) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (84 passed, 0 skipped) | Đạt 84 passed, 0 failed, 0 skipped toàn bộ suite pytest. Hoàn thành đầy đủ 14 unit tests cho toàn bộ tools hệ thống (clarify, format, send, lookup, fetch, timeline, social_search, policy) + 3 tests cho tool mới github_search | Đảm bảo 100% test chạy offline bằng FakeResponse, không gọi mạng thật |
 
-Test challenge: số bug tìm được trong tool có sẵn (nếu có), cách sửa, và test regression tương ứng.
+Test challenge: Toàn bộ suite đạt 84 passed, 0 skipped, 0 failed. Đã kiểm thử đầy đủ các nhánh biên: format rỗng không crash, fetch cắt chuỗi đúng 4000 ký tự, send bắt buộc phải có xác nhận confirmed=true và kiểm tra biến môi trường, timeline bỏ qua item thiếu ID, policy tách biệt dòng chỉ dẫn nguy hiểm (prompt injection) vào untrusted_text thay vì đưa vào facts.
 
 ### B7. Small Local Model Challenge (bonus)
 

@@ -8,9 +8,11 @@
 
 ## 1. Thông tin nhóm
 
-- Tên nhóm:
-- Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
-- Provider/model dùng cho v0–v3:
+- Tên nhóm: ABCD
+- Lớp: L3B
+- Repo: [K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval), nhánh `MaiLeBaVuong`
+- Thành viên và phân công: A — Mai Lê Bá Vương (2A202603872), điều phối/baseline/prompt; B — tool mới/unit test; C — eval nhóm; D — UI/transcript/báo cáo. Tên và MSSV của B/C/D chưa có trong hồ sơ hiện tại.
+- Provider/model dùng cho v0–v3 trong các run hiện có: Ollama `qwen2.5:7b`.
 
 ## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
 

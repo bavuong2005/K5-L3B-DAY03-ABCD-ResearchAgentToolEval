@@ -73,7 +73,7 @@ class GeminiProvider:
         self,
         *,
         api_key_env: str = "GEMINI_API_KEY",
-        default_model: str = "gemini-3.8-flash",
+        default_model: str = "gemini-3-flash-preview",
     ) -> None:
         self.api_key_env = api_key_env
         self.default_model = default_model
@@ -106,11 +106,36 @@ class GeminiProvider:
             config_kwargs["tools"] = [types.Tool(function_declarations=declarations)]
 
         client = genai.Client(api_key=api_key)
-        resp = client.models.generate_content(
-            model=model or self.default_model,
-            contents=contents,
-            config=types.GenerateContentConfig(**config_kwargs),
-        )
+        import time
+        import re
+        max_attempts = 5
+        resp = None
+        target_model = model or self.default_model
+        for attempt in range(max_attempts):
+            try:
+                resp = client.models.generate_content(
+                    model=target_model,
+                    contents=contents,
+                    config=types.GenerateContentConfig(**config_kwargs),
+                )
+                break
+            except Exception as e:
+                err_str = str(e)
+                if ("429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "503" in err_str) and attempt < max_attempts - 1:
+                    wait_seconds = 15.0 * (attempt + 1)
+                    match = re.search(r"retry in (\d+(?:\.\d+)?)s", err_str)
+                    if match:
+                        wait_seconds = float(match.group(1)) + 2.0
+                    else:
+                        match2 = re.search(r"'retryDelay':\s*'(\d+)s'", err_str)
+                        if match2:
+                            wait_seconds = float(match2.group(1)) + 2.0
+                    if wait_seconds > 60:
+                        raise RuntimeError(f"Model {target_model} exceeded quota (requires waiting {wait_seconds:.0f}s). Use another model like 'gemini-3-flash-preview'.") from e
+                    print(f"\n[GeminiProvider] Hit rate limit/temporary error. Sleeping {wait_seconds:.1f}s before retry {attempt + 1}/{max_attempts}...", flush=True)
+                    time.sleep(wait_seconds)
+                else:
+                    raise
 
         text_parts: list[str] = []
         calls: list[ToolCall] = []

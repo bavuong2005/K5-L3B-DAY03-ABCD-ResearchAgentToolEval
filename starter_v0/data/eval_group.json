@@ -1,7 +1,249 @@
 {
   "dataset_id": "day03_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
-  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "description": "Case do nhóm thiết kế để kiểm thử toàn diện khả năng chọn tool, xử lý tham số, giữ ngữ cảnh đa lượt, và route tới tool mới github_search.",
+  "allowed_failure_types": [
+    "wrong_tool",
+    "wrong_arg_value",
+    "wrong_boundary",
+    "unnecessary_tool",
+    "out_of_scope",
+    "missing_info"
+  ],
+  "cases": [
+    {
+      "id": "G01_github_search_python",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_tool",
+      "query": "Tìm giúp tôi 3 repository Python về agent eval có nhiều sao nhất trên GitHub",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "agent eval",
+              "language": "python",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_github_search_lang",
+        "difficulty": "easy",
+        "what_it_tests": "Tìm repo GitHub với từ khóa và bộ lọc language=python, limit=3."
+      }
+    },
+    {
+      "id": "G02_github_search_general",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_tool",
+      "query": "Tìm các repository mã nguồn mở về langchain trên GitHub",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "langchain"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_github_search_general",
+        "difficulty": "easy",
+        "what_it_tests": "Tìm repo trên GitHub không chỉ định ngôn ngữ."
+      }
+    },
+    {
+      "id": "G03_policy_internal_routing",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_tool",
+      "query": "Quy định nội bộ của công ty về việc sử dụng AI trong nghiên cứu là gì?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "ai_research"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_policy_internal",
+        "difficulty": "medium",
+        "what_it_tests": "Hỏi về quy định nội bộ công ty -> route tới policy với policy_area=ai_research thay vì web search."
+      }
+    },
+    {
+      "id": "G04_missing_github_query",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "missing_info",
+      "query": "Tìm cho mình mấy repo GitHub hay ho bằng Python với",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "clarify_missing_topic",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu tìm repo nhưng không có từ khóa/chủ đề cụ thể -> gọi clarify hỏi lại người dùng."
+      }
+    },
+    {
+      "id": "G05_out_of_scope_creative",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "out_of_scope",
+      "query": "Hãy viết cho tôi một bài thơ tình 4 câu về mùa thu Hà Nội",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "boundary_out_of_scope",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu sáng tác thơ ngoài phạm vi research agent -> không gọi bất kỳ tool nào."
+      }
+    },
+    {
+      "id": "G06_multiturn_github_refine_lang",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_arg_value",
+      "turns": [
+        {"role": "user", "content": "Tìm repo về DeepSeek trên GitHub"},
+        {"role": "user", "content": "Chỉ lấy các repo viết bằng TypeScript thôi nhé"}
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "DeepSeek",
+              "language": "typescript"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_refine_arg",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: carry query DeepSeek từ turn 1 và bổ sung language=typescript ở turn 2."
+      }
+    },
+    {
+      "id": "G07_multiturn_clarify_then_github",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "missing_info",
+      "turns": [
+        {"role": "user", "content": "Tìm repo GitHub cho dự án của tôi"},
+        {"role": "user", "content": "Chủ đề là RAG evaluation, ngôn ngữ Python"}
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "RAG evaluation",
+              "language": "python"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_clarify_fill_github",
+        "difficulty": "hard",
+        "what_it_tests": "2 turns: sau khi thiếu thông tin ở turn 1, user bổ sung query và language ở turn 2 -> route github_search đúng args."
+      }
+    },
+    {
+      "id": "G08_multiturn_switch_web_to_github",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_tool",
+      "turns": [
+        {"role": "user", "content": "Tìm tin tức về Llama 3 trên web"},
+        {"role": "user", "content": "Thôi không xem tin tức nữa, tìm repo mã nguồn mở của nó trên GitHub đi"}
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "Llama 3"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_switch_tool_to_github",
+        "difficulty": "hard",
+        "what_it_tests": "2 turns: chuyển hướng từ web search sang tìm kiếm repo GitHub với cùng chủ đề Llama 3."
+      }
+    },
+    {
+      "id": "G09_multiturn_confirm_send_flow",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_boundary",
+      "turns": [
+        {"role": "user", "content": "Gửi bản tóm tắt này lên Telegram giúp mình"},
+        {"role": "user", "content": "Đồng ý, tôi xác nhận gửi lên Telegram"}
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_send_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "2 turns: lượt 1 yêu cầu gửi, lượt 2 user xác nhận confirmed=true -> gọi send với confirmed=true."
+      }
+    },
+    {
+      "id": "G10_multiturn_paper_then_repo",
+      "phase": "B",
+      "suite": "group",
+      "failure_type": "wrong_tool",
+      "turns": [
+        {"role": "user", "content": "Tìm bài báo arXiv về LoRA fine-tuning"},
+        {"role": "user", "content": "Giờ tìm các repo GitHub triển khai LoRA bằng Python"}
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "LoRA",
+              "language": "python"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_research_flow",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi tìm paper, user muốn tìm code repo tương ứng -> route github_search."
+      }
+    }
+  ]
 }

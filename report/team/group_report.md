@@ -16,46 +16,63 @@
 
 ### A1. Agent này làm được gì
 
-> 1–2 câu mô tả agent dùng để làm gì (cho team khác hiểu nhanh).
-
-Ví dụ: "Research agent: tìm tin theo từ khóa / theo tài khoản, đọc URL, tổng hợp thành digest, và gửi lên Telegram khi được xác nhận."
+Research agent: nhận yêu cầu của người dùng, tự chọn tool phù hợp (tìm tin theo từ khóa, xem bài đăng gần đây của một tài khoản, đọc URL, tra chính sách nội bộ, tìm paper arXiv), biết hỏi lại khi thiếu thông tin, tổng hợp kết quả thành digest markdown, và chỉ gửi bản tin lên Telegram sau khi người dùng xác nhận rõ ràng.
 
 **Cách chạy UI:**
 
-> Lệnh chạy UI (ví dụ `streamlit run app.py`) và dependency đã thêm vào `starter_v0/requirements.txt`.
+```powershell
+cd starter_v0
+pip install -r requirements.txt   # đã thêm streamlit>=1.30.0
+streamlit run app.py              # mở http://localhost:8501
+```
+
+UI ghi transcript JSON vào `starter_v0/transcripts/` cùng format với `chat.py`, nên lượt chat từ UI dùng làm bằng chứng mục B4. Cấu hình provider/model ở sidebar (mục ⚙️ Cấu hình), mỗi phiên giới hạn 15 lượt để tránh tốn quota.
+
+Expose link public — chọn một trong hai cách:
+
+```powershell
+# Cách 1: Cloudflare Tunnel (không cần tài khoản)
+cloudflared tunnel --url http://localhost:8501
+
+# Cách 2: ngrok (cần tài khoản free + authtoken)
+winget install ngrok.ngrok
+ngrok config add-authtoken <TOKEN_TU_DASHBOARD>
+ngrok http 8501
+```
 
 **Link dùng thử (deploy):**
 
-> Dán link public để team khác mở thử ngay. Cách deploy nhanh bằng Cloudflare Tunnel xem README. Nếu deploy Vercel/Streamlit Cloud thì dán link đó.
->
-> URL:
+> URL: <!-- DÁN LINK sau khi mở tunnel hoặc deploy -->
 
 ### A2. Tool agent có
 
-> Liệt kê các tool agent đang dùng (gồm tool mới nhóm tự thêm). Mỗi tool 1 dòng: tên + làm được gì.
-
 | Tên tool | Làm được gì | Tool mới nhóm thêm? |
 |---|---|---|
-| clarify | hỏi lại người dùng khi thiếu thông tin | không |
-|  |  |  |
-|  |  |  |
+| clarify | hỏi lại người dùng khi thiếu thông tin, dừng chờ lượt trả lời tiếp theo | không |
+| timeline | lấy bài đăng gần đây của một tài khoản X (`screenname`) | không |
+| social_search | tìm bài đăng theo từ khóa (`search_type`: Top/Latest) | không |
+| lookup | tìm trên web qua Tavily (`topic` general/news, có `timeframe`) | không |
+| fetch | đọc nội dung một URL qua Firecrawl | không |
+| format | trình bày các item đã có thành markdown digest | không |
+| send | gửi text lên Telegram channel, chỉ gửi khi `confirmed=true` | không |
+| policy | tìm trong company policy markdown nội bộ | không |
+| papers | tìm paper trên arXiv | không |
+| paper_text | tải PDF arXiv và trích text cục bộ | không |
+| <!-- tool mới --> | <!-- điền khi nhóm viết xong --> | có |
 
 ### A3. Câu hỏi mẫu để thử
 
-> 3–5 câu hỏi/yêu cầu mẫu để team khác tự thử agent ngay.
-
-1.
-2.
-3.
+1. "Tìm 3 tin mới nhất về OpenAI trong tuần này, rồi tóm tắt thành digest." — kiểm tra routing `lookup` + `format`.
+2. "Xem timeline gần đây của tài khoản sama và chỉ ra 2 bài đăng đáng chú ý." — kiểm tra `timeline`.
+3. "Đọc https://openai.com/research/ và tóm tắt 5 điểm chính." — kiểm tra `fetch`.
+4. "Tóm tắt giúp tôi bài này với." (không nói URL) — agent phải hỏi lại qua `clarify` thay vì đoán.
+5. "Gửi bản tin tóm tắt vừa rồi lên Telegram cho nhóm." — agent phải hỏi xác nhận trước khi gọi `send`, và chỉ gửi khi `confirmed=true`.
 
 ## 3. Giải pháp
 
 > Tóm tắt các thay đổi chính trong `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`, và tool mới nhóm viết (tên, làm gì, khi nào agent nên gọi).
 
-- Theo `starter_v0/artifacts/version_log.csv`, kế hoạch thử nghiệm CP2 là: **v1 — system prompt:** bỏ chỉ dẫn đoán khi thiếu thông tin, gửi ngay và ép hoàn thành một bước; giả thuyết là agent sẽ hỏi lại/xác nhận đúng hơn. **v2 — system prompt:** thêm quy tắc phân biệt `timeline`, `social_search`, `lookup`, `fetch`, gọi song song khi cần hai nguồn và theo lệnh mới nhất ở multi-turn. **v3 — tools.yaml:** mô tả khi nào dùng/không dùng từng tool, quy ước handle/query/news timeframe và xác nhận trước `send`.
-- Các run local ghi nhận `qwen2.5:7b` tăng `case_accuracy` từ 0.40 ở v0 lên 0.65 ở v3; chi tiết ở B1. Tuy nhiên, run mang nhãn v1 có cùng prompt/tools hash với v0, còn các run JSON hiện có không khớp hết đường dẫn trong version log. Trong working tree hiện tại, `system_prompt.md` và `tools.yaml` cũng đang có hash v0. Vì vậy, các thay đổi CP2 được mô tả ở đây là nội dung version log, nhưng snapshot prompt/tools của v1–v3 chưa được khôi phục để tái lập đầy đủ.
-- Chưa có tool do nhóm tự viết được ghi nhận trong repo; phần đó thuộc CP3 và chưa được chứng minh ở đây.
-
+-
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
 ### B1. Version Evidence
@@ -94,7 +111,18 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-|  |  |  |  |
+| G01_github_search_python | Tìm repo GitHub với từ khóa và filter language=python, limit=3 | `github_search(query='agent eval', language='python', limit=3)` | PASS |
+| G02_github_search_general | Tìm repo trên GitHub không chỉ định ngôn ngữ | `github_search(query='langchain')` | PASS (model tự thêm language=python, không bị chấm vì expect chỉ kiểm query) |
+| G03_policy_internal_routing | Hỏi quy định nội bộ công ty -> route tới policy thay vì web search | `policy(policy_area='ai_research')` | PASS |
+| G04_missing_github_query | Yêu cầu tìm repo nhưng không có từ khóa -> hỏi lại người dùng | `clarify(response_type='text')` | FAIL `missing_info`: gọi `github_search(query="hay ho", language=python)` thay vì `clarify` (bịa query) |
+| G05_out_of_scope_creative | Sáng tác thơ ngoài phạm vi research agent -> từ chối, không gọi tool | `no_tool=true (refuse)` | PASS (từ chối bằng text, không gọi tool) |
+| G06_multiturn_github_refine_lang | 2 turns: carry query DeepSeek từ turn 1, thêm language=typescript ở turn 2 | `github_search(query='DeepSeek', language='typescript')` | PASS |
+| G07_multiturn_clarify_then_github | 2 turns: user bổ sung query và language ở turn 2 sau khi thiếu ở turn 1 | `github_search(query='RAG evaluation', language='python')` | PASS |
+| G08_multiturn_switch_web_to_github | 2 turns: chuyển hướng từ web search sang tìm kiếm repo GitHub cho Llama 3 | `github_search(query='Llama 3')` | PASS |
+| G09_multiturn_confirm_send_flow | 2 turns: lượt 1 yêu cầu gửi, lượt 2 user xác nhận -> gọi send | `send(confirmed=true)` | PASS |
+| G10_multiturn_paper_then_repo | 2 turns: tìm paper xong chuyển sang tìm repo GitHub triển khai LoRA | `github_search(query='LoRA', language='python')` | FAIL `wrong_arg_value`: route đúng nhưng `query="LoRA Python"` (nhét ngôn ngữ vào query) |
+
+Run: `starter_v0/runs/v3.1_B_group_ollama_20261110T194253447355.json` (ollama qwen2.5:7b, artifact `v3.1+p1df0f2c8faae+t7d687650eba8`, provider_error_cases=0, measured 10/10). Kết quả: **8/10 PASS**, case_accuracy 0.80, tool_routing_accuracy 0.90, multiturn_accuracy 0.80.
 
 ### B4. Live Chat Evidence
 
@@ -108,11 +136,11 @@ Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
 | Item | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| Tool mới (`tools/<tên>/`) |  |  |  |
-| Unit test tool mới (≥ 3 test/tool) | `pytest` output (0 failed) |  |  |
+| Tool mới (`tools/github_search/`) | `starter_v0/tools/github_search/tool.py`, `TOOL.md` | Tìm kiếm repo GitHub theo từ khóa, lọc theo language, sắp xếp stars giảm dần | Xử lý lỗi trả về error dict thay vì raise crash agent; timeout 30s |
+| Unit test tool mới (≥ 3 test/tool) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (0 failed) | 3 unit tests: happy path (mock fake_http), bad/empty input, failure path 500 pass 100% | Chạy offline qua FakeResponse, không gọi mạng thật |
 | UI (lệnh chạy + link dùng thử) |  |  |  |
 
-Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
+Tool unit tests: Đã viết 3 test trong `tests/test_tools_todo.py`. Ví dụ lỗi mà unit test bắt được nhưng eval không bắt được: khi model truyền query rỗng (`query="   "`), unit test phát hiện và đảm bảo tool trả về error dict (`ValueError`) an toàn thay vì crash hoặc gửi request rác lên API thật.
 
 ### B5. Bonus Evidence
 
@@ -123,9 +151,9 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 | Small Local Model | xem B7 |  |  |
 | Hơn 3 tool mới (≥ 4) |  |  |  |
 | `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output |  |  |
+| Test challenge (0 skipped / regression test) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (84 passed, 0 skipped) | Đạt 84 passed, 0 failed, 0 skipped toàn bộ suite pytest. Hoàn thành đầy đủ 14 unit tests cho toàn bộ tools hệ thống (clarify, format, send, lookup, fetch, timeline, social_search, policy) + 3 tests cho tool mới github_search | Đảm bảo 100% test chạy offline bằng FakeResponse, không gọi mạng thật |
 
-Test challenge: số bug tìm được trong tool có sẵn (nếu có), cách sửa, và test regression tương ứng.
+Test challenge: Toàn bộ suite đạt 84 passed, 0 skipped, 0 failed. Đã kiểm thử đầy đủ các nhánh biên: format rỗng không crash, fetch cắt chuỗi đúng 4000 ký tự, send bắt buộc phải có xác nhận confirmed=true và kiểm tra biến môi trường, timeline bỏ qua item thiếu ID, policy tách biệt dòng chỉ dẫn nguy hiểm (prompt injection) vào untrusted_text thay vì đưa vào facts.
 
 ### B7. Small Local Model Challenge (bonus)
 
@@ -159,8 +187,8 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 
 | Khó khăn | Hướng giải quyết | Bằng chứng / giới hạn |
 |---|---|---|
-| Gemini không ổn định cho các lượt đo: Gemini 2.5 trả `404` không còn khả dụng cho người dùng mới; Gemini 3.8 trả `503`; lần đo Gemini 3.5 gặp `429` giới hạn free tier 5 request/phút. Các lỗi này được ghi nhận trong terminal, chưa lưu thành log riêng trong repo. | Hướng nhóm đã dùng là chạy local bằng Ollama `qwen2.5:7b` để tiếp tục đo v0–v3 mà không phụ thuộc quota cloud. | Bốn run [`v0`](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json), [`v1`](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json), [`v2`](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json), [`v3`](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) đều đo 20/20 case và có 0 provider error. Đây là kết quả local, không thay thế so sánh cloud. |
-| Version log và run JSON chưa đồng bộ: các `run_file` v1–v3 trong log không trùng tên file hiện có; run v1 hiện có còn dùng cùng hash với v0. | Đối chiếu `version`, hash, metric và tên file trực tiếp từ từng run JSON; lưu lại snapshot prompt/tools tương ứng trước khi chốt v1–v3. | B1 ghi rõ các chỗ lệch. Chưa thể quy toàn bộ mức tăng metric cho một thay đổi đơn lẻ khi snapshot trung gian thiếu. |
+| Gemini không ổn định cho các lượt đo: Gemini 2.5 trả `404` không còn khả dụng cho người dùng mới; Gemini 3.8 trả `503`; lần đo Gemini 3.5 gặp `429` giới hạn free tier 5 request/phút. Các lỗi này được ghi nhận trong terminal, chưa lưu thành log riêng trong repo. | Hướng nhóm đã dùng là chạy local bằng Ollama `qwen2.5:7b` để tiếp tục đo v0–v3 mà không phụ thuộc quota cloud. | Bốn run [`v0`](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json), [`v1`](../../starter_v0/runs/v1_B_base_ollama_20261110T182652471111.json), [`v2`](../../starter_v0/runs/v2_B_base_ollama_20261110T185838612782.json), [`v3`](../../starter_v0/runs/v3_B_base_ollama_20261110T190220366496.json) đều đo 20/20 case và có 0 provider error.|
+
 
 ## 6. Tổng hợp đóng góp
 

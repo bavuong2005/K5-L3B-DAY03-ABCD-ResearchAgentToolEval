@@ -8,45 +8,65 @@
 
 ## 1. Thông tin nhóm
 
-- Tên nhóm:
+- Tên nhóm: <!-- ĐIỀN -->
 - Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
-- Provider/model dùng cho v0–v3:
+- Provider/model dùng cho v0–v3: Gemini — `gemini-3.5-flash` <!-- xác nhận lại model/provider thật mà team dùng cho các run v0–v3, sửa lại dòng này cho khớp -->
 
 ## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
 
 ### A1. Agent này làm được gì
 
-> 1–2 câu mô tả agent dùng để làm gì (cho team khác hiểu nhanh).
-
-Ví dụ: "Research agent: tìm tin theo từ khóa / theo tài khoản, đọc URL, tổng hợp thành digest, và gửi lên Telegram khi được xác nhận."
+Research agent: nhận yêu cầu của người dùng, tự chọn tool phù hợp (tìm tin theo từ khóa, xem bài đăng gần đây của một tài khoản, đọc URL, tra chính sách nội bộ, tìm paper arXiv), biết hỏi lại khi thiếu thông tin, tổng hợp kết quả thành digest markdown, và chỉ gửi bản tin lên Telegram sau khi người dùng xác nhận rõ ràng.
 
 **Cách chạy UI:**
 
-> Lệnh chạy UI (ví dụ `streamlit run app.py`) và dependency đã thêm vào `starter_v0/requirements.txt`.
+```powershell
+cd starter_v0
+pip install -r requirements.txt   # đã thêm streamlit>=1.30.0
+streamlit run app.py              # mở http://localhost:8501
+```
+
+UI ghi transcript JSON vào `starter_v0/transcripts/` cùng format với `chat.py`, nên lượt chat từ UI dùng làm bằng chứng mục B4. Cấu hình provider/model ở sidebar (mục ⚙️ Cấu hình), mỗi phiên giới hạn 15 lượt để tránh tốn quota.
+
+Expose link public — chọn một trong hai cách:
+
+```powershell
+# Cách 1: Cloudflare Tunnel (không cần tài khoản)
+cloudflared tunnel --url http://localhost:8501
+
+# Cách 2: ngrok (cần tài khoản free + authtoken)
+winget install ngrok.ngrok
+ngrok config add-authtoken <TOKEN_TU_DASHBOARD>
+ngrok http 8501
+```
 
 **Link dùng thử (deploy):**
 
-> Dán link public để team khác mở thử ngay. Cách deploy nhanh bằng Cloudflare Tunnel xem README. Nếu deploy Vercel/Streamlit Cloud thì dán link đó.
->
-> URL:
+> URL: <!-- DÁN LINK sau khi mở tunnel hoặc deploy -->
 
 ### A2. Tool agent có
 
-> Liệt kê các tool agent đang dùng (gồm tool mới nhóm tự thêm). Mỗi tool 1 dòng: tên + làm được gì.
-
 | Tên tool | Làm được gì | Tool mới nhóm thêm? |
 |---|---|---|
-| clarify | hỏi lại người dùng khi thiếu thông tin | không |
-|  |  |  |
-|  |  |  |
+| clarify | hỏi lại người dùng khi thiếu thông tin, dừng chờ lượt trả lời tiếp theo | không |
+| timeline | lấy bài đăng gần đây của một tài khoản X (`screenname`) | không |
+| social_search | tìm bài đăng theo từ khóa (`search_type`: Top/Latest) | không |
+| lookup | tìm trên web qua Tavily (`topic` general/news, có `timeframe`) | không |
+| fetch | đọc nội dung một URL qua Firecrawl | không |
+| format | trình bày các item đã có thành markdown digest | không |
+| send | gửi text lên Telegram channel, chỉ gửi khi `confirmed=true` | không |
+| policy | tìm trong company policy markdown nội bộ | không |
+| papers | tìm paper trên arXiv | không |
+| paper_text | tải PDF arXiv và trích text cục bộ | không |
+| <!-- tool mới --> | <!-- điền khi nhóm viết xong --> | có |
 
 ### A3. Câu hỏi mẫu để thử
 
-> 3–5 câu hỏi/yêu cầu mẫu để team khác tự thử agent ngay.
-
-1.
-2.
-3.
+1. "Tìm 3 tin mới nhất về OpenAI trong tuần này, rồi tóm tắt thành digest." — kiểm tra routing `lookup` + `format`.
+2. "Xem timeline gần đây của tài khoản sama và chỉ ra 2 bài đăng đáng chú ý." — kiểm tra `timeline`.
+3. "Đọc https://openai.com/research/ và tóm tắt 5 điểm chính." — kiểm tra `fetch`.
+4. "Tóm tắt giúp tôi bài này với." (không nói URL) — agent phải hỏi lại qua `clarify` thay vì đoán.
+5. "Gửi bản tin tóm tắt vừa rồi lên Telegram cho nhóm." — agent phải hỏi xác nhận trước khi gọi `send`, và chỉ gửi khi `confirmed=true`.
 
 ## 3. Giải pháp
 

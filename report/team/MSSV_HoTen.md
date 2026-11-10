@@ -6,12 +6,12 @@ Ví dụ: `20241234_NguyenVanAn.md`.
 
 ## 1. Thông tin thành viên
 
-- Họ tên:
-- MSSV:
-- Email:
+- Họ tên: Đỗ Quốc Khánh
+- MSSV: 2A202603823 
+- Email: 26ai.khanhdq2@vinuni.edu.vn
 
 ## 2. Phần việc phụ trách
-
+Xây dựng phần UI demo 
 ...
 
 ## 3. Đóng góp cụ thể

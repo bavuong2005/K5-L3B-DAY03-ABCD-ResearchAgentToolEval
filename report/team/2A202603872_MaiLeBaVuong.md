@@ -10,7 +10,7 @@
 
 ## 2. Phần việc phụ trách
 
-- Chia việc ban đầu theo checkpoint cho nhóm A/B/C/D và theo dõi bằng chứng cần có trong báo cáo.
+- Chia việc ban đầu theo checkpoint cho nhóm và theo dõi bằng chứng cần có trong báo cáo.
 - Dựng môi trường và chạy chuỗi eval baseline v0, các phiên bản v1–v3 bằng cùng một model Ollama `qwen2.5:7b` để số liệu có thể so sánh.
 - Phân tích lỗi từ run JSON, đề xuất thay đổi prompt/tool declaration theo từng vòng và cập nhật version log.
 - Tích hợp nhánh thành viên vào `MaiLeBaVuong`, rà soát run và đồng bộ báo cáo với bằng chứng thực tế.

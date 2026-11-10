@@ -65,8 +65,3 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 - Commits trên nhánh `MaiLeBaVuong`: `d89fa72` (ghi kết quả CP1/CP2), `62c76ed` (đồng bộ báo cáo với run canonical), `3f317be` (dọn hai run gắn nhãn sai).
 - GitHub: [bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval), nhánh `MaiLeBaVuong`.
 - Tự kiểm tra: so metric và `provider_error_cases` trong JSON với version log; xác nhận hash artifact/đường dẫn run; kiểm tra diff và trạng thái Git sau khi tích hợp.
-
-### Tự đánh giá
-
-- Làm tốt: giữ baseline và các vòng tối ưu trên cùng provider/model, gắn mỗi phiên bản với thay đổi và giả thuyết, rà bằng chứng trước khi cập nhật báo cáo.
-- Cần cải thiện: nên chốt quy tắc đặt tên run và người phụ trách checkpoint sớm hơn để giảm run lặp/gắn nhãn nhầm; tiếp tục theo dõi các lỗi routing/argument còn lại thay vì chỉ nhìn điểm tổng.

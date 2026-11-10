@@ -10,7 +10,7 @@
 
 - Tên nhóm: <!-- ĐIỀN -->
 - Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
-- Provider/model dùng cho v0–v3: OpenRouter — `openai/gpt-4o-mini` <!-- sửa nếu nhóm đổi provider/model -->
+- Provider/model dùng cho v0–v3: Gemini — `gemini-3.5-flash` <!-- xác nhận lại model/provider thật mà team dùng cho các run v0–v3, sửa lại dòng này cho khớp -->
 
 ## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
 
@@ -26,10 +26,18 @@ pip install -r requirements.txt   # đã thêm streamlit>=1.30.0
 streamlit run app.py              # mở http://localhost:8501
 ```
 
-UI ghi transcript JSON vào `starter_v0/transcripts/` cùng format với `chat.py`, nên lượt chat từ UI dùng làm bằng chứng mục B4. Cấu hình provider/model/version ở sidebar. Expose link public bằng Cloudflare Tunnel:
+UI ghi transcript JSON vào `starter_v0/transcripts/` cùng format với `chat.py`, nên lượt chat từ UI dùng làm bằng chứng mục B4. Cấu hình provider/model ở sidebar (mục ⚙️ Cấu hình), mỗi phiên giới hạn 15 lượt để tránh tốn quota.
+
+Expose link public — chọn một trong hai cách:
 
 ```powershell
+# Cách 1: Cloudflare Tunnel (không cần tài khoản)
 cloudflared tunnel --url http://localhost:8501
+
+# Cách 2: ngrok (cần tài khoản free + authtoken)
+winget install ngrok.ngrok
+ngrok config add-authtoken <TOKEN_TU_DASHBOARD>
+ngrok http 8501
 ```
 
 **Link dùng thử (deploy):**

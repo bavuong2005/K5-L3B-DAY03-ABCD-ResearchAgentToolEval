@@ -1,0 +1,78 @@
+{
+  "transcript_id": "ui_v3_openrouter_20261111T091005971685",
+  "version": "v3",
+  "artifact_version": "v3+p1df0f2c8faae+t7d687650eba8",
+  "prompt_hash": "1df0f2c8faae5f8274689819d13119d68f9d2e5b42cca842e20db976a0263d0e",
+  "tools_hash": "7d687650eba8f0f887e0ef3c51e282b773dde7578d94659d43888502122a5d33",
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3.5-super-vl:free",
+  "system_prompt": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "ui": "streamlit",
+  "created_at": "2026-11-11T09:10:05",
+  "updated_at": "2026-11-11T09:10:16",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T09:10:16",
+      "user": "Twitter/X đang nói gì về OpenAI dạo gần đây?",
+      "status": "answered",
+      "assistant_text": "Tôi không thể truy cập dữ liệu Twitter/X lúc này do lỗi hệ thống (403 Forbidden từ API). \n\nBạn có muốn tôi thử tìm thông tin về OpenAI trên web (tin tức, bài viết) thay thế không, hay muốn thử lại sau?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "social_search",
+              "args": {
+                "query": "OpenAI",
+                "search_type": "Latest",
+                "limit": 10
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "social_search",
+              "args": {
+                "query": "OpenAI",
+                "search_type": "Latest",
+                "limit": 10
+              },
+              "result": {
+                "tool": "search_tweets",
+                "error": "HTTPError",
+                "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Latest"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Tôi không thể truy cập dữ liệu Twitter/X lúc này do lỗi hệ thống (403 Forbidden từ API). \n\nBạn có muốn tôi thử tìm thông tin về OpenAI trên web (tin tức, bài viết) thay thế không, hay muốn thử lại sau?",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "OpenAI",
+            "search_type": "Latest",
+            "limit": 10
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Latest"
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T09:10:16"
+    }
+  ]
+}

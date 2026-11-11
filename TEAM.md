@@ -14,6 +14,7 @@
 | 1 | Cung Đức Anh | 2A202603814 | 26ai.anhcd2@vinuni.edu.vn | | Tool mới & Unit Test (CP3) |
 | 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | bavuong2005 |baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
 | 3 | Phạm Thanh An | 2A202603913 | 26ai.anpt3@vinuni.edu.vn | thanhanbk02 | Phân công công việc; chạy eval, tối ưu prompt/tool declaration (CP1, CP2, CP4); tích hợp tool và nhánh |
+| 4 | Đỗ Quốc Khánh | 2A202603823 | 26ai.khanhdq2@vinuni.edu.vn | | UI demo, deploy link public, live chat & bằng chứng B4 (CP5) |
 
 ## Cá nhân
 
@@ -88,3 +89,19 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 - File thay đổi: `starter_v0/artifacts/system_prompt.md`, `starter_v0/artifacts/tools.yaml`, `.gitattributes`; kết quả CP4 tại bảng B3 của `report/team/group_report.md`.
 - Báo cáo cá nhân: `report/team/2A202603913_PhamThanhAn.md`.
 - Tự kiểm tra: loại run có provider error hoặc hash artifact không khớp; xem từng case lỗi và chạy lại cùng artifact để xác nhận kết quả có thể tái lập.
+
+## DoQuocKhanh-2A202603823
+
+### Phần việc phụ trách
+
+- Xây dựng UI demo (CP5), deploy link public, chạy live chat và tổng hợp bằng chứng B4 + mục "Khó khăn" của báo cáo nhóm.
+
+### Đóng góp cụ thể
+
+- Dựng `starter_v0/app.py` (Streamlit) tái dùng đúng vòng lặp `chat.py`, transcript từ UI cùng format với CLI để dùng làm bằng chứng.
+- Xử lý chuỗi lỗi provider (Gemini 503/429, thiếu key OpenRouter) và chuyển live chat sang OpenRouter model free; deploy ngrok.
+- Chạy phiên live chat 6 lượt đủ 3 kịch bản rubric; điền bảng B4, dòng UI ở B5a và 2 dòng khó khăn mới ở mục 5 của `group_report.md`.
+
+### Bằng chứng
+
+- Chi tiết đầy đủ: `report/team/2A202603823_DoQuocKhanh.md`; transcript `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` (phiên 6 lượt) và các transcript lỗi 429/403 làm bằng chứng mục 5.

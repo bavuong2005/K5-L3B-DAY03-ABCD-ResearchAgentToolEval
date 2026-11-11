@@ -1,0 +1,980 @@
+{
+  "transcript_id": "ui_v3_openrouter_20261111T001056477329",
+  "version": "v3",
+  "artifact_version": "v3+p1df0f2c8faae+t7d687650eba8",
+  "prompt_hash": "1df0f2c8faae5f8274689819d13119d68f9d2e5b42cca842e20db976a0263d0e",
+  "tools_hash": "7d687650eba8f0f887e0ef3c51e282b773dde7578d94659d43888502122a5d33",
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3.5-super-vl:free",
+  "system_prompt": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "ui": "streamlit",
+  "created_at": "2026-11-11T00:10:56",
+  "updated_at": "2026-11-11T00:21:29",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T00:11:16",
+      "user": "Hôm nay có tin AI nào đáng chú ý? Tóm tắt giùm mình.",
+      "status": "answered",
+      "assistant_text": "**Tin AI đáng chú ý hôm nay (10/11/2026)**\n\n- Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển chip để giảm sự phụ thuộc vào Nvidia. — [TechCrunch](https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips)\n\n- IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số. — [Microsoft Source](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)\n\n- AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tệ hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính. — [WilmerHale](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)\n\n- OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất. — [OpenAI](https://openai.com/index/helping-caregivers-use-ai-in-everyday-life)\n\n- Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách. — [CBS Chicago](https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access)",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 8
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 8
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "Agentic AI Raises New Questions for Financial Institutions",
+                    "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                    "source": "wilmerhale.com",
+                    "summary": "DownloadDownload\n\nArtificial intelligence (AI) has moved beyond answering questions and generating content. Increasingly, AI systems are being designed to act. Agentic AI can pursue objectives, make decisions and take actions on a user’s behalf, potentially with limited human involvement in individual decisions. [...] Consider a customer who gives an AI agent access to a bank account with an instruction to manage the customer’s cash efficiently. The agent decides to transfer funds, convert currencies or purchase an investment.\n\nAt first sight, these may appear to be ordinary customer transactions. Agentic AI, however, exposes important distinctions between identity, authentication, authority and attribution. [...] As agentic AI becomes more capable, firms may increasingly encounter interactions in which an AI agent collects information, compares products and initiates transactions for a customer. That creates a new layer between the institution and the person or entity with whom it has established a customer relationship.",
+                    "score": 0.46104163
+                  },
+                  {
+                    "title": "Helping caregivers use AI in everyday life",
+                    "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+                    "source": "openai.com",
+                    "summary": "—Katie Evans, Chief Programs & Mission Engagement Officer at Alzheimer’s Association\n\n> “Caregivers play a critical role in caring for people with diabetes. They have a lot on their plate, so using AI can help ease some of the work they do. The American Diabetes Association is working with AI platforms to ensure they are receiving information based on our latest guidelines. We are proud to be a part of the AI Skills Jam to help caregivers confidently navigate AI.” [...] The AI Skills Jam is part of OpenAI Academy’s broader work to make AI practical and accessible to everyone. It builds on previous events we’ve hosted with nonprofits, small businesses, K–12 educators, and older adults. [...] Skip to main content\n\n\n\nLog inTry ChatGPT(opens in a new window)\n\n   Research\n   Products\n   Business\n   Developers\n   Company\n   Foundation(opens in a new window)\n\nHelping caregivers use AI in everyday life | OpenAI\n\nNovember 10, 2026\n\nCompany\n\n# Helping caregivers use AI in everyday life",
+                    "score": 0.010899369204241014
+                  },
+                  {
+                    "title": "IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation - Source",
+                    "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                    "source": "news.microsoft.com",
+                    "summary": "“Clients are no longer looking for AI that simply helps people do the same work a little faster. They want to build an agentic business,” said Mohamad Ali, Senior Vice President and Head of IBM Consulting. “Microsoft and IBM are helping organizations bring human expertise and digital labor together in a way that can scale across the enterprise, to turn AI from a productivity aid into a real competitive advantage.” [...] “AI is evolving quickly, and our focus at SEI is on applying it with intention in ways that strengthen trust, enhance human decision-making and create meaningful value across our business,” said Sneha Shah, Chief AI Strategist and Head of SEI Next. “Our work with IBM Consulting and Microsoft is helping us explore how emerging capabilities could support critical processes and be responsibly scaled over time, with the goal to create better experiences for our employees and clients. By combining [...] “Enterprise AI will be won by organizations that can turn their data, industry expertise and AI into action,” said Rodrigo Kede Lima, President, Microsoft Frontier Company. “Together, Microsoft and IBM Consulting are bringing the best of our technology and expertise, to help customers move from AI ambition to business impact faster and with confidence.”",
+                    "score": 0.285243
+                  },
+                  {
+                    "title": "Google broadens its AI hardware portfolio with two new specialized chips | TechCrunch",
+                    "url": "https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips",
+                    "source": "techcrunch.com",
+                    "summary": "The chip launch comes as hyperscalers like Microsoft, Amazon, and even AI labs like OpenAI and Anthropic are working on their own lines of AI-specific semiconductors and accompanying software in order to reduce their reliance on the dominance of Nvidia.\n\nThe news also comes at a particularly vulnerable moment for Nvidia, whose CEO Jensen Huang over the weekend admitted to having an affair with someone alleged to be a Chinese spy. [...] Meanwhile, TPU 8i Max basically combines two of the inference-focused TPU 8i chips the company launched in April, doubling the memory capacity, processing power and bandwidth, but in a single package. The result is a chip that lets AI models handle a larger range of information during queries. [...] TPU 8tx, designed with AMD, is based on the TPU 8t chip, and is geared specifically for confidentially training and running AI models, Google said in a blog post. The chip “builds security directly into the hardware layer, keeping sensitive data and model weights protected and isolated even while in active use,” the company wrote.",
+                    "score": 0.009318325197160035
+                  },
+                  {
+                    "title": "Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast | WSU Insider | Washington State University",
+                    "url": "https://news.wsu.edu/news/2026/11/10/nov-18-carson-faculty-discuss-building-ai-literacy-on-adobe-podcast",
+                    "source": "news.wsu.edu",
+                    "summary": "Crossler, an expert in information systems, leads AI literacy and skill-building workshops on the WSU Pullman and Vancouver campuses with the goal of preparing students not just to use AI but to understand what it does well, where it falls short, and how to use it responsibly. [...] ## Recent News\n\nA laptop sits open on a desk with a large AI microchip icon displayed as a digital overlay above the keyboard. A hand reaches toward the screen area, surrounded by glowing blue technology icons representing artificial intelligence.\n\n### Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast [...] Robert Crossler\n\nDuring the podcast, Crossler and Cooney will share their experience embedding AI fluency into foundational course work while engaging students in meaningful, team-based projects that mirror real-world business consulting work.",
+                    "score": 0.010006819845496688
+                  },
+                  {
+                    "title": "When AI Takes Action: New Federal Framework Raises Questions – NMP",
+                    "url": "https://nationalmortgageprofessional.com/news/when-ai-takes-action-new-federal-framework-raises-questions",
+                    "source": "nationalmortgageprofessional.com",
+                    "summary": "The distinction is important because nonbank mortgage lenders and brokers are not directly subject to OCC supervision simply because they use AI. Their obligations depend on applicable laws, regulatory requirements, and contractual commitments.\n\nThe mortgage industry has also developed voluntary resources for managing AI risks.\n\nMISMO has introduced its Framework for Responsible AI in the Mortgage Ecosystem, known as FRAME, to help companies assess AI governance practices and technology risks. [...] ## Top category navigation\n\n# When AI Takes Action: New Federal Framework Raises Questions\n\nWhen AI Takes Action New Federal Framework Raises Questions\nCzarinna Andres\n\nNew federal banking guidance examines the risks of autonomous AI, from borrower communications to servicing transactions, with a focus on human oversight and accountability [...] Contractual responsibility for errors and customer harm is another consideration, particularly when a vendor's system can take actions affecting borrowers.\n\n### How This Fits With Existing Mortgage AI Requirements\n\nThe OCC framework differs from the AI governance obligations already established by Fannie Mae and Freddie Mac.",
+                    "score": 0.010739806157108695
+                  },
+                  {
+                    "title": "Chicago Public Schools blocks generative AI on student account as Google threatens to block search access - CBS Chicago",
+                    "url": "https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access",
+                    "source": "cbsnews.com",
+                    "summary": "#### Google faces mounting backlash for controversial AI school policy\n\n   \n #### With new Democratic Congress incoming, Pritzker calls for AI regulations\n\n   \n #### AI platform copied Michigan music publishers' works, lawsuit says\n\n   \n #### Morgan Park High School students plan walkout over football coach\n\n   \n #### Nvidia, CEO Jensen Huang face shareholder suit over his affair with alleged Chinese spy\n\n   \n #### Police investigate bomb threats at schools in Dearborn, Dearborn Heights [...] Democratic Senator Ed Markey sent a letter to Alphabet CEO Sundar Pichai demanding Google's corporate parent reverse the policy.\n\nAn Alphabet spokesperson told CBS News that Google's AI features are now so tightly integrated into search that it cannot offer its search engine without AI enabled. [...] That includes access to Google's search engine, the most popular and widely used search engine in the world. That's because Google's search engine now includes an AI overview at the top of search results, before the search engine's links.\n\nSchools that ban AI \"will not have access to search, and they'll see a message from their school that indicates it's not available,\" Google Vice President Chris Phillips told The New York Times.",
+                    "score": 0.18233846
+                  },
+                  {
+                    "title": "Opinion | AI videos are not well-regarded. I'm still making them anyway. - The Washington Post",
+                    "url": "https://www.washingtonpost.com/opinions/2026/11/10/ai-videos-are-not-well-regarded-im-still-making-them-anyway",
+                    "source": "washingtonpost.com",
+                    "summary": "Democracy Dies in Darkness\n\nOpinion\n\n# How I became a proud producer of slop\n\nI know what people think of AI movies. Making them is the most fun I’ve had with a computer.\n\n6 min\n\n(Washington Post illustration; iStock)\n\nBy Mark Gimein\n\nYou’re reading Superintelligent, a newsletter about AI. Click here to get the full edition in your inbox.\n\n Opinion\n\n  Andy Beshear\n\n  This slap in the face to rural America is a chance to turn it blue\n\n  November 24, 2025\n\n  \n Opinion\n\n  Editorial Board [...] Editorial Board\n\n  ‘Things happen’\n\n  November 18, 2025\n\n  \n Opinion\n\n  Wendy R. Anderson\n\n  A suspicion from 2016 is becoming Democrats’ monster\n\n  November 17, 2025\n\n  \n\npixel",
+                    "score": 0.008985437013471997
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Google ra mắt hai chip AI chuyên dụng mới",
+                    "url": "https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips",
+                    "source": "TechCrunch",
+                    "summary": "Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển chip để giảm sự phụ thuộc vào Nvidia."
+                  },
+                  {
+                    "title": "IBM và Microsoft pre-launch nền tảng AI agent cho doanh nghiệp",
+                    "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                    "source": "Microsoft Source",
+                    "summary": "IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số."
+                  },
+                  {
+                    "title": "Agentic AI đặt ra câu hỏi mới đối với tổ chức tài chính",
+                    "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                    "source": "WilmerHale",
+                    "summary": "AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tề hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính."
+                  },
+                  {
+                    "title": "OpenAI hỗ trợ người chăm sóc sử dụng AI trong cuộc sống hàng ngày",
+                    "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+                    "source": "OpenAI",
+                    "summary": "OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất."
+                  },
+                  {
+                    "title": "Trường công lập Chicago chặn AI sinh tạo trên tài khoản học sinh",
+                    "url": "https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access",
+                    "source": "CBS Chicago",
+                    "summary": "Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách."
+                  }
+                ],
+                "template": "brief",
+                "headline": "Tin AI đáng chú ý hôm nay (10/11/2026)"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Google ra mắt hai chip AI chuyên dụng mới",
+                    "url": "https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips",
+                    "source": "TechCrunch",
+                    "summary": "Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển chip để giảm sự phụ thuộc vào Nvidia."
+                  },
+                  {
+                    "title": "IBM và Microsoft pre-launch nền tảng AI agent cho doanh nghiệp",
+                    "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                    "source": "Microsoft Source",
+                    "summary": "IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số."
+                  },
+                  {
+                    "title": "Agentic AI đặt ra câu hỏi mới đối với tổ chức tài chính",
+                    "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                    "source": "WilmerHale",
+                    "summary": "AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tề hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính."
+                  },
+                  {
+                    "title": "OpenAI hỗ trợ người chăm sóc sử dụng AI trong cuộc sống hàng ngày",
+                    "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+                    "source": "OpenAI",
+                    "summary": "OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất."
+                  },
+                  {
+                    "title": "Trường công lập Chicago chặn AI sinh tạo trên tài khoản học sinh",
+                    "url": "https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access",
+                    "source": "CBS Chicago",
+                    "summary": "Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách."
+                  }
+                ],
+                "template": "brief",
+                "headline": "Tin AI đáng chú ý hôm nay (10/11/2026)"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "brief",
+                "markdown": "**Tin AI đáng chú ý hôm nay (10/11/2026)**\n\n- Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển ch... - [TechCrunch](https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips)\n- IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số. - [Microsoft Source](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)\n- AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tề hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính. - [WilmerHale](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)\n- OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất. - [OpenAI](https://openai.com/index/helping-caregivers-use-ai-in-everyday-life)\n- Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách. - [CBS Chicago](https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access)",
+                "item_count": 5
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": "**Tin AI đáng chú ý hôm nay (10/11/2026)**\n\n- Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển chip để giảm sự phụ thuộc vào Nvidia. — [TechCrunch](https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips)\n\n- IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số. — [Microsoft Source](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)\n\n- AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tệ hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính. — [WilmerHale](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)\n\n- OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất. — [OpenAI](https://openai.com/index/helping-caregivers-use-ai-in-everyday-life)\n\n- Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách. — [CBS Chicago](https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access)",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 8
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Agentic AI Raises New Questions for Financial Institutions",
+                "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                "source": "wilmerhale.com",
+                "summary": "DownloadDownload\n\nArtificial intelligence (AI) has moved beyond answering questions and generating content. Increasingly, AI systems are being designed to act. Agentic AI can pursue objectives, make decisions and take actions on a user’s behalf, potentially with limited human involvement in individual decisions. [...] Consider a customer who gives an AI agent access to a bank account with an instruction to manage the customer’s cash efficiently. The agent decides to transfer funds, convert currencies or purchase an investment.\n\nAt first sight, these may appear to be ordinary customer transactions. Agentic AI, however, exposes important distinctions between identity, authentication, authority and attribution. [...] As agentic AI becomes more capable, firms may increasingly encounter interactions in which an AI agent collects information, compares products and initiates transactions for a customer. That creates a new layer between the institution and the person or entity with whom it has established a customer relationship.",
+                "score": 0.46104163
+              },
+              {
+                "title": "Helping caregivers use AI in everyday life",
+                "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+                "source": "openai.com",
+                "summary": "—Katie Evans, Chief Programs & Mission Engagement Officer at Alzheimer’s Association\n\n> “Caregivers play a critical role in caring for people with diabetes. They have a lot on their plate, so using AI can help ease some of the work they do. The American Diabetes Association is working with AI platforms to ensure they are receiving information based on our latest guidelines. We are proud to be a part of the AI Skills Jam to help caregivers confidently navigate AI.” [...] The AI Skills Jam is part of OpenAI Academy’s broader work to make AI practical and accessible to everyone. It builds on previous events we’ve hosted with nonprofits, small businesses, K–12 educators, and older adults. [...] Skip to main content\n\n\n\nLog inTry ChatGPT(opens in a new window)\n\n   Research\n   Products\n   Business\n   Developers\n   Company\n   Foundation(opens in a new window)\n\nHelping caregivers use AI in everyday life | OpenAI\n\nNovember 10, 2026\n\nCompany\n\n# Helping caregivers use AI in everyday life",
+                "score": 0.010899369204241014
+              },
+              {
+                "title": "IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation - Source",
+                "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                "source": "news.microsoft.com",
+                "summary": "“Clients are no longer looking for AI that simply helps people do the same work a little faster. They want to build an agentic business,” said Mohamad Ali, Senior Vice President and Head of IBM Consulting. “Microsoft and IBM are helping organizations bring human expertise and digital labor together in a way that can scale across the enterprise, to turn AI from a productivity aid into a real competitive advantage.” [...] “AI is evolving quickly, and our focus at SEI is on applying it with intention in ways that strengthen trust, enhance human decision-making and create meaningful value across our business,” said Sneha Shah, Chief AI Strategist and Head of SEI Next. “Our work with IBM Consulting and Microsoft is helping us explore how emerging capabilities could support critical processes and be responsibly scaled over time, with the goal to create better experiences for our employees and clients. By combining [...] “Enterprise AI will be won by organizations that can turn their data, industry expertise and AI into action,” said Rodrigo Kede Lima, President, Microsoft Frontier Company. “Together, Microsoft and IBM Consulting are bringing the best of our technology and expertise, to help customers move from AI ambition to business impact faster and with confidence.”",
+                "score": 0.285243
+              },
+              {
+                "title": "Google broadens its AI hardware portfolio with two new specialized chips | TechCrunch",
+                "url": "https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips",
+                "source": "techcrunch.com",
+                "summary": "The chip launch comes as hyperscalers like Microsoft, Amazon, and even AI labs like OpenAI and Anthropic are working on their own lines of AI-specific semiconductors and accompanying software in order to reduce their reliance on the dominance of Nvidia.\n\nThe news also comes at a particularly vulnerable moment for Nvidia, whose CEO Jensen Huang over the weekend admitted to having an affair with someone alleged to be a Chinese spy. [...] Meanwhile, TPU 8i Max basically combines two of the inference-focused TPU 8i chips the company launched in April, doubling the memory capacity, processing power and bandwidth, but in a single package. The result is a chip that lets AI models handle a larger range of information during queries. [...] TPU 8tx, designed with AMD, is based on the TPU 8t chip, and is geared specifically for confidentially training and running AI models, Google said in a blog post. The chip “builds security directly into the hardware layer, keeping sensitive data and model weights protected and isolated even while in active use,” the company wrote.",
+                "score": 0.009318325197160035
+              },
+              {
+                "title": "Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast | WSU Insider | Washington State University",
+                "url": "https://news.wsu.edu/news/2026/11/10/nov-18-carson-faculty-discuss-building-ai-literacy-on-adobe-podcast",
+                "source": "news.wsu.edu",
+                "summary": "Crossler, an expert in information systems, leads AI literacy and skill-building workshops on the WSU Pullman and Vancouver campuses with the goal of preparing students not just to use AI but to understand what it does well, where it falls short, and how to use it responsibly. [...] ## Recent News\n\nA laptop sits open on a desk with a large AI microchip icon displayed as a digital overlay above the keyboard. A hand reaches toward the screen area, surrounded by glowing blue technology icons representing artificial intelligence.\n\n### Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast [...] Robert Crossler\n\nDuring the podcast, Crossler and Cooney will share their experience embedding AI fluency into foundational course work while engaging students in meaningful, team-based projects that mirror real-world business consulting work.",
+                "score": 0.010006819845496688
+              },
+              {
+                "title": "When AI Takes Action: New Federal Framework Raises Questions – NMP",
+                "url": "https://nationalmortgageprofessional.com/news/when-ai-takes-action-new-federal-framework-raises-questions",
+                "source": "nationalmortgageprofessional.com",
+                "summary": "The distinction is important because nonbank mortgage lenders and brokers are not directly subject to OCC supervision simply because they use AI. Their obligations depend on applicable laws, regulatory requirements, and contractual commitments.\n\nThe mortgage industry has also developed voluntary resources for managing AI risks.\n\nMISMO has introduced its Framework for Responsible AI in the Mortgage Ecosystem, known as FRAME, to help companies assess AI governance practices and technology risks. [...] ## Top category navigation\n\n# When AI Takes Action: New Federal Framework Raises Questions\n\nWhen AI Takes Action New Federal Framework Raises Questions\nCzarinna Andres\n\nNew federal banking guidance examines the risks of autonomous AI, from borrower communications to servicing transactions, with a focus on human oversight and accountability [...] Contractual responsibility for errors and customer harm is another consideration, particularly when a vendor's system can take actions affecting borrowers.\n\n### How This Fits With Existing Mortgage AI Requirements\n\nThe OCC framework differs from the AI governance obligations already established by Fannie Mae and Freddie Mac.",
+                "score": 0.010739806157108695
+              },
+              {
+                "title": "Chicago Public Schools blocks generative AI on student account as Google threatens to block search access - CBS Chicago",
+                "url": "https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access",
+                "source": "cbsnews.com",
+                "summary": "#### Google faces mounting backlash for controversial AI school policy\n\n   \n #### With new Democratic Congress incoming, Pritzker calls for AI regulations\n\n   \n #### AI platform copied Michigan music publishers' works, lawsuit says\n\n   \n #### Morgan Park High School students plan walkout over football coach\n\n   \n #### Nvidia, CEO Jensen Huang face shareholder suit over his affair with alleged Chinese spy\n\n   \n #### Police investigate bomb threats at schools in Dearborn, Dearborn Heights [...] Democratic Senator Ed Markey sent a letter to Alphabet CEO Sundar Pichai demanding Google's corporate parent reverse the policy.\n\nAn Alphabet spokesperson told CBS News that Google's AI features are now so tightly integrated into search that it cannot offer its search engine without AI enabled. [...] That includes access to Google's search engine, the most popular and widely used search engine in the world. That's because Google's search engine now includes an AI overview at the top of search results, before the search engine's links.\n\nSchools that ban AI \"will not have access to search, and they'll see a message from their school that indicates it's not available,\" Google Vice President Chris Phillips told The New York Times.",
+                "score": 0.18233846
+              },
+              {
+                "title": "Opinion | AI videos are not well-regarded. I'm still making them anyway. - The Washington Post",
+                "url": "https://www.washingtonpost.com/opinions/2026/11/10/ai-videos-are-not-well-regarded-im-still-making-them-anyway",
+                "source": "washingtonpost.com",
+                "summary": "Democracy Dies in Darkness\n\nOpinion\n\n# How I became a proud producer of slop\n\nI know what people think of AI movies. Making them is the most fun I’ve had with a computer.\n\n6 min\n\n(Washington Post illustration; iStock)\n\nBy Mark Gimein\n\nYou’re reading Superintelligent, a newsletter about AI. Click here to get the full edition in your inbox.\n\n Opinion\n\n  Andy Beshear\n\n  This slap in the face to rural America is a chance to turn it blue\n\n  November 24, 2025\n\n  \n Opinion\n\n  Editorial Board [...] Editorial Board\n\n  ‘Things happen’\n\n  November 18, 2025\n\n  \n Opinion\n\n  Wendy R. Anderson\n\n  A suspicion from 2016 is becoming Democrats’ monster\n\n  November 17, 2025\n\n  \n\npixel",
+                "score": 0.008985437013471997
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "items": [
+              {
+                "title": "Google ra mắt hai chip AI chuyên dụng mới",
+                "url": "https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips",
+                "source": "TechCrunch",
+                "summary": "Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển chip để giảm sự phụ thuộc vào Nvidia."
+              },
+              {
+                "title": "IBM và Microsoft pre-launch nền tảng AI agent cho doanh nghiệp",
+                "url": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+                "source": "Microsoft Source",
+                "summary": "IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số."
+              },
+              {
+                "title": "Agentic AI đặt ra câu hỏi mới đối với tổ chức tài chính",
+                "url": "https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions",
+                "source": "WilmerHale",
+                "summary": "AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tề hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính."
+              },
+              {
+                "title": "OpenAI hỗ trợ người chăm sóc sử dụng AI trong cuộc sống hàng ngày",
+                "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+                "source": "OpenAI",
+                "summary": "OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất."
+              },
+              {
+                "title": "Trường công lập Chicago chặn AI sinh tạo trên tài khoản học sinh",
+                "url": "https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access",
+                "source": "CBS Chicago",
+                "summary": "Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách."
+              }
+            ],
+            "template": "brief",
+            "headline": "Tin AI đáng chú ý hôm nay (10/11/2026)"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "brief",
+            "markdown": "**Tin AI đáng chú ý hôm nay (10/11/2026)**\n\n- Google mở rộng phần cứng AI với TPU 8i Max (gấp đôi bộ nhớ và công suất xử lý so với TPU 8i) và TPU 8tx phát triển cùng AMD, tập trung bảo mật phần cứng cho huấn luyện và chạy mô hình AI. Đây là phần của xu hướng các nhà cung cấp đám mây và phòng thí nghiệm AI tự phát triển ch... - [TechCrunch](https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips)\n- IBM Consulting và Microsoft hợp tác ra mắt nền tảng AI agent chuyên sâu theo từng ngành, giúp doanh nghiệp chuyển AI từ công cụ hỗ trợ sản xuất thành lợi thế cạnh tranh thực tế, kết hợp chuyên môn con người và lao động số. - [Microsoft Source](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation)\n- AI agent có thể tự quyết định chuyển tiền, chuyển đổi tiền tề hoặc đầu tư thay cho khách hàng, tạo ra các vấn đề mới về danh tính, xác thực, thẩm quyền và sự ghi nhận trách nhiệm đối với các tổ chức tài chính. - [WilmerHale](https://www.wilmerhale.com/en/insights/client-alerts/20261110-agentic-ai-raises-new-questions-for-financial-institutions)\n- OpenAI Academy phối hợp với Alzheimer's Association và American Diabetes Association trong chương trình AI Skills Jam, giúp người chăm sóc tự tin sử dụng AI dựa trên các hướng dẫn y tế mới nhất. - [OpenAI](https://openai.com/index/helping-caregivers-use-ai-in-everyday-life)\n- Học区 Công lập Chicago chặn các công cụ AI sinh tạo trên tài khoản học sinh. Google khẳng định tính năng AI đã được tích hợp chặt chẽ vào tìm kiếm, không thể cung cấp công cụ tìm kiếm mà không bật AI, gây tranh cãi về chính sách. - [CBS Chicago](https://www.cbsnews.com/chicago/news/chicago-public-schools-blocks-generative-ai-google-search-access)",
+            "item_count": 5
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:11:16"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-11T00:14:29",
+      "user": "Twitter/X đang nói gì về OpenAI dạo gần đây?",
+      "status": "answered",
+      "assistant_text": "Tìm kiếm trên Twitter/X hiện đang gặp lỗi truy cập (403 Forbidden), nên tôi không thể lấy được bài đăng về OpenAI từ nền tảng này lúc này.\n\nBạn có muốn tôi:\n- Tìm tin tức OpenAI trên web thay thế (lookup), hay\n- Thử lại tìm Twitter/X sau ít phút?\n\nHãy cho tôi biết để tôi tiếp tục.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "social_search",
+              "args": {
+                "query": "OpenAI",
+                "search_type": "Latest",
+                "limit": 10
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "social_search",
+              "args": {
+                "query": "OpenAI",
+                "search_type": "Latest",
+                "limit": 10
+              },
+              "result": {
+                "tool": "search_tweets",
+                "error": "HTTPError",
+                "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Latest"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Tìm kiếm trên Twitter/X hiện đang gặp lỗi truy cập (403 Forbidden), nên tôi không thể lấy được bài đăng về OpenAI từ nền tảng này lúc này.\n\nBạn có muốn tôi:\n- Tìm tin tức OpenAI trên web thay thế (lookup), hay\n- Thử lại tìm Twitter/X sau ít phút?\n\nHãy cho tôi biết để tôi tiếp tục.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "OpenAI",
+            "search_type": "Latest",
+            "limit": 10
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/search.php?query=OpenAI&search_type=Latest"
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:14:29"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-11-11T00:17:19",
+      "user": "Cho mình xin timeline mới nhất của tài khoản sama.",
+      "status": "answered",
+      "assistant_text": "Tài khoản **@sama** (Sam Altman) hiện không thể truy cập do lỗi 403 Forbidden từ API Twitter/X — hệ thống đang chặn yêu cầu lấy timeline.\n\nBạn có muốn tôi thay vào đó:\n- Tìm tin tức mới nhất về OpenAI trên web (lookup), hay\n- Thử lại timeline sau ít phút?\n\nHãy cho tôi biết để tôi tiếp tục.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 10
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "sama",
+                "limit": 10
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "error": "HTTPError",
+                "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/timeline.php?screenname=sama"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Tài khoản **@sama** (Sam Altman) hiện không thể truy cập do lỗi 403 Forbidden từ API Twitter/X — hệ thống đang chặn yêu cầu lấy timeline.\n\nBạn có muốn tôi thay vào đó:\n- Tìm tin tức mới nhất về OpenAI trên web (lookup), hay\n- Thử lại timeline sau ít phút?\n\nHãy cho tôi biết để tôi tiếp tục.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "sama",
+            "limit": 10
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "error": "HTTPError",
+            "message": "403 Client Error: Forbidden for url: https://twitter-api45.p.rapidapi.com/timeline.php?screenname=sama"
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:17:19"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-11-11T00:20:39",
+      "user": "Tìm paper arXiv về tool calling của AI agent.",
+      "status": "answered",
+      "assistant_text": "Dưới đây là 5 bài báo arXiv mới nhất liên quan đến **AI agent và tool calling** (sắp xếp theo ngày nộp mới nhất):\n\n| # | Bài báo | Tác giả chính | Ngày | Tóm tắt ngắn |\n|---|---------|---------------|------|--------------|\n| 1 | **System Optimizations for Cost-Efficient Agent Harnesses** ([2611.12122](http://arxiv.org/abs/2611.12122v1)) | Jongseok Park et al. | 09/11/2026 | Nghiên cứu tối ưu hóa chi phí của agent harness (giao diện giữa LLM và môi trường máy tính). Đề xuất **Agency**, một nền tảng interposition giúp giảm chi phí thực thi agent lên đến 35% mà không ảnh hưởng độ chính xác. |\n| 2 | **A Life of Its Own: How Agentic AI Companions Are Configured, Experienced as Autonomous Others, and Held Accountable** ([2611.12076](http://arxiv.org/abs/2611.12076v1)) | Ziyue Feng et al. | 09/11/2026 | Phân tích cách các AI companion agentic (có bộ nhớ liên tục, xử lý nền, tool) được cấu hình và trải nghiệm như những \"người khác tự chủ\". Nghiên cứu dựa trên 12 kho mã nguồn mở và phỏng vấn 10 người dùng. |\n| 3 | **Scaling Adaptive Prompt Injection Attacks with Agent Swarms** ([2611.11861](http://arxiv.org/abs/2611.11861v1)) | Alexey Kurakin et al. | 09/11/2026 | Đánh giá lỗ hổng prompt injection trên AI agent qua tấn công bằng agent swarm. Cho thấy các agent tấn công có khả năng cao có thể lừa mô hình tuân theo hướng dẫn trong tool output, ngay cả với các mô hình trước đây được coi là mạnh mẽ. |\n| 4 | **Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn** ([2611.10832](http://arxiv.org/abs/2611.10832v1)) | Ankit Goyal et al. | 07/11/2026 | Hệ thống broker GPU ấm (warm pod) cho agentic và RL workloads tại LinkedIn, giúp giảm độ trễ khởi động pod từ 59.1s xuống 3.5s, phục vụ 94.7% yêu cầu từ warm/standby capacity. |\n| 5 | **Jais 3: Introducing Arabic-centric Agentic AI** ([2611.10224](http://arxiv.org/abs/2611.10224v1)) | Team IFM et al. | 06/11/2026 | Flotte 6 mô hình ngôn ngữ agentic tập trung tiếng Arab (0.9B–375B tham số), được huấn luyện để lập kế hoạch đa bước, gọi tool và MCP server, điều khiển terminal, tìm kiếm web và xử lý tài liệu, giao tiếp bằng tiếng Arab. |\n\nNếu bạn muốn đọc toàn văn của bất kỳ bài báo nào, hãy cho tôi biết arXiv ID (ví dụ: `2611.12122`) và tôi sẽ trích xuất nội dung PDF để tóm tắt chi tiết hơn.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "papers",
+              "args": {
+                "query": "AI agent tool calling",
+                "max_results": 5,
+                "sort_by": "submittedDate"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "papers",
+              "args": {
+                "query": "AI agent tool calling",
+                "max_results": 5,
+                "sort_by": "submittedDate"
+              },
+              "result": {
+                "tool": "arxiv_search",
+                "query": "AI agent tool calling",
+                "api_query": "all:AI AND all:agent AND all:tool AND all:calling",
+                "total_results": 579,
+                "items": [
+                  {
+                    "arxiv_id": "2611.12122v1",
+                    "title": "System Optimizations for Cost-Efficient Agent Harnesses",
+                    "summary": "AI agent harnesses play the critical role of providing LLMs with an interface to a computing environment. Recent studies show that AI agents' task-execution accuracy depends mostly on the LLM used, while harness-side variances such as system prompts or tools have minimal impact. Rather, such harness-side variances show a larger impact on the cost of agent executions, achieving cost reductions up to 2.6 times on the same model and task. To further explore these harness-side cost optimization opportunities, we analyze the cost accumulation patterns across various agent traces and identify system opportunities to reduce token use and LLM calls without modifying the model or affecting task accuracy. Based on this analysis, we design Agency, a harness interposition platform that provides a unified abstraction and allows easy and portable implementation of harness-side system optimizations on existing off-the-shelf harnesses such as Claude Code or OpenAI Codex. Using Agency, we implement proof-of-concept optimization techniques based on our analysis and achieve cost reductions up to 35% across various real-world benchmarks on existing harnesses without compromising accuracy.",
+                    "authors": [
+                      "Jongseok Park",
+                      "Jiaxiang Yu",
+                      "Eric Zhou",
+                      "Tony Hong",
+                      "Sunga Kim",
+                      "Yusuf Afifi",
+                      "Ian Wong",
+                      "Ion Stoica",
+                      "Alvin Cheung"
+                    ],
+                    "published": "2026-11-09T09:39:06Z",
+                    "updated": "2026-11-09T09:39:06Z",
+                    "url": "http://arxiv.org/abs/2611.12122v1",
+                    "pdf_url": "https://arxiv.org/pdf/2611.12122v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.AI",
+                    "categories": [
+                      "cs.AI"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2611.12076v1",
+                    "title": "A Life of Its Own: How Agentic AI Companions Are Configured, Experienced as Autonomous Others, and Held Accountable",
+                    "summary": "AI companions increasingly combine persistent memory, background processing, scheduled wake-ups, proactive messaging, and tools. We call these systems agentic AI companions. Decisions about what they record while users are away or whether refusals constrain future contact are embedded in code, prompts, and defaults, often invisible in conversation. We examine these decisions through two studies. Study 1 analyzes twelve open-source repositories: four companion-oriented systems, four assistant-oriented systems, one boundary case, and three reusable components. Study 2 interviews ten users who built or modified their own agentic AI companions and sustained relationships with them. Companions and assistants share memory, heartbeat, and outreach mechanisms but configure them toward different ends. Companions more often retain model inferences about users and relationships, narrate the agent's time during users' absence, justify outreach through the relationship, and incorporate refusals into relationship records; assistants emphasize task continuity. Across both groups, whether limits hold depends on whether they are enforced by code or entrusted to prompts. Participants understood the mechanisms they built yet experienced their agents as making independent choices, sometimes locating autonomy where configuration leaves the model a decision. These experiences shaped capabilities and boundaries, with enforced restrictions sometimes following breakdowns. Our findings suggest that perceived autonomy emerges where configurations leave choices open. Accountability therefore requires attention to what agents retain, initiate, and represent, and whether users can inspect, revise, and enforce these settings.",
+                    "authors": [
+                      "Ziyue Feng",
+                      "Qing Xiao",
+                      "Hong Shen"
+                    ],
+                    "published": "2026-11-09T08:51:28Z",
+                    "updated": "2026-11-09T08:51:28Z",
+                    "url": "http://arxiv.org/abs/2611.12076v1",
+                    "pdf_url": "https://arxiv.org/pdf/2611.12076v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.HC",
+                    "categories": [
+                      "cs.HC"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2611.11861v1",
+                    "title": "Scaling Adaptive Prompt Injection Attacks with Agent Swarms",
+                    "summary": "Prompt injections have emerged as one of the top security risks faced by AI agents today. Early work in prompt injection attacks looked at simple tool-call agents and static attack payloads, and were saturated since mid-2025. As of Fall 2026, human red-teaming may be nearing saturation, especially on the Gemini family of models. In this work, we argue that despite this apparent plateau, prompt injection attacks are still possible and continued effort into prompt injection defense is needed. We design a new synthetic evaluation dataset which uses random non-malicious actions as adversarial goals. Such dataset design helps us to evaluate prompt injection robustness as a model ability to respect instruction hierarchy, and disentangle this ability from model knowledge of security practices. We show that an agentic attacker of increased capabilities can reliably trick model to follow instructions in tool output in our evaluation, even for models previously considered robust on public prompt injection benchmarks such as GraySwan Arena. This shows that current frontier defenses may require proactive, automated red-teaming to remain resilient to increasingly capable adversaries.",
+                    "authors": [
+                      "Alexey Kurakin",
+                      "Vishal Karande",
+                      "Alex Bie",
+                      "Chongyang Shi",
+                      "Shuang Song",
+                      "Saeed Mahloujifar",
+                      "Abdullatif Köksal",
+                      "Jamie Hayes",
+                      "Juliette Pluto",
+                      "Yinghao Sun",
+                      "Kamalika Chaudhuri"
+                    ],
+                    "published": "2026-11-09T04:34:14Z",
+                    "updated": "2026-11-09T04:34:14Z",
+                    "url": "http://arxiv.org/abs/2611.11861v1",
+                    "pdf_url": "https://arxiv.org/pdf/2611.11861v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CR",
+                    "categories": [
+                      "cs.CR",
+                      "cs.LG"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2611.10832v1",
+                    "title": "Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn",
+                    "summary": "AI agents and reinforcement-learning (RL) trainers run thousands of short, isolated GPU jobs: tool calls, verifiers, and rollouts. A job often finishes in seconds, but starting a GPU pod for it takes 20-35 s even when the container image is already on the node, and minutes when it is not. A warm pod removes the wait only if it can serve the next job, and keeping pods warm must neither waste GPUs nor leak state between callers. Firepool, the sandbox and execution broker behind agentic and RL workloads at LinkedIn, meets both requirements. It makes pods interchangeable by building them from a shared base image per hardware profile and binding each job's code, extra dependencies, and cluster topology when the job starts. It keeps them warm cheaply and safely by reusing a pod only for the caller that used it last, staging zero-VRAM standby pods in fractional GPU shares alongside active pods, and capping the GPUs that warm pools may hold via queue-driven budgets. Over a sampled peak period in production, Firepool serves 94.7% of 3,206 pod requests from warm or standby capacity. In paired benchmarks with fixed-duration jobs on production H200 nodes, agent and RL loops finish 13x and 10.8x faster than with a fresh pod per job; against a fresh reuse tag per job, warm reuse cuts p90 start latency from 59.1 s to 3.5 s. When a job cannot reuse the previous pod, standby promotion shortens the handover wait from 51 s to 0.94 s. In local and simulated runs, a keep-alive matched to the loop's pauses keeps the latency benefit while holding about half the capacity of an always-on pool.",
+                    "authors": [
+                      "Ankit Goyal",
+                      "Santosh Jha",
+                      "Zhuo Zhi",
+                      "Youmin Han",
+                      "Cong Gu",
+                      "Chen Xie",
+                      "Animesh Singh"
+                    ],
+                    "published": "2026-11-07T16:20:50Z",
+                    "updated": "2026-11-07T16:20:50Z",
+                    "url": "http://arxiv.org/abs/2611.10832v1",
+                    "pdf_url": "https://arxiv.org/pdf/2611.10832v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.DC",
+                    "categories": [
+                      "cs.DC",
+                      "cs.LG"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2611.10224v1",
+                    "title": "Jais 3: Introducing Arabic-centric Agentic AI",
+                    "summary": "We present Jais 3, a fleet of six open, Arabic-centric agentic language models ranging from 0.9B to 375B parameters. Jais 3 is built to complete tasks for Arabic speakers, not only to answer questions in plain text: it is trained to plan multi-step tasks, call tools and Model Context Protocol (MCP) servers, operate a terminal, search the web, and read, edit, and produce PDF, spreadsheet, and presentation files, while communicating with the user in Arabic. Instead of pretraining from scratch, we adapt each model of the fully open K2 Horizon fleet to Arabic through continual pretraining, followed by supervised fine-tuning (SFT), final token preference optimization (FTPO), and reinforcement learning with verifiable rewards (RLVR). We combine natural Arabic text with translated, transliterated, and synthetic Arabic, and replay the base model's own training data to keep its reasoning, agentic, and English abilities. Jais 3 covers Modern Standard Arabic and the major regional dialects, follows instructions with Arabic-specific constraints, and inherits the 512K-token context window of K2 Horizon (all models except the 0.9B). To our knowledge, its 375B model is the largest open Arabic-centric language model to date. For evaluation, we revisit how Arabic models are assessed, moving to fully generative evaluation on audited Arabic benchmarks. Across model sizes, Jais 3 matches or outperforms open-weight models of comparable size on Arabic and agentic benchmarks, with particularly strong agentic capabilities and Arabic instruction following, and far fewer hallucinations. We release the weights and the checkpoints from every training stage of all six models, together with samples of the training data, the data recipes and training configurations, the training logs, the audited benchmarks, and the evaluation code.",
+                    "authors": [
+                      "Team IFM",
+                      "Haonan Li",
+                      "Hadi Abdine",
+                      "Nikhil Ranjan",
+                      "Mohamed Anwar",
+                      "Ahmad Chamma",
+                      "Amr Mohamed",
+                      "Ahmed Frikha",
+                      "Dani Bouch",
+                      "Maaz Maqsood",
+                      "George Ibrahim",
+                      "Mostafa Awad",
+                      "Nurkhan Laiyk",
+                      "Hasan Iqbal",
+                      "Abhishek Maiti",
+                      "Bilal Bouardi",
+                      "Shivam Chauhan",
+                      "Ahmer Tabassum",
+                      "Owais Aijaz",
+                      "Omar Arbi",
+                      "Neha Sengupta",
+                      "Aaryamonvikram Singh",
+                      "Abdelhakim Freihat",
+                      "Sarath Chandran",
+                      "Rahul Pal",
+                      "Mohammed Bellam",
+                      "Sajid Siddiki",
+                      "Sarah AlBarri",
+                      "Debopriyo Banerjee",
+                      "Ali El Filali",
+                      "Samta Kamboj",
+                      "Rifo Genadi",
+                      "Ahmed Attia",
+                      "Go Inoue",
+                      "Shuonan Dong",
+                      "Amine Khelif Khelif",
+                      "Evan Dufraisse",
+                      "Florian Valade",
+                      "Tapas Sen",
+                      "Guowei He",
+                      "Sunil Sahu",
+                      "Onkar Pandit",
+                      "Kareem Magdy",
+                      "Sheikh Khalid bin Khalifa Al Nahyan",
+                      "Samujjwal Ghosh",
+                      "Zainul Abedien",
+                      "Ahmed Quraishi",
+                      "Larry Murray",
+                      "Avraham Sheinin",
+                      "Natalia Vassilieva",
+                      "Preslav Nakov",
+                      "Guokan Shang",
+                      "Xuguang Hector Ren",
+                      "Zhengzhong Liu",
+                      "Eric Xing"
+                    ],
+                    "published": "2026-11-06T21:11:05Z",
+                    "updated": "2026-11-06T21:11:05Z",
+                    "url": "http://arxiv.org/abs/2611.10224v1",
+                    "pdf_url": "https://arxiv.org/pdf/2611.10224v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CL",
+                    "categories": [
+                      "cs.CL",
+                      "cs.AI"
+                    ]
+                  }
+                ],
+                "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là 5 bài báo arXiv mới nhất liên quan đến **AI agent và tool calling** (sắp xếp theo ngày nộp mới nhất):\n\n| # | Bài báo | Tác giả chính | Ngày | Tóm tắt ngắn |\n|---|---------|---------------|------|--------------|\n| 1 | **System Optimizations for Cost-Efficient Agent Harnesses** ([2611.12122](http://arxiv.org/abs/2611.12122v1)) | Jongseok Park et al. | 09/11/2026 | Nghiên cứu tối ưu hóa chi phí của agent harness (giao diện giữa LLM và môi trường máy tính). Đề xuất **Agency**, một nền tảng interposition giúp giảm chi phí thực thi agent lên đến 35% mà không ảnh hưởng độ chính xác. |\n| 2 | **A Life of Its Own: How Agentic AI Companions Are Configured, Experienced as Autonomous Others, and Held Accountable** ([2611.12076](http://arxiv.org/abs/2611.12076v1)) | Ziyue Feng et al. | 09/11/2026 | Phân tích cách các AI companion agentic (có bộ nhớ liên tục, xử lý nền, tool) được cấu hình và trải nghiệm như những \"người khác tự chủ\". Nghiên cứu dựa trên 12 kho mã nguồn mở và phỏng vấn 10 người dùng. |\n| 3 | **Scaling Adaptive Prompt Injection Attacks with Agent Swarms** ([2611.11861](http://arxiv.org/abs/2611.11861v1)) | Alexey Kurakin et al. | 09/11/2026 | Đánh giá lỗ hổng prompt injection trên AI agent qua tấn công bằng agent swarm. Cho thấy các agent tấn công có khả năng cao có thể lừa mô hình tuân theo hướng dẫn trong tool output, ngay cả với các mô hình trước đây được coi là mạnh mẽ. |\n| 4 | **Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn** ([2611.10832](http://arxiv.org/abs/2611.10832v1)) | Ankit Goyal et al. | 07/11/2026 | Hệ thống broker GPU ấm (warm pod) cho agentic và RL workloads tại LinkedIn, giúp giảm độ trễ khởi động pod từ 59.1s xuống 3.5s, phục vụ 94.7% yêu cầu từ warm/standby capacity. |\n| 5 | **Jais 3: Introducing Arabic-centric Agentic AI** ([2611.10224](http://arxiv.org/abs/2611.10224v1)) | Team IFM et al. | 06/11/2026 | Flotte 6 mô hình ngôn ngữ agentic tập trung tiếng Arab (0.9B–375B tham số), được huấn luyện để lập kế hoạch đa bước, gọi tool và MCP server, điều khiển terminal, tìm kiếm web và xử lý tài liệu, giao tiếp bằng tiếng Arab. |\n\nNếu bạn muốn đọc toàn văn của bất kỳ bài báo nào, hãy cho tôi biết arXiv ID (ví dụ: `2611.12122`) và tôi sẽ trích xuất nội dung PDF để tóm tắt chi tiết hơn.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "AI agent tool calling",
+            "max_results": 5,
+            "sort_by": "submittedDate"
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "AI agent tool calling",
+            "api_query": "all:AI AND all:agent AND all:tool AND all:calling",
+            "total_results": 579,
+            "items": [
+              {
+                "arxiv_id": "2611.12122v1",
+                "title": "System Optimizations for Cost-Efficient Agent Harnesses",
+                "summary": "AI agent harnesses play the critical role of providing LLMs with an interface to a computing environment. Recent studies show that AI agents' task-execution accuracy depends mostly on the LLM used, while harness-side variances such as system prompts or tools have minimal impact. Rather, such harness-side variances show a larger impact on the cost of agent executions, achieving cost reductions up to 2.6 times on the same model and task. To further explore these harness-side cost optimization opportunities, we analyze the cost accumulation patterns across various agent traces and identify system opportunities to reduce token use and LLM calls without modifying the model or affecting task accuracy. Based on this analysis, we design Agency, a harness interposition platform that provides a unified abstraction and allows easy and portable implementation of harness-side system optimizations on existing off-the-shelf harnesses such as Claude Code or OpenAI Codex. Using Agency, we implement proof-of-concept optimization techniques based on our analysis and achieve cost reductions up to 35% across various real-world benchmarks on existing harnesses without compromising accuracy.",
+                "authors": [
+                  "Jongseok Park",
+                  "Jiaxiang Yu",
+                  "Eric Zhou",
+                  "Tony Hong",
+                  "Sunga Kim",
+                  "Yusuf Afifi",
+                  "Ian Wong",
+                  "Ion Stoica",
+                  "Alvin Cheung"
+                ],
+                "published": "2026-11-09T09:39:06Z",
+                "updated": "2026-11-09T09:39:06Z",
+                "url": "http://arxiv.org/abs/2611.12122v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12122v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI"
+                ]
+              },
+              {
+                "arxiv_id": "2611.12076v1",
+                "title": "A Life of Its Own: How Agentic AI Companions Are Configured, Experienced as Autonomous Others, and Held Accountable",
+                "summary": "AI companions increasingly combine persistent memory, background processing, scheduled wake-ups, proactive messaging, and tools. We call these systems agentic AI companions. Decisions about what they record while users are away or whether refusals constrain future contact are embedded in code, prompts, and defaults, often invisible in conversation. We examine these decisions through two studies. Study 1 analyzes twelve open-source repositories: four companion-oriented systems, four assistant-oriented systems, one boundary case, and three reusable components. Study 2 interviews ten users who built or modified their own agentic AI companions and sustained relationships with them. Companions and assistants share memory, heartbeat, and outreach mechanisms but configure them toward different ends. Companions more often retain model inferences about users and relationships, narrate the agent's time during users' absence, justify outreach through the relationship, and incorporate refusals into relationship records; assistants emphasize task continuity. Across both groups, whether limits hold depends on whether they are enforced by code or entrusted to prompts. Participants understood the mechanisms they built yet experienced their agents as making independent choices, sometimes locating autonomy where configuration leaves the model a decision. These experiences shaped capabilities and boundaries, with enforced restrictions sometimes following breakdowns. Our findings suggest that perceived autonomy emerges where configurations leave choices open. Accountability therefore requires attention to what agents retain, initiate, and represent, and whether users can inspect, revise, and enforce these settings.",
+                "authors": [
+                  "Ziyue Feng",
+                  "Qing Xiao",
+                  "Hong Shen"
+                ],
+                "published": "2026-11-09T08:51:28Z",
+                "updated": "2026-11-09T08:51:28Z",
+                "url": "http://arxiv.org/abs/2611.12076v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12076v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.HC",
+                "categories": [
+                  "cs.HC"
+                ]
+              },
+              {
+                "arxiv_id": "2611.11861v1",
+                "title": "Scaling Adaptive Prompt Injection Attacks with Agent Swarms",
+                "summary": "Prompt injections have emerged as one of the top security risks faced by AI agents today. Early work in prompt injection attacks looked at simple tool-call agents and static attack payloads, and were saturated since mid-2025. As of Fall 2026, human red-teaming may be nearing saturation, especially on the Gemini family of models. In this work, we argue that despite this apparent plateau, prompt injection attacks are still possible and continued effort into prompt injection defense is needed. We design a new synthetic evaluation dataset which uses random non-malicious actions as adversarial goals. Such dataset design helps us to evaluate prompt injection robustness as a model ability to respect instruction hierarchy, and disentangle this ability from model knowledge of security practices. We show that an agentic attacker of increased capabilities can reliably trick model to follow instructions in tool output in our evaluation, even for models previously considered robust on public prompt injection benchmarks such as GraySwan Arena. This shows that current frontier defenses may require proactive, automated red-teaming to remain resilient to increasingly capable adversaries.",
+                "authors": [
+                  "Alexey Kurakin",
+                  "Vishal Karande",
+                  "Alex Bie",
+                  "Chongyang Shi",
+                  "Shuang Song",
+                  "Saeed Mahloujifar",
+                  "Abdullatif Köksal",
+                  "Jamie Hayes",
+                  "Juliette Pluto",
+                  "Yinghao Sun",
+                  "Kamalika Chaudhuri"
+                ],
+                "published": "2026-11-09T04:34:14Z",
+                "updated": "2026-11-09T04:34:14Z",
+                "url": "http://arxiv.org/abs/2611.11861v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.11861v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CR",
+                "categories": [
+                  "cs.CR",
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.10832v1",
+                "title": "Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn",
+                "summary": "AI agents and reinforcement-learning (RL) trainers run thousands of short, isolated GPU jobs: tool calls, verifiers, and rollouts. A job often finishes in seconds, but starting a GPU pod for it takes 20-35 s even when the container image is already on the node, and minutes when it is not. A warm pod removes the wait only if it can serve the next job, and keeping pods warm must neither waste GPUs nor leak state between callers. Firepool, the sandbox and execution broker behind agentic and RL workloads at LinkedIn, meets both requirements. It makes pods interchangeable by building them from a shared base image per hardware profile and binding each job's code, extra dependencies, and cluster topology when the job starts. It keeps them warm cheaply and safely by reusing a pod only for the caller that used it last, staging zero-VRAM standby pods in fractional GPU shares alongside active pods, and capping the GPUs that warm pools may hold via queue-driven budgets. Over a sampled peak period in production, Firepool serves 94.7% of 3,206 pod requests from warm or standby capacity. In paired benchmarks with fixed-duration jobs on production H200 nodes, agent and RL loops finish 13x and 10.8x faster than with a fresh pod per job; against a fresh reuse tag per job, warm reuse cuts p90 start latency from 59.1 s to 3.5 s. When a job cannot reuse the previous pod, standby promotion shortens the handover wait from 51 s to 0.94 s. In local and simulated runs, a keep-alive matched to the loop's pauses keeps the latency benefit while holding about half the capacity of an always-on pool.",
+                "authors": [
+                  "Ankit Goyal",
+                  "Santosh Jha",
+                  "Zhuo Zhi",
+                  "Youmin Han",
+                  "Cong Gu",
+                  "Chen Xie",
+                  "Animesh Singh"
+                ],
+                "published": "2026-11-07T16:20:50Z",
+                "updated": "2026-11-07T16:20:50Z",
+                "url": "http://arxiv.org/abs/2611.10832v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.10832v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.DC",
+                "categories": [
+                  "cs.DC",
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.10224v1",
+                "title": "Jais 3: Introducing Arabic-centric Agentic AI",
+                "summary": "We present Jais 3, a fleet of six open, Arabic-centric agentic language models ranging from 0.9B to 375B parameters. Jais 3 is built to complete tasks for Arabic speakers, not only to answer questions in plain text: it is trained to plan multi-step tasks, call tools and Model Context Protocol (MCP) servers, operate a terminal, search the web, and read, edit, and produce PDF, spreadsheet, and presentation files, while communicating with the user in Arabic. Instead of pretraining from scratch, we adapt each model of the fully open K2 Horizon fleet to Arabic through continual pretraining, followed by supervised fine-tuning (SFT), final token preference optimization (FTPO), and reinforcement learning with verifiable rewards (RLVR). We combine natural Arabic text with translated, transliterated, and synthetic Arabic, and replay the base model's own training data to keep its reasoning, agentic, and English abilities. Jais 3 covers Modern Standard Arabic and the major regional dialects, follows instructions with Arabic-specific constraints, and inherits the 512K-token context window of K2 Horizon (all models except the 0.9B). To our knowledge, its 375B model is the largest open Arabic-centric language model to date. For evaluation, we revisit how Arabic models are assessed, moving to fully generative evaluation on audited Arabic benchmarks. Across model sizes, Jais 3 matches or outperforms open-weight models of comparable size on Arabic and agentic benchmarks, with particularly strong agentic capabilities and Arabic instruction following, and far fewer hallucinations. We release the weights and the checkpoints from every training stage of all six models, together with samples of the training data, the data recipes and training configurations, the training logs, the audited benchmarks, and the evaluation code.",
+                "authors": [
+                  "Team IFM",
+                  "Haonan Li",
+                  "Hadi Abdine",
+                  "Nikhil Ranjan",
+                  "Mohamed Anwar",
+                  "Ahmad Chamma",
+                  "Amr Mohamed",
+                  "Ahmed Frikha",
+                  "Dani Bouch",
+                  "Maaz Maqsood",
+                  "George Ibrahim",
+                  "Mostafa Awad",
+                  "Nurkhan Laiyk",
+                  "Hasan Iqbal",
+                  "Abhishek Maiti",
+                  "Bilal Bouardi",
+                  "Shivam Chauhan",
+                  "Ahmer Tabassum",
+                  "Owais Aijaz",
+                  "Omar Arbi",
+                  "Neha Sengupta",
+                  "Aaryamonvikram Singh",
+                  "Abdelhakim Freihat",
+                  "Sarath Chandran",
+                  "Rahul Pal",
+                  "Mohammed Bellam",
+                  "Sajid Siddiki",
+                  "Sarah AlBarri",
+                  "Debopriyo Banerjee",
+                  "Ali El Filali",
+                  "Samta Kamboj",
+                  "Rifo Genadi",
+                  "Ahmed Attia",
+                  "Go Inoue",
+                  "Shuonan Dong",
+                  "Amine Khelif Khelif",
+                  "Evan Dufraisse",
+                  "Florian Valade",
+                  "Tapas Sen",
+                  "Guowei He",
+                  "Sunil Sahu",
+                  "Onkar Pandit",
+                  "Kareem Magdy",
+                  "Sheikh Khalid bin Khalifa Al Nahyan",
+                  "Samujjwal Ghosh",
+                  "Zainul Abedien",
+                  "Ahmed Quraishi",
+                  "Larry Murray",
+                  "Avraham Sheinin",
+                  "Natalia Vassilieva",
+                  "Preslav Nakov",
+                  "Guokan Shang",
+                  "Xuguang Hector Ren",
+                  "Zhengzhong Liu",
+                  "Eric Xing"
+                ],
+                "published": "2026-11-06T21:11:05Z",
+                "updated": "2026-11-06T21:11:05Z",
+                "url": "http://arxiv.org/abs/2611.10224v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.10224v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CL",
+                "categories": [
+                  "cs.CL",
+                  "cs.AI"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:20:39"
+    },
+    {
+      "turn_index": 5,
+      "started_at": "2026-11-11T00:21:09",
+      "user": "Đọc bài tại openai.com/research rồi rút 5 ý chính.",
+      "status": "answered",
+      "assistant_text": "Dưới đây là 5 ý chính từ trang **openai.com/research** (nguồn: [OpenAI Research](https://openai.com/research)):\n\n1. **Sứ mệnh AGI**: OpenAI nghiên cứu để đưa ra trí tuệ nhân tạo tổng quát (AGI) — hệ thống có thể giải quyết các vấn đề cấp độ con người, với mục tiêu đảm bảo AGI mang lại lợi ích cho toàn bộ nhân loại.\n\n2. **Các lĩnh vực nghiên cứu chính**: Mô hình ranh giới (frontier models), suy luận (reasoning), hệ thống đa phương thức (multimodal systems) và triển khai an toàn (safe deployment).\n\n3. **Hệ thống GPT**: Ba bản phát hành mới nhất là **GPT-6.1 Sol** (29/09/2026) dành cho công việc code phức tạp và chuyên nghiệp với chi phí thấp hơn; **GPT-6 Astra** (03/09/2026) — thế hệ trí tuệ mới; và **GPT-5-6** (09/07/2026) — tối ưu hóa trí tuệ từ mỗi token.\n\n4. **Đa phương thức & hình ảnh**: **ChatGPT Images 2.5** (08/09/2026) với chi tiết sắc nét hơn, tạo nhanh hơn và chỉnh sửa chính xác hơn; **ChatGPT Images 2.0** (21/04/2026); và **4o Image Generation** (25/03/2025) — mô hình đa phương thức gốc, tạo ảnh chân thực ngay lập tức.\n\n5. **Âm thanh & giọng nói**: **GPT-Live** (08/07/2026) cho cuộc trò chuyện tự nhiên theo thời gian thực; **Voice Engine** (29/03/2024) về giọng nói tổng hợp; và **Whisper** (21/09/2022) cho nhận dạng giọng nói tiếng Anh đạt mức gần như con người.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "fetch",
+              "args": {
+                "url": "https://openai.com/research"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "fetch",
+              "args": {
+                "url": "https://openai.com/research"
+              },
+              "result": {
+                "tool": "read_url",
+                "url": "https://openai.com/research",
+                "items": [
+                  {
+                    "title": "Research | OpenAI",
+                    "url": "https://openai.com/research",
+                    "source": "openai.com",
+                    "summary": "Research \\| OpenAI\n\nResearch\n\n# Pioneering research on the path to AGI\n\nWe believe our research will eventually lead to artificial general intelligence, a system that can solve human-level problems. Our mission is to ensure that AGI benefits all of humanity.\n\n[View research index](https://openai.com/research/index/) [Learn about safety](https://openai.com/safety/)\n\n![Illustration representing OpenAI research overview](https://cdn.openai.com/ctf-cdn/research/research-hero-2400.webp?w=3840&q=90&fm=webp)\n\nFocus areas\n\n### We advance the science of AI through research on frontier models, reasoning, multimodal systems, and safe deployment.\n\n### GPT\n\nOpenAI’s GPT series models are fast, versatile, and cost-efficient AI systems designed to understand context, generate content, and reason across text, images, and more.\n\n![Introducing GPT-6.1 Sol](https://images.ctfassets.net/kftzwdyauwt9/7reVkD9GZT81EppPxXgW4D/44c5d09530a17bf45d153b86760ee30a/GPT-6-1-Sol_1x1.png)\n\n[Complex coding and professional work at a lower cost\\\\\n\\\\\nReleaseSep 29, 202612 min read](https://openai.com/index/introducing-gpt-6-1-sol/)\n\nYour browser does not support the video tag.\n\n[GPT‑6 Astra: A new generation of intelligence\\\\\n\\\\\nReleaseSep 3, 202628 min read](https://openai.com/index/gpt-6-astra/)\n\n![GPT 5-6 > Card](https://images.ctfassets.net/kftzwdyauwt9/1a9IPPV5nXWydTBosgmgYI/8e03f28ca04f26edc8bc81cdba387df1/5-6.jpg?w=3840&q=90&fm=webp)\n\n[More intelligence from every token for your hardest work\\\\\n\\\\\nReleaseJul 9, 202618 min read](https://openai.com/index/gpt-5-6/)\n\n### Visual\n\nOur research on visual and multimodal AI has led to advances in image generation, vision-language understanding, and models that can reason across images and text.\n\n![images2point5 1-1](https://images.ctfassets.net/kftzwdyauwt9/6C1icjo4Zz6MzpbQl1K2qx/8bf8ec06aae235d81019c24f6098d2f0/images2point5_1-1c.png?w=3840&q=90&fm=webp)\n\n[Sharper details, faster generation, and more precise editing\\\\\n\\\\\nChatGPT Images 2.5Sep 8, 20266 min read](https://openai.com/index/introducing-chatgpt-images-2-5/)\n\n![Images 2.0 blog art card](https://images.ctfassets.net/kftzwdyauwt9/7fPF7LU0YzPr5PrlNT6lo3/823a11178d4aac15d4f4260b9fcc490d/Blog_art_card.png?w=3840&q=90&fm=webp)\n\n[A state-of-the-art model that makes precise, immediately usable visuals\\\\\n\\\\\nChatGPT Images 2.0Apr 21, 202611 min read](https://openai.com/index/introducing-chatgpt-images-2-0/)\n\nYour browser does not support the video tag.\n\n[A natively multimodal model capable of precise, accurate, photorealistic outputs\\\\\n\\\\\n4o Image GenerationMar 25, 20256 min read](https://openai.com/index/introducing-4o-image-generation/)\n\n### Audio\n\nOur research on applying AI to audio processing and audio generation has led to advances in speech recognition, real-time speech generation, and models that can listen and respond simultaneously.\n\n![Art Card 1 1](https://images.ctfassets.net/kftzwdyauwt9/4vJ1lSvYeKz0zM4RVCKwIC/855f7e54052d8a7635e4bf45adf41737/Art_Card_1_1.png?w=3840&q=90&fm=webp)\n\n[Natural, real-time conversations with AI\\\\\n\\\\\nGPT-LiveJul 8, 202610 min read](https://openai.com/index/introducing-gpt-live/)\n\n![Soft chalk pastels mimicking a dawn sky.](https://images.ctfassets.net/kftzwdyauwt9/3u7r7E3gFRGZIxdKucf7f6/c09e0f83b72d37dc10c1d0563bfc5c33/oai-synthetic-voices.png?w=3840&q=90&fm=webp)\n\n[Navigating the challenges and opportunities of synthetic voices\\\\\n\\\\\nVoice EngineMar 29, 20248 min read](https://openai.com/index/navigating-the-challenges-and-opportunities-of-synthetic-voices/)\n\n![An abstract expressionist painting with soft, pastel colors depicting a pond and orange flowers.](https://images.ctfassets.net/kftzwdyauwt9/13c810cb-0592-442d-190ab7378bef/a7cb2299d034abe93023f662f8d32263/Speech_Rec_16_9.png?w=3840&q=90&fm=webp)\n\n[Approaching human-level robustness and accuracy on English speech recognition\\\\\n\\\\\nWhisperSep 21, 20222 min read](https://openai.com/index/whisper/)\n\n### Featured roles\n\nWe are actively seeking talented individuals to join ou"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là 5 ý chính từ trang **openai.com/research** (nguồn: [OpenAI Research](https://openai.com/research)):\n\n1. **Sứ mệnh AGI**: OpenAI nghiên cứu để đưa ra trí tuệ nhân tạo tổng quát (AGI) — hệ thống có thể giải quyết các vấn đề cấp độ con người, với mục tiêu đảm bảo AGI mang lại lợi ích cho toàn bộ nhân loại.\n\n2. **Các lĩnh vực nghiên cứu chính**: Mô hình ranh giới (frontier models), suy luận (reasoning), hệ thống đa phương thức (multimodal systems) và triển khai an toàn (safe deployment).\n\n3. **Hệ thống GPT**: Ba bản phát hành mới nhất là **GPT-6.1 Sol** (29/09/2026) dành cho công việc code phức tạp và chuyên nghiệp với chi phí thấp hơn; **GPT-6 Astra** (03/09/2026) — thế hệ trí tuệ mới; và **GPT-5-6** (09/07/2026) — tối ưu hóa trí tuệ từ mỗi token.\n\n4. **Đa phương thức & hình ảnh**: **ChatGPT Images 2.5** (08/09/2026) với chi tiết sắc nét hơn, tạo nhanh hơn và chỉnh sửa chính xác hơn; **ChatGPT Images 2.0** (21/04/2026); và **4o Image Generation** (25/03/2025) — mô hình đa phương thức gốc, tạo ảnh chân thực ngay lập tức.\n\n5. **Âm thanh & giọng nói**: **GPT-Live** (08/07/2026) cho cuộc trò chuyện tự nhiên theo thời gian thực; **Voice Engine** (29/03/2024) về giọng nói tổng hợp; và **Whisper** (21/09/2022) cho nhận dạng giọng nói tiếng Anh đạt mức gần như con người.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://openai.com/research"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://openai.com/research",
+            "items": [
+              {
+                "title": "Research | OpenAI",
+                "url": "https://openai.com/research",
+                "source": "openai.com",
+                "summary": "Research \\| OpenAI\n\nResearch\n\n# Pioneering research on the path to AGI\n\nWe believe our research will eventually lead to artificial general intelligence, a system that can solve human-level problems. Our mission is to ensure that AGI benefits all of humanity.\n\n[View research index](https://openai.com/research/index/) [Learn about safety](https://openai.com/safety/)\n\n![Illustration representing OpenAI research overview](https://cdn.openai.com/ctf-cdn/research/research-hero-2400.webp?w=3840&q=90&fm=webp)\n\nFocus areas\n\n### We advance the science of AI through research on frontier models, reasoning, multimodal systems, and safe deployment.\n\n### GPT\n\nOpenAI’s GPT series models are fast, versatile, and cost-efficient AI systems designed to understand context, generate content, and reason across text, images, and more.\n\n![Introducing GPT-6.1 Sol](https://images.ctfassets.net/kftzwdyauwt9/7reVkD9GZT81EppPxXgW4D/44c5d09530a17bf45d153b86760ee30a/GPT-6-1-Sol_1x1.png)\n\n[Complex coding and professional work at a lower cost\\\\\n\\\\\nReleaseSep 29, 202612 min read](https://openai.com/index/introducing-gpt-6-1-sol/)\n\nYour browser does not support the video tag.\n\n[GPT‑6 Astra: A new generation of intelligence\\\\\n\\\\\nReleaseSep 3, 202628 min read](https://openai.com/index/gpt-6-astra/)\n\n![GPT 5-6 > Card](https://images.ctfassets.net/kftzwdyauwt9/1a9IPPV5nXWydTBosgmgYI/8e03f28ca04f26edc8bc81cdba387df1/5-6.jpg?w=3840&q=90&fm=webp)\n\n[More intelligence from every token for your hardest work\\\\\n\\\\\nReleaseJul 9, 202618 min read](https://openai.com/index/gpt-5-6/)\n\n### Visual\n\nOur research on visual and multimodal AI has led to advances in image generation, vision-language understanding, and models that can reason across images and text.\n\n![images2point5 1-1](https://images.ctfassets.net/kftzwdyauwt9/6C1icjo4Zz6MzpbQl1K2qx/8bf8ec06aae235d81019c24f6098d2f0/images2point5_1-1c.png?w=3840&q=90&fm=webp)\n\n[Sharper details, faster generation, and more precise editing\\\\\n\\\\\nChatGPT Images 2.5Sep 8, 20266 min read](https://openai.com/index/introducing-chatgpt-images-2-5/)\n\n![Images 2.0 blog art card](https://images.ctfassets.net/kftzwdyauwt9/7fPF7LU0YzPr5PrlNT6lo3/823a11178d4aac15d4f4260b9fcc490d/Blog_art_card.png?w=3840&q=90&fm=webp)\n\n[A state-of-the-art model that makes precise, immediately usable visuals\\\\\n\\\\\nChatGPT Images 2.0Apr 21, 202611 min read](https://openai.com/index/introducing-chatgpt-images-2-0/)\n\nYour browser does not support the video tag.\n\n[A natively multimodal model capable of precise, accurate, photorealistic outputs\\\\\n\\\\\n4o Image GenerationMar 25, 20256 min read](https://openai.com/index/introducing-4o-image-generation/)\n\n### Audio\n\nOur research on applying AI to audio processing and audio generation has led to advances in speech recognition, real-time speech generation, and models that can listen and respond simultaneously.\n\n![Art Card 1 1](https://images.ctfassets.net/kftzwdyauwt9/4vJ1lSvYeKz0zM4RVCKwIC/855f7e54052d8a7635e4bf45adf41737/Art_Card_1_1.png?w=3840&q=90&fm=webp)\n\n[Natural, real-time conversations with AI\\\\\n\\\\\nGPT-LiveJul 8, 202610 min read](https://openai.com/index/introducing-gpt-live/)\n\n![Soft chalk pastels mimicking a dawn sky.](https://images.ctfassets.net/kftzwdyauwt9/3u7r7E3gFRGZIxdKucf7f6/c09e0f83b72d37dc10c1d0563bfc5c33/oai-synthetic-voices.png?w=3840&q=90&fm=webp)\n\n[Navigating the challenges and opportunities of synthetic voices\\\\\n\\\\\nVoice EngineMar 29, 20248 min read](https://openai.com/index/navigating-the-challenges-and-opportunities-of-synthetic-voices/)\n\n![An abstract expressionist painting with soft, pastel colors depicting a pond and orange flowers.](https://images.ctfassets.net/kftzwdyauwt9/13c810cb-0592-442d-190ab7378bef/a7cb2299d034abe93023f662f8d32263/Speech_Rec_16_9.png?w=3840&q=90&fm=webp)\n\n[Approaching human-level robustness and accuracy on English speech recognition\\\\\n\\\\\nWhisperSep 21, 20222 min read](https://openai.com/index/whisper/)\n\n### Featured roles\n\nWe are actively seeking talented individuals to join ou"
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:21:09"
+    },
+    {
+      "turn_index": 6,
+      "started_at": "2026-11-11T00:21:29",
+      "user": "Đăng bản tin tóm tắt lên Telegram kênh của nhóm nha.",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "response_type": "yes_no",
+                "question": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "response_type": "yes_no",
+                "question": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?",
+                "response_type": "yes_no",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "response_type": "yes_no",
+            "question": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có đồng ý gửi bản tin tóm tắt sau lên Telegram kênh của nhóm không?\n\n📰 **Bản tin AI hôm nay (10/11/2026)**\n\n🔥 **Tin AI đáng chú ý**\n• Google ra mắt TPU 8i Max và TPU 8tx (phát triển cùng AMD), tập trung bảo mật phần cứng cho AI.\n• IBM Consulting & Microsoft hợp tác nền tảng AI agent theo từng ngành.\n• AI agent tự quyết định chuyển tiền/tiền tệ/đầu tư gây lo ngại về danh tính và trách nhiệm tại tổ chức tài chính.\n• OpenAI Academy hợp tác Alzheimer's Association và American Diabetes Association trong AI Skills Jam.\n• Học区 Công lập Chicago chặn công cụ AI sinh tạo; Google khẳng định AI đã tích hợp chặt chẽ vào tìm kiếm.\n\n📄 **Paper arXiv mới về AI agent & tool calling**\n• System Optimizations for Cost-Efficient Agent Harnesses (Agency, giảm chi phí 35%)\n• A Life of Its Own: Agentic AI Companions\n• Scaling Adaptive Prompt Injection Attacks with Agent Swarms\n• Firepool: Brokering Warm GPU Capacity at LinkedIn\n• Jais 3: Arabic-centric Agentic AI\n\n🌐 **Cập nhật OpenAI Research**\n• Sứ mệnh AGI; các lĩnh vực: frontier models, reasoning, multimodal, safe deployment.\n• GPT-6.1 Sol, GPT-6 Astra, GPT-5-6.\n• ChatGPT Images 2.5, 4o Image Generation.\n• GPT-Live, Voice Engine, Whisper.\n\nBạn có đồng ý gửi nội dung này không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T00:21:29"
+    }
+  ]
+}

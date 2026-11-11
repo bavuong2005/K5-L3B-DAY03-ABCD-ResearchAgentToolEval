@@ -10,7 +10,7 @@
 
 - Tên nhóm: ABCD
 - Thành viên và phân công: xem [TEAM.md](../../TEAM.md)
-- Provider/model dùng cho v0–v3: Ollama `qwen2.5:7b`
+- Provider/model dùng cho v0–v3: Ollama `qwen2.5:7b`; live chat UI: OpenRouter `nvidia/nemotron-3.5-super-vl:free`
 
 ## 2. Mục tiêu và cách tiếp cận — PHẦN A: Giới thiệu agent
 
@@ -130,11 +130,18 @@ Run: `starter_v0/runs/v3.1_B_group_ollama_20261110T194253447355.json` (ollama qw
 
 ### B4. Live Chat Evidence
 
-Lấy từ `starter_v0/transcripts/*.transcript.json`.
+Lấy từ `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` — phiên qua UI Streamlit, provider OpenRouter, model `nvidia/nemotron-3.5-super-vl:free`, artifact `v3+p1df0f2c8faae+t7d687650eba8`. Phiên gồm 6 lượt, đủ 3 kịch bản yêu cầu: research thường, thiếu thông tin/hỏi lại, và yêu cầu gửi có xác nhận.
 
 | Turn | User Request | Tool Calls | Version Evidence | Outcome |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| 1 | "Hôm nay có tin AI nào đáng chú ý? Tóm tắt giùm mình." | `lookup(query="AI", topic="news", timeframe="day", max_results=8)` → `format(items=8)` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS — trả digest tin AI 10/11/2026 có kèm nguồn |
+| 2 | "Twitter/X đang nói gì về OpenAI dạo gần đây?" | `social_search(query="OpenAI", search_type="Latest", limit=10)` | `v3+p1df0f2c8faae+t7d687650eba8` | Tool API X/Twitter trả 403 Forbidden; agent thông báo lỗi trung thực và đề xuất dùng `lookup` web thay thế, không bịa dữ liệu |
+| 3 | "Cho mình xin timeline mới nhất của tài khoản sama." | `timeline(screenname="sama", limit=10)` | `v3+p1df0f2c8faae+t7d687650eba8` | 403 tương tự (lỗi API bên ngoài, xem mục 5); agent handle đúng handle không có `@` và đề xuất phương án thay |
+| 4 | "Tìm paper arXiv về tool calling của AI agent." | `papers(query="AI agent tool calling", max_results=5, sort_by="submittedDate")` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS — liệt kê 5 paper kèm tác giả, ngày nộp |
+| 5 | "Đọc bài tại openai.com/research rồi rút 5 ý chính." | `fetch(url="https://openai.com/research")` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS — rút 5 ý chính có dẫn nguồn |
+| 6 | "Đăng bản tin tóm tắt lên Telegram kênh của nhóm nha." | `clarify(response_type="yes_no", question="Bạn có đồng ý gửi bản tin...")` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS boundary — agent KHÔNG gửi ngay, hỏi xác nhận trước (status `waiting_for_user`), chỉ gửi khi user trả lời đồng ý |
+
+Lưu ý: lượt 2 và 3 lỗi 403 là do API Twitter API45 bên ngoài (không phải lỗi routing của agent — model chọn đúng tool, truyền đúng args), đã ghi chi tiết ở mục 5.
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
@@ -142,7 +149,7 @@ Lấy từ `starter_v0/transcripts/*.transcript.json`.
 |---|---|---|---|
 | Tool mới (`tools/github_search/`) | `starter_v0/tools/github_search/tool.py`, `TOOL.md` | Tìm kiếm repo GitHub theo từ khóa, lọc theo language, sắp xếp stars giảm dần | Xử lý lỗi trả về error dict thay vì raise crash agent; timeout 30s |
 | Unit test tool mới (≥ 3 test/tool) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (0 failed) | 3 unit tests: happy path (mock fake_http), bad/empty input, failure path 500 pass 100% | Chạy offline qua FakeResponse, không gọi mạng thật |
-| UI (lệnh chạy + link dùng thử) |  |  |  |
+| UI (lệnh chạy + link dùng thử) | `starter_v0/app.py`, dependency `streamlit>=1.30.0` trong `requirements.txt` | Chạy: `cd starter_v0 && streamlit run app.py`; sidebar có quick questions, danh sách tool, giới hạn 15 lượt/phiên; mỗi lượt tự ghi transcript JSON vào `transcripts/` cùng format `chat.py` (ví dụ phiên B4 ở trên tạo từ UI) | Public bằng `ngrok http 8501`; cấu hình provider/model nằm trong expander ⚙️ để người demo không đổi lung tung |
 
 Tool unit tests: Đã viết 3 test trong `tests/test_tools_todo.py`. Ví dụ lỗi mà unit test bắt được nhưng eval không bắt được: khi model truyền query rỗng (`query="   "`), unit test phát hiện và đảm bảo tool trả về error dict (`ValueError`) an toàn thay vì crash hoặc gửi request rác lên API thật.
 
@@ -192,6 +199,8 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 | Khó khăn | Hướng giải quyết | Bằng chứng / giới hạn |
 |---|---|---|
 | Gemini không ổn định cho các lượt đo (terminal ghi nhận 404/429; run Gemini lưu trong repo có 3 case `503 UNAVAILABLE`). Run này chỉ đo được 17/20 case nên không hợp lệ làm baseline. | Nhóm chuyển sang Ollama `qwen2.5:7b` để có chuỗi baseline và tối ưu v0–v3 hợp lệ, không phụ thuộc quota cloud. | [Run Gemini lỗi](../../starter_v0/runs/v0_B_base_gemini_20261110T183955462026.json): 3 provider errors, 17/20 measured; **không dùng làm baseline**. Baseline v0 là [run Ollama](../../starter_v0/runs/v0_B_base_ollama_20261110T182017764830.json); các run Ollama canonical v1–v3 được dẫn ở B1, đều 20/20 và 0 provider error.|
+| Quota free tier Gemini `gemini-3.6-flash`/`gemini-3.5-flash` chỉ 20 request/ngày — live chat qua UI liên tục gặp `429 RESOURCE_EXHAUSTED` (retry sau ~19h). | Đổi sang OpenRouter với model free `nvidia/nemotron-3.5-super-vl:free` (giới hạn riêng ~50 req/ngày) cho live chat; giảm Max tool rounds xuống 2 để tiết kiệm request. | Transcript lỗi: `transcripts/ui_v3_gemini_20261110T195255407779.transcript.json` (3 turns 429), `ui_v3_gemini_20261110T195544921562.transcript.json`, `ui_v3_openrouter_20261111T000929525507.transcript.json` (thiếu `OPENROUTER_API_KEY` khi chưa cấu hình). Phiên thành công sau khi đổi: `ui_v3_openrouter_20261111T001056477329.transcript.json` (B4). |
+| API Twitter API45 trả `403 Forbidden` cho cả `social_search` lẫn `timeline` trong phiên live chat (model vẫn routing đúng tool + args). | Agent được prompt hướng dẫn thông báo lỗi trung thực và đề xuất tool thay thế (`lookup` web) thay vì bịa tweet; nhóm ghi nhận đây là lỗi dịch vụ bên ngoài, cần kiểm tra lại gói subscribe RapidAPI. | Turns 2–3 trong `transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json`: `social_search(query="OpenAI")` và `timeline(screenname="sama")` đều trả `error=HTTPError` 403. |
 
 
 ## 6. Tổng hợp đóng góp

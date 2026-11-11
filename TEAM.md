@@ -5,7 +5,7 @@
 - Tên nhóm: ABCD
 - Lớp: L3B
 - Repo nhóm: [K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval)
-- URL repo, nhánh nộp, commit chốt: https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval · `MaiLeBaVuong` · `72904a4`
+- URL repo, nhánh nộp, commit chốt: https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval
 
 ## Thành viên
 

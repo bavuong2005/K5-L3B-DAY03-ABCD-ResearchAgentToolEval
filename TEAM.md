@@ -101,7 +101,8 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 - Dựng `starter_v0/app.py` (Streamlit) tái dùng đúng vòng lặp `chat.py`, transcript từ UI cùng format với CLI để dùng làm bằng chứng.
 - Xử lý chuỗi lỗi provider (Gemini 503/429, thiếu key OpenRouter) và chuyển live chat sang OpenRouter model free; deploy ngrok.
 - Chạy phiên live chat 6 lượt đủ 3 kịch bản rubric; điền bảng B4, dòng UI ở B5a và 2 dòng khó khăn mới ở mục 5 của `group_report.md`.
+- Cấu hình Telegram thật cho tool `send` (bot, channel private, `TELEGRAM_CHAT_ID`) và chạy luồng hoàn chỉnh `clarify` → xác nhận → `send(confirmed=true)` → `status: sent` (bonus B5).
 
 ### Bằng chứng
 
-- Chi tiết đầy đủ: `report/team/2A202603823_DoQuocKhanh.md`; transcript `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` (phiên 6 lượt) và các transcript lỗi 429/403 làm bằng chứng mục 5.
+- Chi tiết đầy đủ: `report/team/2A202603823_DoQuocKhanh.md`; transcript `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` (phiên 6 lượt), `ui_v3_openrouter_20261111T092939065330.transcript.json` (follow-up sau lỗi), `ui_v3_openrouter_20261111T105912755727.transcript.json` (luồng Telegram) và các transcript lỗi 429/403 làm bằng chứng mục 5.

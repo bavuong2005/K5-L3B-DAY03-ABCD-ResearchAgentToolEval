@@ -1,0 +1,29 @@
+{
+  "transcript_id": "ui_v3_gemini_20261111T101758271710",
+  "version": "v3",
+  "artifact_version": "v3+p1df0f2c8faae+t7d687650eba8",
+  "prompt_hash": "1df0f2c8faae5f8274689819d13119d68f9d2e5b42cca842e20db976a0263d0e",
+  "tools_hash": "7d687650eba8f0f887e0ef3c51e282b773dde7578d94659d43888502122a5d33",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash",
+  "system_prompt": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "ui": "streamlit",
+  "created_at": "2026-11-11T10:17:58",
+  "updated_at": "2026-11-11T10:17:58",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T10:17:58",
+      "user": "Tìm paper arXiv về tool calling của AI agent.",
+      "status": "provider_error",
+      "assistant_text": null,
+      "rounds": [],
+      "tool_events": [],
+      "error": "RuntimeError: Model gemini-3.5-flash exceeded quota (requires waiting 16922s). Use another model like 'gemini-3-flash-preview'.",
+      "ended_at": "2026-11-11T10:17:58"
+    }
+  ]
+}

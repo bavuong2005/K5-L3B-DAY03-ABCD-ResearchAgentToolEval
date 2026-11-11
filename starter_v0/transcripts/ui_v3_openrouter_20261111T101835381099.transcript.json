@@ -1,0 +1,496 @@
+{
+  "transcript_id": "ui_v3_openrouter_20261111T101835381099",
+  "version": "v3",
+  "artifact_version": "v3+p1df0f2c8faae+t7d687650eba8",
+  "prompt_hash": "1df0f2c8faae5f8274689819d13119d68f9d2e5b42cca842e20db976a0263d0e",
+  "tools_hash": "7d687650eba8f0f887e0ef3c51e282b773dde7578d94659d43888502122a5d33",
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3.5-super-vl:free",
+  "system_prompt": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AI20k\\K5-L3B-DAY03-ABCD-Prompt-Function-Calling-Tool-Design-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "ui": "streamlit",
+  "created_at": "2026-11-11T10:18:35",
+  "updated_at": "2026-11-11T10:19:08",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T10:18:48",
+      "user": "Tìm paper arXiv về tool calling của AI agent.",
+      "status": "answered",
+      "assistant_text": "Dưới đây là 5 paper arXiv liên quan đến **tool calling của AI agent** (tìm theo từ khóa \"AI agent tool calling\", sắp xếp theo độ liên quan):\n\n| # | Tiêu đề | arXiv ID | Tác giả | Tóm tắt ngắn |\n|---|---------|----------|---------|--------------|\n| 1 | **STRIDE: A Systematic Framework for Selecting AI Modalities — Agentic AI, AI Assistants, or LLM Calls** | [2512.02228](http://arxiv.org/abs/2512.02228v1) | Shubhi Asthana et al. | Framework STRIDE giúp chọn giữa 3 modality: direct LLM calls, guided AI assistants, và fully autonomous agentic AI. Đánh giá trên 30 task thực tế (SRE, compliance, enterprise automation), đạt 92% độ chính xác trong việc chọn modality, giảm 45% việc triển khai agent không cần thiết và cắt 37% chi phí tài nguyên. |\n| 2 | **Switchcraft: AI Model Router for Agentic Tool Calling** | [2605.07112](http://arxiv.org/abs/2605.07112v2) | Sharad Agarwal et al. | Model router đầu tiên được tối ưu cho độ chính xác của từng tool call riêng lẻ trong workload agentic. Sử dụng DistilBERT-based classifier để chọn model thấp chi phí nhất đảm bảo correctness, hoặc abstain khi không chắc chắn. Đạt 78.3% answer accuracy (86.4% khi tính abstention đúng) với chi phí thấp hơn 59% so với best individual model. |\n| 3 | **Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling** | [2608.26199](http://arxiv.org/abs/2608.26199v1) | Leonardo Liparulo, Francesco Pierri | Xem xét khả năng của AI agent chạy LLM cục bộ trong việc tự động hóa workflow thiết kế phần cứng qua Model Context Protocol (MCP). Xây dựng benchmark bao gồm single-operation edits, multi-step dependency chains, invalid requests, misspelled prompts, và multi-server tool contexts. Đánh giá 7 model open-source. |\n| 4 | **AEGIS: No Tool Call Left Unchecked — A Pre-Execution Firewall and Audit Layer for AI Agents** | [2603.12621](http://arxiv.org/abs/2603.12621v1) | Aojie Yuan, Zhiyuan Su, Yue Zhao | Pre-execution firewall và audit layer cho AI agent. AEGIS can thiệp vào đường dẫn thực thi tool, áp dụng 3 giai đoạn: deep string extraction, content-first risk scanning, composable policy validation. Hỗ trợ 14 agent framework (Python, JavaScript, Go), chặn 100% các tấn công trong bộ dữ liệu kiểm tra, false positive 1.2%, latency trung vị 8.3 ms. |\n| 5 | **AgentRiskBOM: A Risk-Scoping Security Bill of Materials for Agentic AI Systems** | [2606.21877](http://arxiv.org/abs/2606.21877v1) | Srimonti Dutta, Akshata Kishore Moharir | Security BOM cho agentic AI, bổ sung các trường về runtime authority: autonomy, tool permissions, memory, credential scope, approval gates, audit signals, inter-agent communication, external action capability. Đánh giá trên 13 open-source agent và 52 risk scenarios. |\n\nNếu bạn muốn đọc toàn văn của paper nào cụ thể (tải PDF và trích đoạn), hãy cho tôi biết arXiv ID hoặc link paper đó.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "papers",
+              "args": {
+                "query": "AI agent tool calling",
+                "max_results": 5,
+                "sort_by": "relevance"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "papers",
+              "args": {
+                "query": "AI agent tool calling",
+                "max_results": 5,
+                "sort_by": "relevance"
+              },
+              "result": {
+                "tool": "arxiv_search",
+                "query": "AI agent tool calling",
+                "api_query": "all:AI AND all:agent AND all:tool AND all:calling",
+                "total_results": 580,
+                "items": [
+                  {
+                    "arxiv_id": "2512.02228v1",
+                    "title": "STRIDE: A Systematic Framework for Selecting AI Modalities -- Agentic AI, AI Assistants, or LLM Calls",
+                    "summary": "The rapid shift from stateless large language models (LLMs) to autonomous, goal-driven agents raises a central question: When is agentic AI truly necessary? While agents enable multi-step reasoning, persistent memory, and tool orchestration, deploying them indiscriminately leads to higher cost, complexity, and risk. We present STRIDE (Systematic Task Reasoning Intelligence Deployment Evaluator), a framework that provides principled recommendations for selecting between three modalities: (i) direct LLM calls, (ii) guided AI assistants, and (iii) fully autonomous agentic AI. STRIDE integrates structured task decomposition, dynamism attribution, and self-reflection requirement analysis to produce an Agentic Suitability Score, ensuring that full agentic autonomy is reserved for tasks with inherent dynamism or evolving context. Evaluated across 30 real-world tasks spanning SRE, compliance, and enterprise automation, STRIDE achieved 92% accuracy in modality selection, reduced unnecessary agent deployments by 45%, and cut resource costs by 37%. Expert validation over six months in SRE and compliance domains confirmed its practical utility, with domain specialists agreeing that STRIDE effectively distinguishes between tasks requiring simple LLM calls, guided assistants, or full agentic autonomy. This work reframes agent adoption as a necessity-driven design decision, ensuring autonomy is applied only when its benefits justify the costs.",
+                    "authors": [
+                      "Shubhi Asthana",
+                      "Bing Zhang",
+                      "Chad DeLuca",
+                      "Ruchi Mahindru",
+                      "Hima Patel"
+                    ],
+                    "published": "2025-12-01T21:54:07Z",
+                    "updated": "2025-12-01T21:54:07Z",
+                    "url": "http://arxiv.org/abs/2512.02228v1",
+                    "pdf_url": "https://arxiv.org/pdf/2512.02228v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.AI",
+                    "categories": [
+                      "cs.AI",
+                      "cs.LG"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2605.07112v2",
+                    "title": "Switchcraft: AI Model Router for Agentic Tool Calling",
+                    "summary": "Agentic AI systems that invoke external tools are powerful but costly, leading developers to default to large models and overspend inference budgets. Existing model routers target chat responses or end-task success, not the correctness of the individual tool calls on which agent tasks depend; we present Switchcraft, the first (to the best of our knowledge) model router optimized for strict tool-call correctness in agentic workloads. We construct an evaluation framework on six function-calling benchmarks, holding one out entirely, and fine-tune a calibrated DistilBERT-based classifier, deployed inline under a latency budget, to select the lowest-cost model subject to correctness or abstain when none is likely to answer correctly. Switchcraft reaches 78.3% answer accuracy (86.4% when correct abstentions are credited) at 59% lower cost than the best individual model (75.6%), saving over $3,800 per million queries, and outperforms kNN, MIRT, heuristic, and random routers. On the held-out benchmark, it matches or exceeds every individual model at 5--7X lower cost than the strongest ones. We find two counter-intuitive results: larger models do not consistently outperform smaller ones on tool-use tasks, and nominally cheaper models can incur higher total cost due to token-intensive output.",
+                    "authors": [
+                      "Sharad Agarwal",
+                      "Pooria Namyar",
+                      "Alec Wolman",
+                      "Rahul Ambavat",
+                      "Ankur Gupta",
+                      "Qizheng Zhang"
+                    ],
+                    "published": "2026-05-08T01:41:31Z",
+                    "updated": "2026-10-30T19:45:03Z",
+                    "url": "http://arxiv.org/abs/2605.07112v2",
+                    "pdf_url": "https://arxiv.org/pdf/2605.07112v2",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.AI",
+                    "categories": [
+                      "cs.AI",
+                      "cs.MA"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2608.26199v1",
+                    "title": "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling",
+                    "summary": "We ask whether AI agents powered by locally deployed large language models can reliably automate expert-defined hardware design workflows in an industry-realistic tool-calling setting. In these environments, engineers issue repetitive, dependency-ordered operations---such as creating components, adding ports, and wiring connections---through specialised tools. Confidentiality constraints on component specifications and naming conventions often preclude hosted proprietary APIs, motivating the use of locally deployed models. To study this setting, we build a Model Context Protocol (MCP) server that reproduces the state and dependency logic of a proprietary hardware design tool used in embedded system development and construct a benchmark covering single-operation edits, multi-step dependency chains, invalid requests, misspelled prompts, and multi-server tool contexts. We evaluate seven open-source models comparing pipeline choices including system prompts, tool-description detail, context scope, and single-agent versus multi-agent architectures. Results show that strong models can achieve near-complete expected-call coverage on the benchmarked workflows, but reliability depends strongly on both task structure and agent configuration. Comprehensive tool descriptions consistently reduce failures, few-shot prompting can cause severe inaction for some models, cumulative context harms constrained models, and multi-agent decomposition helps weak workers or long sessions at the cost of additional calls. These findings provide practical guidance for deploying local LLM agents in stateful hardware design environments.",
+                    "authors": [
+                      "Leonardo Liparulo",
+                      "Francesco Pierri"
+                    ],
+                    "published": "2026-08-25T15:33:50Z",
+                    "updated": "2026-08-25T15:33:50Z",
+                    "url": "http://arxiv.org/abs/2608.26199v1",
+                    "pdf_url": "https://arxiv.org/pdf/2608.26199v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.AI",
+                    "categories": [
+                      "cs.AI",
+                      "cs.SE"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2603.12621v1",
+                    "title": "AEGIS: No Tool Call Left Unchecked -- A Pre-Execution Firewall and Audit Layer for AI Agents",
+                    "summary": "AI agents increasingly act through external tools: they query databases, execute shell commands, read and write files, and send network requests. Yet in most current agent stacks, model-generated tool calls are handed to the execution layer with no framework-agnostic control point in between. Post-execution observability can record these actions, but it cannot stop them before side effects occur. We present AEGIS, a pre-execution firewall and audit layer for AI agents. AEGIS interposes on the tool-execution path and applies a three-stage pipeline: (i) deep string extraction from tool arguments, (ii) content-first risk scanning, and (iii) composable policy validation. High-risk calls can be held for human approval, and all decisions are recorded in a tamper-evident audit trail based on Ed25519 signatures and SHA-256 hash chaining. In the current implementation, AEGIS supports 14 agent frameworks across Python, JavaScript, and Go with lightweight integration. On a curated suite of 48 attackinstances, AEGIS blocks all attacks in the suite before execution; on 500 benign tool calls, it yields a 1.2% false positive rate; and across 1,000 consecutive interceptions, it adds 8.3 ms median latency. The live demo will show end-to-end interception of benign, malicious, and human-escalated tool calls, allowing attendees to observe real-time blocking, approval workflows, and audit-trail generation. These results suggest that pre-execution mediation for AI agents can be practical, low-overhead, and directly deployable.",
+                    "authors": [
+                      "Aojie Yuan",
+                      "Zhiyuan Su",
+                      "Yue Zhao"
+                    ],
+                    "published": "2026-03-13T03:49:12Z",
+                    "updated": "2026-03-13T03:49:12Z",
+                    "url": "http://arxiv.org/abs/2603.12621v1",
+                    "pdf_url": "https://arxiv.org/pdf/2603.12621v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CR",
+                    "categories": [
+                      "cs.CR"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2606.21877v1",
+                    "title": "AgentRiskBOM: A Risk-Scoping Security Bill of Materials for Agentic AI Systems",
+                    "summary": "Agentic AI systems retrieve private context, invoke tools, write files, call external services, coordinate with other agents, and may act without human approval. Existing bill of materials artifacts improve transparency for dependencies, model metadata, and training provenance, but leave an agentic transparency gap: capability opacity, the absence of a structured account of what a deployed agent can access, remember, change, delegate, and prove afterward. This paper introduces AgentRiskBOM, a security BOM for risk-scoping tool-using AI agents. It is an additive layer over SBOM, AIBOM, and MLBOM artifacts, referencing them where authoritative while adding fields for runtime authority: autonomy, tool permissions, memory, credential scope, approval gates, audit signals, inter-agent communication, and external action capability. We implement AgentRiskBOM as a JSON-schema artifact with a reproducible corpus, risk scenarios, scorer, diff detector, control mapper, and reports. We evaluate AgentRiskBOM on 13 open-source agents spanning coding, RAG, and multi-agent archetypes, plus 52 risk scenarios across 14 categories. The schema validates all 13 corpus artifacts. Coverage analysis gives AgentRiskBOM a native-equivalent score of 14 across 16 capability dimensions, vs. 1 for SBOM, 1.5 for AIBOM and 2 for MLBOM. Across modeled risk categories, AgentRiskBOM exposes 100% risk-category visibility vs. 10.5% for SBOM-like and 20.9% for AIBOM-like views. To test agentic authority drift, we inject 33 structured deployment mutations; the diff detector identifies the correct change type for all mutations. A secondary penalty-based scorer yields a Spearman correlation of 0.73 with the primary scorer, supporting rank-level consistency while showing that thresholds require human calibration. The results show that agentic AI security needs a machine-readable authority-and-risk artifact before incidents occur.",
+                    "authors": [
+                      "Srimonti Dutta",
+                      "Akshata Kishore Moharir"
+                    ],
+                    "published": "2026-06-20T04:38:41Z",
+                    "updated": "2026-06-20T04:38:41Z",
+                    "url": "http://arxiv.org/abs/2606.21877v1",
+                    "pdf_url": "https://arxiv.org/pdf/2606.21877v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.AI",
+                    "categories": [
+                      "cs.AI",
+                      "cs.CR",
+                      "cs.SE"
+                    ]
+                  }
+                ],
+                "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là 5 paper arXiv liên quan đến **tool calling của AI agent** (tìm theo từ khóa \"AI agent tool calling\", sắp xếp theo độ liên quan):\n\n| # | Tiêu đề | arXiv ID | Tác giả | Tóm tắt ngắn |\n|---|---------|----------|---------|--------------|\n| 1 | **STRIDE: A Systematic Framework for Selecting AI Modalities — Agentic AI, AI Assistants, or LLM Calls** | [2512.02228](http://arxiv.org/abs/2512.02228v1) | Shubhi Asthana et al. | Framework STRIDE giúp chọn giữa 3 modality: direct LLM calls, guided AI assistants, và fully autonomous agentic AI. Đánh giá trên 30 task thực tế (SRE, compliance, enterprise automation), đạt 92% độ chính xác trong việc chọn modality, giảm 45% việc triển khai agent không cần thiết và cắt 37% chi phí tài nguyên. |\n| 2 | **Switchcraft: AI Model Router for Agentic Tool Calling** | [2605.07112](http://arxiv.org/abs/2605.07112v2) | Sharad Agarwal et al. | Model router đầu tiên được tối ưu cho độ chính xác của từng tool call riêng lẻ trong workload agentic. Sử dụng DistilBERT-based classifier để chọn model thấp chi phí nhất đảm bảo correctness, hoặc abstain khi không chắc chắn. Đạt 78.3% answer accuracy (86.4% khi tính abstention đúng) với chi phí thấp hơn 59% so với best individual model. |\n| 3 | **Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling** | [2608.26199](http://arxiv.org/abs/2608.26199v1) | Leonardo Liparulo, Francesco Pierri | Xem xét khả năng của AI agent chạy LLM cục bộ trong việc tự động hóa workflow thiết kế phần cứng qua Model Context Protocol (MCP). Xây dựng benchmark bao gồm single-operation edits, multi-step dependency chains, invalid requests, misspelled prompts, và multi-server tool contexts. Đánh giá 7 model open-source. |\n| 4 | **AEGIS: No Tool Call Left Unchecked — A Pre-Execution Firewall and Audit Layer for AI Agents** | [2603.12621](http://arxiv.org/abs/2603.12621v1) | Aojie Yuan, Zhiyuan Su, Yue Zhao | Pre-execution firewall và audit layer cho AI agent. AEGIS can thiệp vào đường dẫn thực thi tool, áp dụng 3 giai đoạn: deep string extraction, content-first risk scanning, composable policy validation. Hỗ trợ 14 agent framework (Python, JavaScript, Go), chặn 100% các tấn công trong bộ dữ liệu kiểm tra, false positive 1.2%, latency trung vị 8.3 ms. |\n| 5 | **AgentRiskBOM: A Risk-Scoping Security Bill of Materials for Agentic AI Systems** | [2606.21877](http://arxiv.org/abs/2606.21877v1) | Srimonti Dutta, Akshata Kishore Moharir | Security BOM cho agentic AI, bổ sung các trường về runtime authority: autonomy, tool permissions, memory, credential scope, approval gates, audit signals, inter-agent communication, external action capability. Đánh giá trên 13 open-source agent và 52 risk scenarios. |\n\nNếu bạn muốn đọc toàn văn của paper nào cụ thể (tải PDF và trích đoạn), hãy cho tôi biết arXiv ID hoặc link paper đó.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "AI agent tool calling",
+            "max_results": 5,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "AI agent tool calling",
+            "api_query": "all:AI AND all:agent AND all:tool AND all:calling",
+            "total_results": 580,
+            "items": [
+              {
+                "arxiv_id": "2512.02228v1",
+                "title": "STRIDE: A Systematic Framework for Selecting AI Modalities -- Agentic AI, AI Assistants, or LLM Calls",
+                "summary": "The rapid shift from stateless large language models (LLMs) to autonomous, goal-driven agents raises a central question: When is agentic AI truly necessary? While agents enable multi-step reasoning, persistent memory, and tool orchestration, deploying them indiscriminately leads to higher cost, complexity, and risk. We present STRIDE (Systematic Task Reasoning Intelligence Deployment Evaluator), a framework that provides principled recommendations for selecting between three modalities: (i) direct LLM calls, (ii) guided AI assistants, and (iii) fully autonomous agentic AI. STRIDE integrates structured task decomposition, dynamism attribution, and self-reflection requirement analysis to produce an Agentic Suitability Score, ensuring that full agentic autonomy is reserved for tasks with inherent dynamism or evolving context. Evaluated across 30 real-world tasks spanning SRE, compliance, and enterprise automation, STRIDE achieved 92% accuracy in modality selection, reduced unnecessary agent deployments by 45%, and cut resource costs by 37%. Expert validation over six months in SRE and compliance domains confirmed its practical utility, with domain specialists agreeing that STRIDE effectively distinguishes between tasks requiring simple LLM calls, guided assistants, or full agentic autonomy. This work reframes agent adoption as a necessity-driven design decision, ensuring autonomy is applied only when its benefits justify the costs.",
+                "authors": [
+                  "Shubhi Asthana",
+                  "Bing Zhang",
+                  "Chad DeLuca",
+                  "Ruchi Mahindru",
+                  "Hima Patel"
+                ],
+                "published": "2025-12-01T21:54:07Z",
+                "updated": "2025-12-01T21:54:07Z",
+                "url": "http://arxiv.org/abs/2512.02228v1",
+                "pdf_url": "https://arxiv.org/pdf/2512.02228v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI",
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2605.07112v2",
+                "title": "Switchcraft: AI Model Router for Agentic Tool Calling",
+                "summary": "Agentic AI systems that invoke external tools are powerful but costly, leading developers to default to large models and overspend inference budgets. Existing model routers target chat responses or end-task success, not the correctness of the individual tool calls on which agent tasks depend; we present Switchcraft, the first (to the best of our knowledge) model router optimized for strict tool-call correctness in agentic workloads. We construct an evaluation framework on six function-calling benchmarks, holding one out entirely, and fine-tune a calibrated DistilBERT-based classifier, deployed inline under a latency budget, to select the lowest-cost model subject to correctness or abstain when none is likely to answer correctly. Switchcraft reaches 78.3% answer accuracy (86.4% when correct abstentions are credited) at 59% lower cost than the best individual model (75.6%), saving over $3,800 per million queries, and outperforms kNN, MIRT, heuristic, and random routers. On the held-out benchmark, it matches or exceeds every individual model at 5--7X lower cost than the strongest ones. We find two counter-intuitive results: larger models do not consistently outperform smaller ones on tool-use tasks, and nominally cheaper models can incur higher total cost due to token-intensive output.",
+                "authors": [
+                  "Sharad Agarwal",
+                  "Pooria Namyar",
+                  "Alec Wolman",
+                  "Rahul Ambavat",
+                  "Ankur Gupta",
+                  "Qizheng Zhang"
+                ],
+                "published": "2026-05-08T01:41:31Z",
+                "updated": "2026-10-30T19:45:03Z",
+                "url": "http://arxiv.org/abs/2605.07112v2",
+                "pdf_url": "https://arxiv.org/pdf/2605.07112v2",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI",
+                  "cs.MA"
+                ]
+              },
+              {
+                "arxiv_id": "2608.26199v1",
+                "title": "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling",
+                "summary": "We ask whether AI agents powered by locally deployed large language models can reliably automate expert-defined hardware design workflows in an industry-realistic tool-calling setting. In these environments, engineers issue repetitive, dependency-ordered operations---such as creating components, adding ports, and wiring connections---through specialised tools. Confidentiality constraints on component specifications and naming conventions often preclude hosted proprietary APIs, motivating the use of locally deployed models. To study this setting, we build a Model Context Protocol (MCP) server that reproduces the state and dependency logic of a proprietary hardware design tool used in embedded system development and construct a benchmark covering single-operation edits, multi-step dependency chains, invalid requests, misspelled prompts, and multi-server tool contexts. We evaluate seven open-source models comparing pipeline choices including system prompts, tool-description detail, context scope, and single-agent versus multi-agent architectures. Results show that strong models can achieve near-complete expected-call coverage on the benchmarked workflows, but reliability depends strongly on both task structure and agent configuration. Comprehensive tool descriptions consistently reduce failures, few-shot prompting can cause severe inaction for some models, cumulative context harms constrained models, and multi-agent decomposition helps weak workers or long sessions at the cost of additional calls. These findings provide practical guidance for deploying local LLM agents in stateful hardware design environments.",
+                "authors": [
+                  "Leonardo Liparulo",
+                  "Francesco Pierri"
+                ],
+                "published": "2026-08-25T15:33:50Z",
+                "updated": "2026-08-25T15:33:50Z",
+                "url": "http://arxiv.org/abs/2608.26199v1",
+                "pdf_url": "https://arxiv.org/pdf/2608.26199v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI",
+                  "cs.SE"
+                ]
+              },
+              {
+                "arxiv_id": "2603.12621v1",
+                "title": "AEGIS: No Tool Call Left Unchecked -- A Pre-Execution Firewall and Audit Layer for AI Agents",
+                "summary": "AI agents increasingly act through external tools: they query databases, execute shell commands, read and write files, and send network requests. Yet in most current agent stacks, model-generated tool calls are handed to the execution layer with no framework-agnostic control point in between. Post-execution observability can record these actions, but it cannot stop them before side effects occur. We present AEGIS, a pre-execution firewall and audit layer for AI agents. AEGIS interposes on the tool-execution path and applies a three-stage pipeline: (i) deep string extraction from tool arguments, (ii) content-first risk scanning, and (iii) composable policy validation. High-risk calls can be held for human approval, and all decisions are recorded in a tamper-evident audit trail based on Ed25519 signatures and SHA-256 hash chaining. In the current implementation, AEGIS supports 14 agent frameworks across Python, JavaScript, and Go with lightweight integration. On a curated suite of 48 attackinstances, AEGIS blocks all attacks in the suite before execution; on 500 benign tool calls, it yields a 1.2% false positive rate; and across 1,000 consecutive interceptions, it adds 8.3 ms median latency. The live demo will show end-to-end interception of benign, malicious, and human-escalated tool calls, allowing attendees to observe real-time blocking, approval workflows, and audit-trail generation. These results suggest that pre-execution mediation for AI agents can be practical, low-overhead, and directly deployable.",
+                "authors": [
+                  "Aojie Yuan",
+                  "Zhiyuan Su",
+                  "Yue Zhao"
+                ],
+                "published": "2026-03-13T03:49:12Z",
+                "updated": "2026-03-13T03:49:12Z",
+                "url": "http://arxiv.org/abs/2603.12621v1",
+                "pdf_url": "https://arxiv.org/pdf/2603.12621v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CR",
+                "categories": [
+                  "cs.CR"
+                ]
+              },
+              {
+                "arxiv_id": "2606.21877v1",
+                "title": "AgentRiskBOM: A Risk-Scoping Security Bill of Materials for Agentic AI Systems",
+                "summary": "Agentic AI systems retrieve private context, invoke tools, write files, call external services, coordinate with other agents, and may act without human approval. Existing bill of materials artifacts improve transparency for dependencies, model metadata, and training provenance, but leave an agentic transparency gap: capability opacity, the absence of a structured account of what a deployed agent can access, remember, change, delegate, and prove afterward. This paper introduces AgentRiskBOM, a security BOM for risk-scoping tool-using AI agents. It is an additive layer over SBOM, AIBOM, and MLBOM artifacts, referencing them where authoritative while adding fields for runtime authority: autonomy, tool permissions, memory, credential scope, approval gates, audit signals, inter-agent communication, and external action capability. We implement AgentRiskBOM as a JSON-schema artifact with a reproducible corpus, risk scenarios, scorer, diff detector, control mapper, and reports. We evaluate AgentRiskBOM on 13 open-source agents spanning coding, RAG, and multi-agent archetypes, plus 52 risk scenarios across 14 categories. The schema validates all 13 corpus artifacts. Coverage analysis gives AgentRiskBOM a native-equivalent score of 14 across 16 capability dimensions, vs. 1 for SBOM, 1.5 for AIBOM and 2 for MLBOM. Across modeled risk categories, AgentRiskBOM exposes 100% risk-category visibility vs. 10.5% for SBOM-like and 20.9% for AIBOM-like views. To test agentic authority drift, we inject 33 structured deployment mutations; the diff detector identifies the correct change type for all mutations. A secondary penalty-based scorer yields a Spearman correlation of 0.73 with the primary scorer, supporting rank-level consistency while showing that thresholds require human calibration. The results show that agentic AI security needs a machine-readable authority-and-risk artifact before incidents occur.",
+                "authors": [
+                  "Srimonti Dutta",
+                  "Akshata Kishore Moharir"
+                ],
+                "published": "2026-06-20T04:38:41Z",
+                "updated": "2026-06-20T04:38:41Z",
+                "url": "http://arxiv.org/abs/2606.21877v1",
+                "pdf_url": "https://arxiv.org/pdf/2606.21877v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI",
+                  "cs.CR",
+                  "cs.SE"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T10:18:48"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-11T10:19:08",
+      "user": "có tìm được link github nào không",
+      "status": "answered",
+      "assistant_text": "Có, tôi đã tìm được 10 repository GitHub liên quan đến **AI agent tool calling** (lọc theo ngôn ngữ Python). Dưới đây là danh sách:\n\n| # | Repository | Mô tả ngắn | Ngôn ngữ | Stars |\n|---|------------|------------|----------|-------|\n| 1 | [aipotheosis-labs/aci](https://github.com/aipotheosis-labs/aci) | Nền tảng tool-calling open source, kết nối 600+ công cụ vào agentic IDE hoặc AI agent tùy chỉnh qua direct function calling hoặc unified MCP server. | Python | 4,935 |\n| 2 | [IBM/mcp-context-forge](https://github.com/IBM/mcp-context-forge) | AI Gateway, registry và proxy đứng trước MCP, A2A, hoặc REST/gRPC APIs, cung cấp unified endpoint với centralized discovery, guardrails và management. Tối ưu cho Agent & Tool calling. | Python | 4,796 |\n| 3 | [vstorm-co/pydantic-deepagents](https://github.com/vstorm-co/pydantic-deepagents) | Framework terminal AI assistant (self-hosted Claude Code) với tool-calling, sandboxed execution, multi-agent teams, skills, checkpoints. Xây trên Pydantic AI. | Python | 1,117 |\n| 4 | [agenticloops-ai/agentic-ai-engineering](https://github.com/agenticloops-ai/agentic-ai-engineering) | Tutorial thực hành xây dựng AI agent từ đầu: LLM APIs, prompt engineering, tool calling, agent loop. | Python | 386 |\n| 5 | [schmitech/orbit](https://github.com/schmitech/orbit) | AI gateway tự lưu trữ cho private RAG, natural-language data access, và tool-calling agents. | Python | 362 |\n| 6 | [kandada/fastclaw](https://github.com/kandada/fastclaw) | AI Agent framework nhẹ nhưng mạnh trong Python, hỗ trợ multi-channel, tool calling, cron scheduling, streaming output. | Python | 169 |\n| 7 | [mobfish-ai/mobfish-agent](https://github.com/mobfish-ai/mobfish-agent) | Framework production-ready xây dựng AI agent thông minh với tool calling, persistent memory, intelligent concurrency, event-driven observability. | Python | 163 |\n| 8 | [OoriData/Toolio](https://github.com/OoriData/Toolio) | GenAI & agent toolkit cho Apple Silicon Mac, triển khai JSON schema-steered structured output (3SO) và tool-calling trong Python. | Python | 139 |\n| 9 | [civai-technologies/cursor-agent](https://github.com/civai-technologies/cursor-agent) | Python AI agent tái tạo khả năng của Cursor coding assistant: function calling, code generation, hỗ trợ Claude, OpenAI, Ollama. | Python | 137 |\n| 10 | [SevenBT/nemo-assistant](https://github.com/SevenBT/nemo-assistant) | Local-first floating desktop AI assistant cho Windows, có selection actions, OCR, notes, và tool-calling agent. | Python | 130 |\n\nNếu bạn muốn tôi tìm thêm repository theo ngôn ngữ khác (TypeScript, Go, Rust...) hoặc theo từ khóa cụ thể hơn (ví dụ: \"MCP tool calling\", \"function calling agent\"), hãy cho tôi biết.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "github_search",
+              "args": {
+                "query": "AI agent tool calling",
+                "language": "python",
+                "limit": 10
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "github_search",
+              "args": {
+                "query": "AI agent tool calling",
+                "language": "python",
+                "limit": 10
+              },
+              "result": {
+                "tool": "github_search",
+                "query": "AI agent tool calling",
+                "count": 10,
+                "items": [
+                  {
+                    "name": "aipotheosis-labs/aci",
+                    "url": "https://github.com/aipotheosis-labs/aci",
+                    "description": "ACI.dev is the open source tool-calling platform that hooks up 600+ tools into any agentic IDE or custom AI agent through direct function calling or a unified MCP server. The birthplace of VibeOps.",
+                    "stars": 4935,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "IBM/mcp-context-forge",
+                    "url": "https://github.com/IBM/mcp-context-forge",
+                    "description": "An AI Gateway, registry, and proxy that sits in front of any MCP, A2A, or REST/gRPC APIs, exposing a unified endpoint with centralized discovery, guardrails and management. Optimizes Agent & Tool calling, and supports plugins.",
+                    "stars": 4796,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "vstorm-co/pydantic-deepagents",
+                    "url": "https://github.com/vstorm-co/pydantic-deepagents",
+                    "description": "Open-source, self-hosted Claude Code - a terminal AI assistant and the Python framework behind it. Tool-calling, sandboxed execution, multi-agent teams, skills, checkpoints, unlimited context - on Pydantic AI, any model.",
+                    "stars": 1117,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "agenticloops-ai/agentic-ai-engineering",
+                    "url": "https://github.com/agenticloops-ai/agentic-ai-engineering",
+                    "description": "Hands-on tutorials for building AI agents from scratch. Learn LLM APIs, prompt engineering, tool calling, and the agent loop through practical examples.",
+                    "stars": 386,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "schmitech/orbit",
+                    "url": "https://github.com/schmitech/orbit",
+                    "description": "Self-hosted AI gateway for private RAG, natural-language data access, and tool-calling agents.",
+                    "stars": 362,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "kandada/fastclaw",
+                    "url": "https://github.com/kandada/fastclaw",
+                    "description": "A python-based light but strong lobster. A lightweight but powerful AI Agent framework in Python, with multi-channel support, tool calling, cron scheduling and streaming output",
+                    "stars": 169,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "mobfish-ai/mobfish-agent",
+                    "url": "https://github.com/mobfish-ai/mobfish-agent",
+                    "description": "A comprehensive, production-ready framework for building intelligent AI agents with advanced capabilities including tool calling, persistent memory, intelligent concurrency, and event-driven observability",
+                    "stars": 163,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "OoriData/Toolio",
+                    "url": "https://github.com/OoriData/Toolio",
+                    "description": "GenAI & agent toolkit for Apple Silicon Mac, implementing JSON schema-steered structured output (3SO) and tool-calling in Python. For more on 3SO: https://huggingface.co/blog/ucheog/llm-power-steering",
+                    "stars": 139,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "civai-technologies/cursor-agent",
+                    "url": "https://github.com/civai-technologies/cursor-agent",
+                    "description": "Cursor Agent Tools - A Python-based AI agent that replicates Cursor's coding assistant capabilities, enabling function calling, code generation, and intelligent coding assistance with Claude, OpenAI, and locally hosted Ollama models.",
+                    "stars": 137,
+                    "language": "Python"
+                  },
+                  {
+                    "name": "SevenBT/nemo-assistant",
+                    "url": "https://github.com/SevenBT/nemo-assistant",
+                    "description": "Local-first floating desktop AI assistant for Windows — selection actions, OCR, notes, and a tool-calling agent.",
+                    "stars": 130,
+                    "language": "Python"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Có, tôi đã tìm được 10 repository GitHub liên quan đến **AI agent tool calling** (lọc theo ngôn ngữ Python). Dưới đây là danh sách:\n\n| # | Repository | Mô tả ngắn | Ngôn ngữ | Stars |\n|---|------------|------------|----------|-------|\n| 1 | [aipotheosis-labs/aci](https://github.com/aipotheosis-labs/aci) | Nền tảng tool-calling open source, kết nối 600+ công cụ vào agentic IDE hoặc AI agent tùy chỉnh qua direct function calling hoặc unified MCP server. | Python | 4,935 |\n| 2 | [IBM/mcp-context-forge](https://github.com/IBM/mcp-context-forge) | AI Gateway, registry và proxy đứng trước MCP, A2A, hoặc REST/gRPC APIs, cung cấp unified endpoint với centralized discovery, guardrails và management. Tối ưu cho Agent & Tool calling. | Python | 4,796 |\n| 3 | [vstorm-co/pydantic-deepagents](https://github.com/vstorm-co/pydantic-deepagents) | Framework terminal AI assistant (self-hosted Claude Code) với tool-calling, sandboxed execution, multi-agent teams, skills, checkpoints. Xây trên Pydantic AI. | Python | 1,117 |\n| 4 | [agenticloops-ai/agentic-ai-engineering](https://github.com/agenticloops-ai/agentic-ai-engineering) | Tutorial thực hành xây dựng AI agent từ đầu: LLM APIs, prompt engineering, tool calling, agent loop. | Python | 386 |\n| 5 | [schmitech/orbit](https://github.com/schmitech/orbit) | AI gateway tự lưu trữ cho private RAG, natural-language data access, và tool-calling agents. | Python | 362 |\n| 6 | [kandada/fastclaw](https://github.com/kandada/fastclaw) | AI Agent framework nhẹ nhưng mạnh trong Python, hỗ trợ multi-channel, tool calling, cron scheduling, streaming output. | Python | 169 |\n| 7 | [mobfish-ai/mobfish-agent](https://github.com/mobfish-ai/mobfish-agent) | Framework production-ready xây dựng AI agent thông minh với tool calling, persistent memory, intelligent concurrency, event-driven observability. | Python | 163 |\n| 8 | [OoriData/Toolio](https://github.com/OoriData/Toolio) | GenAI & agent toolkit cho Apple Silicon Mac, triển khai JSON schema-steered structured output (3SO) và tool-calling trong Python. | Python | 139 |\n| 9 | [civai-technologies/cursor-agent](https://github.com/civai-technologies/cursor-agent) | Python AI agent tái tạo khả năng của Cursor coding assistant: function calling, code generation, hỗ trợ Claude, OpenAI, Ollama. | Python | 137 |\n| 10 | [SevenBT/nemo-assistant](https://github.com/SevenBT/nemo-assistant) | Local-first floating desktop AI assistant cho Windows, có selection actions, OCR, notes, và tool-calling agent. | Python | 130 |\n\nNếu bạn muốn tôi tìm thêm repository theo ngôn ngữ khác (TypeScript, Go, Rust...) hoặc theo từ khóa cụ thể hơn (ví dụ: \"MCP tool calling\", \"function calling agent\"), hãy cho tôi biết.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "github_search",
+          "args": {
+            "query": "AI agent tool calling",
+            "language": "python",
+            "limit": 10
+          },
+          "result": {
+            "tool": "github_search",
+            "query": "AI agent tool calling",
+            "count": 10,
+            "items": [
+              {
+                "name": "aipotheosis-labs/aci",
+                "url": "https://github.com/aipotheosis-labs/aci",
+                "description": "ACI.dev is the open source tool-calling platform that hooks up 600+ tools into any agentic IDE or custom AI agent through direct function calling or a unified MCP server. The birthplace of VibeOps.",
+                "stars": 4935,
+                "language": "Python"
+              },
+              {
+                "name": "IBM/mcp-context-forge",
+                "url": "https://github.com/IBM/mcp-context-forge",
+                "description": "An AI Gateway, registry, and proxy that sits in front of any MCP, A2A, or REST/gRPC APIs, exposing a unified endpoint with centralized discovery, guardrails and management. Optimizes Agent & Tool calling, and supports plugins.",
+                "stars": 4796,
+                "language": "Python"
+              },
+              {
+                "name": "vstorm-co/pydantic-deepagents",
+                "url": "https://github.com/vstorm-co/pydantic-deepagents",
+                "description": "Open-source, self-hosted Claude Code - a terminal AI assistant and the Python framework behind it. Tool-calling, sandboxed execution, multi-agent teams, skills, checkpoints, unlimited context - on Pydantic AI, any model.",
+                "stars": 1117,
+                "language": "Python"
+              },
+              {
+                "name": "agenticloops-ai/agentic-ai-engineering",
+                "url": "https://github.com/agenticloops-ai/agentic-ai-engineering",
+                "description": "Hands-on tutorials for building AI agents from scratch. Learn LLM APIs, prompt engineering, tool calling, and the agent loop through practical examples.",
+                "stars": 386,
+                "language": "Python"
+              },
+              {
+                "name": "schmitech/orbit",
+                "url": "https://github.com/schmitech/orbit",
+                "description": "Self-hosted AI gateway for private RAG, natural-language data access, and tool-calling agents.",
+                "stars": 362,
+                "language": "Python"
+              },
+              {
+                "name": "kandada/fastclaw",
+                "url": "https://github.com/kandada/fastclaw",
+                "description": "A python-based light but strong lobster. A lightweight but powerful AI Agent framework in Python, with multi-channel support, tool calling, cron scheduling and streaming output",
+                "stars": 169,
+                "language": "Python"
+              },
+              {
+                "name": "mobfish-ai/mobfish-agent",
+                "url": "https://github.com/mobfish-ai/mobfish-agent",
+                "description": "A comprehensive, production-ready framework for building intelligent AI agents with advanced capabilities including tool calling, persistent memory, intelligent concurrency, and event-driven observability",
+                "stars": 163,
+                "language": "Python"
+              },
+              {
+                "name": "OoriData/Toolio",
+                "url": "https://github.com/OoriData/Toolio",
+                "description": "GenAI & agent toolkit for Apple Silicon Mac, implementing JSON schema-steered structured output (3SO) and tool-calling in Python. For more on 3SO: https://huggingface.co/blog/ucheog/llm-power-steering",
+                "stars": 139,
+                "language": "Python"
+              },
+              {
+                "name": "civai-technologies/cursor-agent",
+                "url": "https://github.com/civai-technologies/cursor-agent",
+                "description": "Cursor Agent Tools - A Python-based AI agent that replicates Cursor's coding assistant capabilities, enabling function calling, code generation, and intelligent coding assistance with Claude, OpenAI, and locally hosted Ollama models.",
+                "stars": 137,
+                "language": "Python"
+              },
+              {
+                "name": "SevenBT/nemo-assistant",
+                "url": "https://github.com/SevenBT/nemo-assistant",
+                "description": "Local-first floating desktop AI assistant for Windows — selection actions, OCR, notes, and a tool-calling agent.",
+                "stars": 130,
+                "language": "Python"
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-11T10:19:08"
+    }
+  ]
+}

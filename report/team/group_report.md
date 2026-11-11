@@ -171,7 +171,7 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 |---|---|---|---|
 | Small Local Model | xem B7 |  |  |
 | Hơn 3 tool mới (≥ 4) |  |  |  |
-| `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
+| `send` gửi thật lên Telegram sau xác nhận | `transcripts/ui_v3_openrouter_20261111T105912755727.transcript.json` | Luồng đủ 2 lượt: lượt 1 agent `lookup` → `format` → `clarify` hỏi xác nhận và dừng chờ (`awaiting_user=true`); lượt 2 sau khi user trả lời "Có, gửi đi", agent gọi `send(confirmed=true)` → `status: sent`, bản tin 5 tin AI có nguồn xuất hiện thật trên channel private "ABCD Research Log" | Guardrail 2 lớp: tool chặn mọi lệnh gửi khi `confirmed != true` (trả `needs_confirmation`); chỉ gửi vào channel private của nhóm, `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` nằm trong `.env`, không commit |
 | Test challenge (0 skipped / regression test) | `starter_v0/tests/test_tools_todo.py`, `pytest` output (84 passed, 0 skipped) | Đạt 84 passed, 0 failed, 0 skipped toàn bộ suite pytest. Hoàn thành đầy đủ 14 unit tests cho toàn bộ tools hệ thống (clarify, format, send, lookup, fetch, timeline, social_search, policy) + 3 tests cho tool mới github_search | Đảm bảo 100% test chạy offline bằng FakeResponse, không gọi mạng thật |
 
 Test challenge: Toàn bộ suite đạt 84 passed, 0 skipped, 0 failed. Đã kiểm thử đầy đủ các nhánh biên: format rỗng không crash, fetch cắt chuỗi đúng 4000 ký tự, send bắt buộc phải có xác nhận confirmed=true và kiểm tra biến môi trường, timeline bỏ qua item thiếu ID, policy tách biệt dòng chỉ dẫn nguy hiểm (prompt injection) vào untrusted_text thay vì đưa vào facts.

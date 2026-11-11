@@ -40,7 +40,7 @@ ngrok config add-authtoken <TOKEN_TU_DASHBOARD>
 ngrok http 8501
 ```
 
-**Link dùng thử (deploy):**
+**Link dùng thử (deploy):** https://catcher-relock-october.ngrok-free.dev
 
 > URL: <!-- DÁN LINK sau khi mở tunnel hoặc deploy -->
 

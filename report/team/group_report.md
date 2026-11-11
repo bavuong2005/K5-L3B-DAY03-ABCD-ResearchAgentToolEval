@@ -153,6 +153,15 @@ Lưu ý: lượt 2 và 3 lỗi 403 là do API Twitter API45 bên ngoài (không 
 
 Quan sát: sau khi agent trả lời "không biết/không làm được", chất lượng của lượt reply tiếp theo phụ thuộc vào việc agent có đề xuất lựa chọn rõ ràng hay không — ở đây agent liệt kê 2 hướng nên user chỉ cần chọn bằng một câu tự nhiên, và agent route lại đúng tool với arguments hợp lệ mà không cần user nhắc lại chi tiết.
 
+**Phiên 3 — "Thiếu thông tin rồi bổ sung" (kịch bản C6):** `transcripts/ui_v3_openrouter_20261111T112706061259.transcript.json` (cùng artifact `v3+p1df0f2c8faae+t7d687650eba8`).
+
+| Turn | User Request | Tool Calls | Version Evidence | Outcome |
+|---|---|---|---|---|
+| 1 | "Tóm tắt giúp mình một bài báo hay với." (cố ý không kèm URL) | `clarify(response_type="text", question="Bạn muốn tóm tắt bài báo nào? Vui lòng gửi link...")` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS missing_info — agent không đoán URL (khác hẳn hành vi đoán của v0 ở baseline, xem case R11/B2), hỏi lại và dừng chờ user |
+| 2 | "Bài này nè mình quên đưa link: https://openai.com/research/" | `fetch(url="https://openai.com/research/")` → `clarify(question="Trang ... là danh sách nhiều bài nghiên cứu... Bạn muốn tóm tắt bài nào cụ thể?")` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS — dùng URL vừa bổ sung để đọc trang; nhận ra trang là danh sách nhiều bài (thông tin vẫn chưa đủ cụ thể) nên hỏi tiếp lượt `clarify` thứ hai thay vì tóm tắt cả trang một cách máy móc |
+
+Quan sát: đây đúng kịch bản "thiếu thông tin rồi bổ sung" mà C6 yêu cầu, và lượt 2 cho thấy thêm một hành vi đáng giá — khi thông tin được bổ sung vẫn còn mập mờ, agent tiếp tục hỏi lại thay vì tự quyết định, nhất quán với boundary đã thiết lập từ v1.
+
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
 | Item | Evidence File | What Worked | Risk / Guardrail |
@@ -225,4 +234,18 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 
 ## 8. Tài liệu tham khảo
 
--
+Tài liệu chính thức của các dịch vụ nhóm dùng trong lab:
+
+- OpenRouter API (model provider): https://openrouter.ai/docs
+- Google Gemini API & rate limits: https://ai.dev/rate-limit và https://ai.dev/docs
+- Ollama (local model provider): https://ollama.com và https://ollama.com/search?c=tools (danh sách model hỗ trợ tool calling)
+- Tavily Search API (tool `lookup`): https://docs.tavily.com
+- Firecrawl API (tool `fetch`): https://docs.firecrawl.dev
+- Twitter API45 trên RapidAPI (tool `timeline`, `social_search`): https://rapidapi.com/alexanderxbx/api/twitter-api45
+- arXiv API (tool `papers`, `paper_text`): https://info.arxiv.org/help/api/
+- Telegram Bot API (tool `send`): https://core.telegram.org/bots/api
+- GitHub REST API (tool `github_search` nhóm tự viết): https://docs.github.com/en/rest
+- Streamlit (UI demo, bao gồm `streamlit.testing.v1.AppTest` dùng để tự kiểm tra): https://docs.streamlit.io
+- ngrok (expose link public): https://ngrok.com/docs
+
+Đề bài và tiêu chí chấm: README.md, CHECKPOINTS.md, RUBRIC.md, SUBMISSION.md của lab Day 03.

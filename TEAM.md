@@ -12,7 +12,9 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 | 1 | Cung Đức Anh | 2A202603814 | 26ai.anhcd2@vinuni.edu.vn | | Tool mới & Unit Test (CP3) |
-| 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | bavuong2005 |baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
+| 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | bavuong2005 | baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
+| 3 | Phạm Thanh An | 2A202603913 | 26ai.anpt3@vinuni.edu.vn | thanhanbk02 | Phân công việc, chạy eval & tối ưu (CP1, CP2, CP4), merge nhánh |
+| 4 | Đỗ Quốc Khánh | 2A202603823 | 26ai.khanhdq2@vinuni.edu.vn | | UI demo, deploy link public, live chat & bằng chứng B4 (CP5) |
 
 ## Cá nhân
 
@@ -65,3 +67,19 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 - Commits trên nhánh `MaiLeBaVuong`: `d89fa72` (ghi kết quả CP1/CP2), `62c76ed` (đồng bộ báo cáo với run canonical), `3f317be` (dọn hai run gắn nhãn sai).
 - GitHub: [bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval), nhánh `MaiLeBaVuong`.
 - Tự kiểm tra: so metric và `provider_error_cases` trong JSON với version log; xác nhận hash artifact/đường dẫn run; kiểm tra diff và trạng thái Git sau khi tích hợp.
+
+## DoQuocKhanh-2A202603823
+
+### Phần việc phụ trách
+
+- Xây dựng UI demo (CP5), deploy link public, chạy live chat và tổng hợp bằng chứng B4 + mục "Khó khăn" của báo cáo nhóm.
+
+### Đóng góp cụ thể
+
+- Dựng `starter_v0/app.py` (Streamlit) tái dùng đúng vòng lặp `chat.py`, transcript từ UI cùng format với CLI để dùng làm bằng chứng.
+- Xử lý chuỗi lỗi provider (Gemini 503/429, thiếu key OpenRouter) và chuyển live chat sang OpenRouter model free; deploy ngrok.
+- Chạy phiên live chat 6 lượt đủ 3 kịch bản rubric; điền bảng B4, dòng UI ở B5a và 2 dòng khó khăn mới ở mục 5 của `group_report.md`.
+
+### Bằng chứng
+
+- Chi tiết đầy đủ: `report/team/2A202603823_DoQuocKhanh.md`; transcript `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` (phiên 6 lượt) và các transcript lỗi 429/403 làm bằng chứng mục 5.

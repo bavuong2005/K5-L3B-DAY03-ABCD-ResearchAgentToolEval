@@ -143,6 +143,15 @@ Lấy từ `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transc
 
 Lưu ý: lượt 2 và 3 lỗi 403 là do API Twitter API45 bên ngoài (không phải lỗi routing của agent — model chọn đúng tool, truyền đúng args), đã ghi chi tiết ở mục 5.
 
+**Phiên bổ sung — hành vi khi agent trả lời "không làm được" và user gợi ý hướng khác:** `transcripts/ui_v3_openrouter_20261111T092939065330.transcript.json` (cùng artifact `v3+p1df0f2c8faae+t7d687650eba8`, OpenRouter `nvidia/nemotron-3.5-super-vl:free`).
+
+| Turn | User Request | Tool Calls | Version Evidence | Outcome |
+|---|---|---|---|---|
+| 1 | "Cho mình xin timeline mới nhất của tài khoản sama." | `timeline(screenname="sama", limit=10)` | `v3+p1df0f2c8faae+t7d687650eba8` | Tool trả 403 Forbidden → agent trả lời trung thực "không thể lấy lúc này", giải thích nguyên nhân và đề xuất 2 lựa chọn (thử handle khác / tìm trên web), không bịa tweet |
+| 2 | "bạn có thể thử lại với 1 tài khoản nào hay tìm kiếm Sam trên web khác" | `lookup(query="Sam Altman", topic="news", timeframe="week", max_results=5)` | `v3+p1df0f2c8faae+t7d687650eba8` | PASS multi-turn recovery — agent hiểu user chọn hướng web, tự chuyển từ `timeline` sang `lookup`, tự điền `topic="news"` và `timeframe="week"` từ ngữ cảnh lượt trước, trả tin Sam Altman có nguồn |
+
+Quan sát: sau khi agent trả lời "không biết/không làm được", chất lượng của lượt reply tiếp theo phụ thuộc vào việc agent có đề xuất lựa chọn rõ ràng hay không — ở đây agent liệt kê 2 hướng nên user chỉ cần chọn bằng một câu tự nhiên, và agent route lại đúng tool với arguments hợp lệ mà không cần user nhắc lại chi tiết.
+
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
 | Item | Evidence File | What Worked | Risk / Guardrail |

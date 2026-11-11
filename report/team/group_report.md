@@ -129,6 +129,7 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 Run: `starter_v0/runs/v3.1_B_group_ollama_20261110T194253447355.json` (ollama qwen2.5:7b, artifact `v3.1+p1df0f2c8faae+t7d687650eba8`, provider_error_cases=0, measured 10/10). Kết quả: **8/10 PASS**, case_accuracy 0.80, tool_routing_accuracy 0.90, multiturn_accuracy 0.80.
 
 ### B4. Live Chat Evidence
+Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
 Lấy từ `starter_v0/transcripts/ui_v3_openrouter_20261111T001056477329.transcript.json` — phiên qua UI Streamlit, provider OpenRouter, model `nvidia/nemotron-3.5-super-vl:free`, artifact `v3+p1df0f2c8faae+t7d687650eba8`. Phiên gồm 6 lượt, đủ 3 kịch bản yêu cầu: research thường, thiếu thông tin/hỏi lại, và yêu cầu gửi có xác nhận.
 

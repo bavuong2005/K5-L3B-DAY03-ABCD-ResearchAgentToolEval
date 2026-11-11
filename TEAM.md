@@ -5,7 +5,7 @@
 - Tên nhóm: ABCD
 - Lớp: L3B
 - Repo nhóm: [K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval)
-- URL repo, nhánh nộp, commit chốt: https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval · `MaiLeBaVuong` · `3f317be`
+- URL repo, nhánh nộp, commit chốt: https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval · `MaiLeBaVuong` · `72904a4`
 
 ## Thành viên
 
@@ -13,6 +13,7 @@
 | --: | ------ | ---- | ----- | ------ | ------- |
 | 1 | Cung Đức Anh | 2A202603814 | 26ai.anhcd2@vinuni.edu.vn | | Tool mới & Unit Test (CP3) |
 | 2 | Mai Lê Bá Vương | 2A202603872 | 26ai.vuongmlb@vinuni.edu.vn | bavuong2005 |baseline, tối ưu prompt/tool declaration (CP1–CP2); đồng bộ báo cáo và tích hợp nhánh |
+| 3 | Phạm Thanh An | 2A202603913 | 26ai.anpt3@vinuni.edu.vn | thanhanbk02 | Phân công công việc; chạy eval, tối ưu prompt/tool declaration (CP1, CP2, CP4); tích hợp tool và nhánh |
 
 ## Cá nhân
 
@@ -65,3 +66,25 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 - Commits trên nhánh `MaiLeBaVuong`: `d89fa72` (ghi kết quả CP1/CP2), `62c76ed` (đồng bộ báo cáo với run canonical), `3f317be` (dọn hai run gắn nhãn sai).
 - GitHub: [bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval](https://github.com/bavuong2005/K5-L3B-DAY03-ABCD-ResearchAgentToolEval), nhánh `MaiLeBaVuong`.
 - Tự kiểm tra: so metric và `provider_error_cases` trong JSON với version log; xác nhận hash artifact/đường dẫn run; kiểm tra diff và trạng thái Git sau khi tích hợp.
+
+## PhamThanhAn-2A202603913
+
+### Phần việc phụ trách
+
+- Đọc yêu cầu, chia việc theo checkpoint và phân công cho 4 thành viên.
+- Dựng môi trường eval Ollama `qwen2.5:7b`; là người duy nhất chạy chuỗi eval v0 → v3 để giữ cùng model và provider.
+- Chạy baseline, tối ưu prompt/tool declaration cho CP1–CP2; kiểm tra bộ eval nhóm CP4 và tích hợp tool `github_search`.
+
+### Đóng góp và kết quả
+
+- Chạy các phiên bản trên cùng model: v0 `case_acc=0.40`; v1 `0.50`; v2 `0.55`; v3 `0.65` (`routing_acc=0.85`). Sau khi thêm `github_search`, v3.1 đạt `case_acc=0.60`, `routing_acc=0.85` trên base.
+- Ghi giả thuyết, thay đổi artifact, hash và metric vào `starter_v0/artifacts/version_log.csv`; phân tích lỗi từ `actual_tool_calls` và `actual_text` trong run JSON.
+- Tích hợp `github_search`, kiểm tra khai báo 10 case group (5 single, 5 multi) và chạy group eval v3.1 đạt **8/10** (case accuracy 0.80, routing 0.90; còn lỗi G04 và G10).
+- Xử lý sai lệch hash do LF/CRLF trên Windows bằng `.gitattributes`, chuẩn hóa artifact và chạy lại eval để bảo đảm run khớp hash.
+
+### Bằng chứng
+
+- Run canonical v0–v3 và v3.1: `starter_v0/runs/`; version log: `starter_v0/artifacts/version_log.csv`.
+- File thay đổi: `starter_v0/artifacts/system_prompt.md`, `starter_v0/artifacts/tools.yaml`, `.gitattributes`; kết quả CP4 tại bảng B3 của `report/team/group_report.md`.
+- Báo cáo cá nhân: `report/team/2A202603913_PhamThanhAn.md`.
+- Tự kiểm tra: loại run có provider error hoặc hash artifact không khớp; xem từng case lỗi và chạy lại cùng artifact để xác nhận kết quả có thể tái lập.
